@@ -1,0 +1,62 @@
+<template>
+  <div v-if="showModal">
+    <before v-if="step === 'before'" :title="'Withdraw'" @close="closeModal" />
+    <waiting v-if="step === 'waiting'" :title="'Withdraw'" />
+    <after v-if="step === 'after'" :title="'Withdraw'" @close="closeModal" />
+    <faillure
+      v-if="step === 'faillure'"
+      :title="'Withdraw'"
+      @close="closeModal"
+    />
+  </div>
+</template>
+
+<script>
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
+
+import before from './Before.vue'
+import waiting from './Waiting.vue'
+import after from './After.vue'
+import faillure from './Faillure.vue'
+
+export default {
+  components: {
+    before,
+    waiting,
+    after,
+    faillure,
+  },
+
+  props: {
+    showModal: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  emits: ['update:showModal'],
+
+  setup() {
+    const store = useStore()
+
+    return {
+      step: computed(() => store.state.user.withdrawals.last.step),
+      withdrawProcess: (infos) => store.commit('user/WITHDRAW_PROCESS', infos),
+    }
+  },
+
+  methods: {
+    closeModal() {
+      this.$emit('update:showModal', false)
+      this.withdrawProcess({
+        step: 'before',
+        amount: 0,
+        id: null,
+        payment: null,
+        secret: null,
+      })
+    },
+  },
+}
+</script>

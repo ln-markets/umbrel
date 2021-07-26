@@ -1,0 +1,56 @@
+x-logging: &default-logging
+  driver: 'json-file'
+  options:
+    max-size: '5m'
+    max-file: '5'
+
+networks:
+  lnmarkets_umbrel:
+    name: lnmarkets_umbrel
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.81.4.0/24
+
+services:
+  bitcoin_testnet:
+    image: vafanassieff/bitcoin:0.21.1
+    container_name: bitcoin_testnet
+    restart: unless-stopped
+    volumes:
+      - ./bitcoin.conf:/conf/bitcoin.conf:rw
+      - /mnt/crypto/bitcoin/testnet:/bitcoin/.bitcoin
+    ports:
+      - 18332:18332
+      - 18333:18333
+      - 38332:38332
+      - 38333:38333
+    environment:
+      - PUID=1000
+      - PGID=1000
+    command: bitcoind -conf=/conf/bitcoin.conf
+    networks:
+      lnmarkets_umbrel:
+        ipv4_address: 172.81.4.10
+    logging: *default-logging
+
+  lnd:
+    image: vafanassieff/lnd:v0.13.1-beta
+    container_name: lnmarkets_umbrel_lnd
+    hostname: lnmarkets_umbrel_lnd
+    restart: unless-stopped
+    ports:
+      - 9735:9735
+      - 8080:8080
+      - 11009:10009
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./lnd.conf:/conf/lnd.conf
+      - /data/lnd/:/lnd/.lnd
+    command: lnd --configfile=/conf/lnd.conf
+    networks:
+      lnmarkets_umbrel:
+        ipv4_address: 172.81.4.20
+    logging: *default-logging

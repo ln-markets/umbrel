@@ -1,0 +1,12 @@
+FROM node:14.16-alpine
+
+WORKDIR /usr/src
+
+COPY package.json yarn.lock ./
+COPY apps/front/package.json apps/front/package.json
+
+RUN yarn install --frozen-lockfile
+
+EXPOSE 3000
+
+CMD [ "yarn", "workspace", "front", "dev" ]
