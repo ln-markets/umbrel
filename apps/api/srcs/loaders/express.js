@@ -9,6 +9,9 @@ module.exports = async (app) => {
   app.use(bodyParser.text())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use('/api', routes)
+  app.get('/status', (req, res) => {
+    res.status(200).end()
+  })
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../front/')))
