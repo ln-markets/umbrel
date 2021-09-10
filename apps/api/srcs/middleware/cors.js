@@ -6,7 +6,7 @@ const origin = (origin, callback) => {
   if (
     !origin ||
     origin.match(/^http:\/\/localhost:\d+$/) ||
-    origin.match(/^http:\/\/umbrel(-dev)?.local(:\d+)?$/)
+    origin.match(/^http:\/\/umbrel(.*?).local(:\d+)?$/)
   ) {
     callback(null, true)
   } else {
