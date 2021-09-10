@@ -26,11 +26,6 @@ ENV LNMARKETS_API_VERSION="/v1"
 
 WORKDIR /usr/src
 
-RUN apk add --no-cache curl git && cd /tmp && \
-    curl -#L https://github.com/tj/node-prune/releases/download/v1.0.1/node-prune_1.0.1_linux_amd64.tar.gz | tar -xvzf- && \
-    mv -v node-prune /usr/local/bin && rm -rvf * && chmod +x /usr/local/bin/node-prune && \
-    apk del curl
-
 RUN apk add dumb-init
 
 COPY --chown=node:node --from=builder /usr/tmp/apps/front/dist /usr/src/apps/api/front
@@ -40,10 +35,8 @@ COPY --chown=node:node ./apps/api/package.json /usr/src/apps/api/package.json
 RUN yarn config --silent set cache-folder .yarn && \
     yarn workspace api install --frozen-lockfile --production && \
     yarn cache clean && \
-    node-prune && \
     rm -f ~/.npmrc && \
-    rm -f ~/.yarnc && \
-    rm -f /usr/local/bin/node-prune
+    rm -f ~/.yarnc
 
 COPY --chown=node:node ./apps/api/srcs /usr/src/apps/api/srcs
 COPY --chown=node:node ./apps/api/docker/healthcheck.js /usr/src/apps/api/healthcheck.js
