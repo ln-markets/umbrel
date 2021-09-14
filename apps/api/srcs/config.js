@@ -5,7 +5,7 @@ const config = {
   },
   lnmarkets: {
     url:
-      process.env.LNMARKETS_API_URL || process.env.BITCOIN_NETWORK === 'testnet'
+      process.env.BITCOIN_NETWORK === 'testnet'
         ? 'https://api.testnet.lnmarkets.com'
         : 'https://api.lnmarkets.com',
     version: process.env.LNMARKETS_API_VERSION || '/v1',
