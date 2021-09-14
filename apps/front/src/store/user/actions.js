@@ -72,9 +72,10 @@ export default {
       dispatch('get')
       dispatch('transactionHistory')
 
-      const [
-        { id, payment_hash: payment },
-      ] = state.withdrawals.transactions.slice(-1)
+      const {
+        id,
+        payment_hash: payment,
+      } = state.withdrawals.transactions.slice(-1)[0]
 
       commit('WITHDRAW_PROCESS', { step: 'after', id, secret, payment, amount })
     } catch (error) {

@@ -2,31 +2,21 @@ const LNMarketsAPI = require('@classes/lnmarkets-api.js')
 
 module.exports = async (req, res) => {
   try {
-    const payload = {
+    const { rawHistory: deposits } = await LNMarketsAPI.request({
       method: 'GET',
       endpoint: '/user/deposit',
       params: {
-        getLength: true,
+        limit: 100,
       },
-    }
+    })
 
-    const { dateSliceLength: nbDeposits } = await LNMarketsAPI.request(payload)
-
-    payload.endpoint = '/user/withdraw'
-
-    const { dateSliceLength: nbWithdrawals } = await LNMarketsAPI.request(
-      payload
-    )
-
-    delete payload.params.getLength
-    payload.params.nbItem = nbWithdrawals || 1
-
-    const { rawHistory: withdrawals } = await LNMarketsAPI.request(payload)
-
-    payload.params.nbItem = nbDeposits || 1
-    payload.endpoint = '/user/deposit'
-
-    const { rawHistory: deposits } = await LNMarketsAPI.request(payload)
+    const { rawHistory: withdrawals } = await LNMarketsAPI.request({
+      method: 'GET',
+      endpoint: '/user/withdraw',
+      params: {
+        limit: 100,
+      },
+    })
 
     res.json({ deposits, withdrawals })
   } catch (error) {

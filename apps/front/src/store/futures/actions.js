@@ -3,7 +3,7 @@ import client from '../../plugins/client.js'
 export default {
   async get({ commit }) {
     try {
-      const { open: opened, running, closed } = await client.get({
+      const { opened, running, closed } = await client.get({
         path: '/api/futures',
       })
 
