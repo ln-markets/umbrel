@@ -1,26 +1,10 @@
 export default {
   depositCount: (state) => {
-    let total = 0
-
-    for (const deposit of state.deposits.transactions) {
-      if (deposit.success) {
-        total++
-      }
-    }
-
-    return total
+    return state.deposits.transactions.filter((el) => el.success).length
   },
 
   withdrawalCount: (state) => {
-    let total = 0
-
-    for (const withdrawal of state.withdrawals.transactions) {
-      if (withdrawal.success) {
-        total++
-      }
-    }
-
-    return total
+    return state.withdrawals.transactions.filter((el) => el.success).length
   },
 
   maxDeposit: (state) => {
