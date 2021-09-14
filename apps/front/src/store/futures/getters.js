@@ -16,12 +16,6 @@ export default {
   },
 
   computePL: (state) => {
-    let total = 0
-
-    for (const position of state.running) {
-      total += position.pl
-    }
-
-    return total
+    return state.running.reduce((a, b) => ({ pl: a.pl + b.pl })).pl
   },
 }
