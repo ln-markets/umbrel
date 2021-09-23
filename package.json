@@ -11,7 +11,8 @@
   },
   "workspaces": [
     "apps/api",
-    "apps/front"
+    "apps/front",
+    "dev"
   ],
   "dependencies": {
     "dotenv": "^10.0.0"
