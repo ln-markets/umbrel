@@ -12,8 +12,7 @@ This environment is linked to the **testnet** version of LN Markets.
 ### Setting up the app:
 
 ```shell
-  $> cd dev/infra ; docker-compose up -d
-  $> cd .. docker-compose up -d
+ $> yarn workspace dev start
 ```
 
 After launching `infra` for the first time, `bitcoin-testnet` container might takes several minutes to sync to the current state of the bitcoin testnet blockchain. During this time you can start interacting with `lnmarkets_umbrel_lnd` to setup your wallet and channels with LN Markets.

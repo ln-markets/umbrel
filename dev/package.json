@@ -1,0 +1,12 @@
+{
+  "name": "dev",
+  "version": "1.0.0",
+  "description": "Easy access to dev commands",
+  "main": "index.js",
+  "author": "BOTREL Kilian",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd infra && docker-compose up -d ; cd .. ; docker-compose up -d",
+    "stop": "docker-compose down ; cd infra ; docker-compose down"
+  }
+}

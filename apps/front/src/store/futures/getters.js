@@ -16,6 +16,6 @@ export default {
   },
 
   computePL: (state) => {
-    return state.running.reduce((a, b) => ({ pl: a.pl + b.pl })).pl
+    return state.running.reduce((a, b) => ({ pl: a.pl + b.pl }), { pl: 0 }).pl
   },
 }
