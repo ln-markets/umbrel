@@ -13,9 +13,11 @@ export default {
   setup() {
     const store = useStore()
 
-    store.dispatch('user/get')
-    store.dispatch('user/transactionHistory')
-    store.dispatch('futures/get')
+    setInterval(() => {
+      store.dispatch('user/get')
+      store.dispatch('user/transactionHistory')
+      store.dispatch('futures/get')
+    }, 5000)
 
     return {}
   },
