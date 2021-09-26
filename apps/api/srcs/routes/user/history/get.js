@@ -4,12 +4,12 @@ module.exports = async (req, res) => {
   try {
     const deposits = await retrieveHistory({
       endpoint: '/user/deposit',
-      key: 'creation_ts',
+      key: 'ts',
     })
 
     const withdrawals = await retrieveHistory({
       endpoint: '/user/withdraw',
-      key: 'creation_ts',
+      key: 'ts',
     })
 
     res.json({ deposits, withdrawals })

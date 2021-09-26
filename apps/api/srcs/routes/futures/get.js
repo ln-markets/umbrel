@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       params: {
         type: 'closed',
       },
-      key: 'closed_ts',
+      key: 'creation_ts',
     })
 
     res.json({ opened, running, closed })

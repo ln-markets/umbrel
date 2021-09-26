@@ -2,18 +2,11 @@ const LNMarketsAPI = require('@classes/lnmarkets-api.js')
 
 const retrieveHistory = async ({ endpoint, params = {}, key }) => {
   const history = []
+  const now = Date.now()
 
-  Object.assign(params, { limit: 100 })
+  Object.assign(params, { limit: 100, from: 0, to: now })
 
-  if (!params.to) {
-    Object.assign(params, { to: Date.now() })
-  }
-
-  let lastTimestamp = 0
-
-  while (lastTimestamp < params.to) {
-    Object.assign(params, { from: lastTimestamp })
-
+  while (1) {
     const page = await LNMarketsAPI.request({
       method: 'GET',
       endpoint,
@@ -21,15 +14,13 @@ const retrieveHistory = async ({ endpoint, params = {}, key }) => {
     })
 
     history.push(...page)
-
-    lastTimestamp = page[page.length - 1][key]
-
-    if (page.length !== 100) {
-      break
+    console.log({ endpoint, size: history.length })
+    if (page.length === 0) {
+      return history
     }
-  }
 
-  return history
+    params.to = page[page.length - 1][key] - 1
+  }
 }
 
 module.exports = { retrieveHistory }
