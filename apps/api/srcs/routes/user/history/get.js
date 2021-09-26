@@ -1,21 +1,15 @@
-const LNMarketsAPI = require('@classes/lnmarkets-api.js')
+const { retrieveHistory } = require('@wrappers/history.js')
 
 module.exports = async (req, res) => {
   try {
-    const deposits = await LNMarketsAPI.request({
-      method: 'GET',
+    const deposits = await retrieveHistory({
       endpoint: '/user/deposit',
-      params: {
-        limit: 100,
-      },
+      key: 'creation_ts',
     })
 
-    const withdrawals = await LNMarketsAPI.request({
-      method: 'GET',
+    const withdrawals = await retrieveHistory({
       endpoint: '/user/withdraw',
-      params: {
-        limit: 100,
-      },
+      key: 'creation_ts',
     })
 
     res.json({ deposits, withdrawals })

@@ -1,4 +1,5 @@
 const LNMarketsAPI = require('@classes/lnmarkets-api.js')
+const { retrieveHistory } = require('@wrappers/history.js')
 
 module.exports = async (req, res) => {
   try {
@@ -7,7 +8,7 @@ module.exports = async (req, res) => {
       endpoint: '/futures',
       params: {
         type: 'open',
-        limit: 100,
+        limit: 50,
       },
     })
 
@@ -16,17 +17,16 @@ module.exports = async (req, res) => {
       endpoint: '/futures',
       params: {
         type: 'running',
-        limit: 100,
+        limit: 50,
       },
     })
 
-    const closed = await LNMarketsAPI.request({
-      method: 'GET',
+    const closed = await retrieveHistory({
       endpoint: '/futures',
       params: {
         type: 'closed',
-        limit: 100,
       },
+      key: 'closed_ts',
     })
 
     res.json({ opened, running, closed })
