@@ -19,6 +19,7 @@
           placeholder="Amount"
           @keypress="isInteger($event)"
         />
+        <p class="mt-2 ml-1">sats</p>
       </div>
     </template>
     <template #footer>
