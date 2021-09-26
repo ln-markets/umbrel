@@ -45,13 +45,19 @@ export default {
       await dispatch('get')
       await dispatch('transactionHistory')
 
-      const [{ id, payment_hash: payment }] = state.deposits.transactions.slice(
-        -1
-      )
+      const { transactions } = state.deposits
+      const { id, payment_hash } = transactions[transactions.length - 1]
 
-      commit('DEPOSIT_PROCESS', { step: 'after', id, secret, payment, amount })
+      commit('DEPOSIT_PROCESS', {
+        step: 'after',
+        id,
+        secret,
+        payment: payment_hash,
+        amount,
+      })
     } catch (error) {
       commit('DEPOSIT_PROCESS', { step: 'faillure' })
+      commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
   },
@@ -72,14 +78,19 @@ export default {
       dispatch('get')
       dispatch('transactionHistory')
 
-      const {
-        id,
-        payment_hash: payment,
-      } = state.withdrawals.transactions.slice(-1)[0]
+      const { transactions } = state.withdrawals
+      const { id, payment_hash } = transactions[transactions.length - 1]
 
-      commit('WITHDRAW_PROCESS', { step: 'after', id, secret, payment, amount })
+      commit('WITHDRAW_PROCESS', {
+        step: 'after',
+        id,
+        secret,
+        payment: payment_hash,
+        amount,
+      })
     } catch (error) {
       commit('WITHDRAW_PROCESS', { step: 'faillure' })
+      commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
   },

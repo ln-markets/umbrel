@@ -1,8 +1,8 @@
 <template>
-  <modal :title="'Welcome to LN Markets app on Umbrel'">
+  <modal :title="'Welcome to the LN Markets app on Umbrel'">
     <template #body>
       <p class="text-center text-sm sm:text-base py-1">
-        Start mananing your LN Markets account directly from this pannel!
+        Start managing your LN Markets account directly from this pannel!
       </p>
       <p class="text-xs text-center">
         <i>This app may get extra features in the future...</i>

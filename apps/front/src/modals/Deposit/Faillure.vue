@@ -4,6 +4,7 @@
       <p class="text-center text-sm sm:text-base text-red-500">
         An error occured during deposit. Please try again later.
       </p>
+      <p class="text-center text-xs text-red-500">(Code: {{ errorCode }})</p>
     </template>
     <template #footer>
       <lnm-button :color="'red'" class="w-1/3 sm:w-1/4" @click="closeModal">
@@ -14,6 +15,9 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
+import { useStore } from 'vuex'
+
 export default {
   props: {
     title: {
@@ -25,7 +29,11 @@ export default {
   emits: ['close'],
 
   setup() {
-    return {}
+    const store = useStore()
+
+    return {
+      errorCode: computed(() => store.state.errorCode),
+    }
   },
 
   methods: {

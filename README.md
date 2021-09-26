@@ -15,7 +15,7 @@ This environment is linked to the **testnet** version of LN Markets.
  $> yarn workspace dev start
 ```
 
-After launching `infra` for the first time, `bitcoin-testnet` container might takes several minutes to sync to the current state of the bitcoin testnet blockchain. During this time you can start interacting with `lnmarkets_umbrel_lnd` to setup your wallet and channels with LN Markets.
+After launching the dev environment for the first time, `bitcoin-testnet` container might takes several minutes to sync to the current state of the bitcoin testnet blockchain. During this time you can start interacting with `lnmarkets_umbrel_lnd` to setup your wallet and channels with LN Markets.
 
 ```shell
   $> docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network="testnet" create
@@ -36,7 +36,7 @@ Copy this adress and get tBTC from faucets like these :
 | https://testnet-faucet.mempool.co/ |
 | https://bitcoinfaucet.uo1.net/ |
 
-You can check how mych your wallet has with the following command:
+You can check how much your wallet contains with the following command:
 
 ```shell
   $> docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network="testnet" walletbalance

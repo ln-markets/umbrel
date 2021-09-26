@@ -9,6 +9,7 @@ import client from '../plugins/client.js'
 const defaultState = () => {
   return {
     disclaimer: true,
+    errorCode: '',
   }
 }
 
@@ -36,6 +37,9 @@ const store = createStore({
   mutations: {
     UPDATE_DISCLAIMER(state) {
       state.disclaimer = false
+    },
+    API_ERROR(state, errorCode) {
+      state.errorCode = errorCode
     },
   },
 })
