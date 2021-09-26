@@ -57,6 +57,7 @@ export default {
       })
     } catch (error) {
       commit('DEPOSIT_PROCESS', { step: 'faillure' })
+      commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
   },
@@ -89,6 +90,7 @@ export default {
       })
     } catch (error) {
       commit('WITHDRAW_PROCESS', { step: 'faillure' })
+      commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
   },
