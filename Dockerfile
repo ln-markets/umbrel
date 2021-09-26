@@ -18,7 +18,7 @@ RUN yarn config --silent set cache-folder .yarn && \
 FROM node:14.17-alpine
 
 ENV NODE_ENV="production"
-ENV APP_VERSION=0.0.3
+ENV APP_VERSION=0.0.4
 ENV API_PORT=4242
 ENV BITCOIN_NETWORK="mainnet"
 ENV LNMARKETS_API_URL="https://api.lnmarkets.com"
