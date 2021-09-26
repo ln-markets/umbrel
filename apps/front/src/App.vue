@@ -17,8 +17,7 @@ export default {
       store.dispatch('user/get')
       store.dispatch('user/transactionHistory')
       store.dispatch('futures/get')
-    }, 5000)
-
+    }, 15000)
     return {}
   },
 }
