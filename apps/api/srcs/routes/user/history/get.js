@@ -2,7 +2,7 @@ const LNMarketsAPI = require('@classes/lnmarkets-api.js')
 
 module.exports = async (req, res) => {
   try {
-    const { rawHistory: deposits } = await LNMarketsAPI.request({
+    const deposits = await LNMarketsAPI.request({
       method: 'GET',
       endpoint: '/user/deposit',
       params: {
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
       },
     })
 
-    const { rawHistory: withdrawals } = await LNMarketsAPI.request({
+    const withdrawals = await LNMarketsAPI.request({
       method: 'GET',
       endpoint: '/user/withdraw',
       params: {
