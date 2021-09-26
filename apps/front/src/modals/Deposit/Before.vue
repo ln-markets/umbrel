@@ -8,6 +8,7 @@
         :min="1000"
         :max="max"
         :value="parseInt(amount)"
+        :step="(max - 1000) / 1000"
         @update="amount = parseInt($event)"
       />
       <div class="mt-4 flex justify-center">
