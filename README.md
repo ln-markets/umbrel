@@ -1,9 +1,11 @@
 # Umbrel App
 
+As a regular user you should use the official integrated application through [Umbrel](https://github.com/getumbrel/umbrel) (to be released soon). This way you could switch between mainnet and testnet network.
+
+
 ## Install development env
 
-This environment is linked to the **testnet** version of LN Markets.
-
+This environment is linked to the **testnet** version of LN Markets. **Meant for development use only**.
 ### Prerequisites:
 
 - [docker]()
