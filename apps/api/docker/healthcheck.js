@@ -1,8 +1,9 @@
 const http = require('http')
+const { config } = require('process')
 
 const options = {
   host: 'localhost',
-  port: '4242',
+  port: config.app.port,
   timeout: 2000,
   method: 'GET',
   path: '/status',
