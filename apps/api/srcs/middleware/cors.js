@@ -6,7 +6,8 @@ const origin = (origin, callback) => {
   if (
     !origin ||
     origin.match(/^http:\/\/localhost:\d+$/) ||
-    origin.match(/^http:\/\/umbrel(.*?).local(:\d+)?$/)
+    origin.match(/^http:\/\/umbrel(.*?).local(:\d+)?$/) ||
+    origin.match(`http://${process.env.APP_HIDDEN_SERVICE}`)
   ) {
     callback(null, true)
   } else {
