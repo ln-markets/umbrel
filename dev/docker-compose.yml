@@ -35,6 +35,8 @@ services:
     build:
       context: ..
       dockerfile: ./apps/front/docker/Dockerfile.dev
+      args:
+        - APP_LNMARKETS_PORT=4242
     ports:
       - 3000:3000
     volumes:
@@ -45,5 +47,7 @@ services:
       - ../apps/front/vite.config.js:/usr/src/apps/front/vite.config.js
       - ../apps/front/index.html:/usr/src/apps/front/index.html
       - ../apps/front/.env.development:/usr/src/apps/front/.env.development
+    environment:
+      - APP_LNMARKETS_PORT=4242
     networks:
       - lnmarkets_umbrel
