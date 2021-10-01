@@ -3,14 +3,16 @@ FROM node:14.17-alpine as builder
 WORKDIR /usr/tmp
 
 COPY package.json yarn.lock ./
-COPY ./apps/front/package.json /usr/tmp/apps/front/package.json
-COPY ./apps/front/index.html /usr/tmp/apps/front/index.html
-COPY ./apps/front/vite.config.js /usr/tmp/apps/front/vite.config.js
-COPY ./apps/front/tailwind.config.js /usr/tmp/apps/front/tailwind.config.js
-COPY ./apps/front/postcss.config.js /usr/tmp/apps/front/postcss.config.js
-COPY ./apps/front/public /usr/tmp/apps/front/public
-COPY ./apps/front/src /usr/tmp/apps/front/src
+COPY apps/front/package.json /usr/tmp/apps/front/package.json
+COPY apps/front/index.html /usr/tmp/apps/front/index.html
+COPY apps/front/vite.config.js /usr/tmp/apps/front/vite.config.js
+COPY apps/front/tailwind.config.js /usr/tmp/apps/front/tailwind.config.js
+COPY apps/front/postcss.config.js /usr/tmp/apps/front/postcss.config.js
+COPY apps/front/public /usr/tmp/apps/front/public
+COPY apps/front/src /usr/tmp/apps/front/src
+COPY entrypoint.sh entrypoint.sh
 
+RUN chmod +x entrypoint.sh
 RUN yarn config --silent set cache-folder .yarn && \
   yarn workspace front install --frozen-lockfile && \
   yarn workspace front build
@@ -48,6 +50,4 @@ HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \
 
 EXPOSE 2021
 
-WORKDIR /usr/src/apps/api
-
-CMD ["dumb-init", "node", "srcs/index.js"]
+CMD ["sh", "entrypoint.sh"]
