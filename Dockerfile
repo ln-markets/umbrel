@@ -10,7 +10,6 @@ COPY apps/front/tailwind.config.js /usr/tmp/apps/front/tailwind.config.js
 COPY apps/front/postcss.config.js /usr/tmp/apps/front/postcss.config.js
 COPY apps/front/public /usr/tmp/apps/front/public
 COPY apps/front/src /usr/tmp/apps/front/src
-COPY entrypoint.sh entrypoint.sh
 
 RUN chmod +x entrypoint.sh
 RUN yarn config --silent set cache-folder .yarn && \
@@ -49,5 +48,7 @@ HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \
     CMD node /usr/src/apps/api/healthcheck.js
 
 EXPOSE 2021
+
+COPY --chown=node:node ./entrypoint.sh /usr/src/entrypoint.sh
 
 CMD ["sh", "entrypoint.sh"]
