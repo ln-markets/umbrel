@@ -11,7 +11,6 @@ COPY apps/front/postcss.config.js /usr/tmp/apps/front/postcss.config.js
 COPY apps/front/public /usr/tmp/apps/front/public
 COPY apps/front/src /usr/tmp/apps/front/src
 
-RUN chmod +x entrypoint.sh
 RUN yarn config --silent set cache-folder .yarn && \
   yarn workspace front install --frozen-lockfile && \
   yarn workspace front build
@@ -41,6 +40,9 @@ RUN yarn config --silent set cache-folder .yarn && \
 
 COPY --chown=node:node ./apps/api/srcs /usr/src/apps/api/srcs
 COPY --chown=node:node ./apps/api/docker/healthcheck.js /usr/src/apps/api/healthcheck.js
+COPY --chown=node:node ./entrypoint.sh /usr/src/entrypoint.sh
+
+RUN chmod +x entrypoint.sh
 
 USER node
 
@@ -48,7 +50,5 @@ HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \
     CMD node /usr/src/apps/api/healthcheck.js
 
 EXPOSE 2021
-
-COPY --chown=node:node ./entrypoint.sh /usr/src/entrypoint.sh
 
 CMD ["sh", "entrypoint.sh"]
