@@ -1,7 +1,5 @@
 FROM node:14.17-alpine as builder
 
-ENV NODE_ENV="production"
-
 WORKDIR /usr/tmp
 
 COPY package.json yarn.lock ./
@@ -19,6 +17,7 @@ RUN yarn config --silent set cache-folder .yarn && \
 
 FROM node:14.17-alpine
 
+ENV NODE_ENV="production"
 ENV APP_VERSION=1.0.0
 
 WORKDIR /usr/src
