@@ -2,17 +2,18 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 function getDevServerConf() {
-  if (process.env.DOCKER) {
+  if (process.env.NODE_ENV !== 'production') {
     return {
       host: '0.0.0.0',
       port: 3000,
       strictPort: true,
       force: true,
     }
-  }
-  return {
-    host: '0.0.0.0',
-    port: 3000,
+  } else {
+    return {
+      host: '0.0.0.0',
+      port: process.env.APP_LNMARKETS_PORT,
+    }
   }
 }
 

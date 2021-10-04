@@ -7,6 +7,4 @@ COPY apps/api/package.json apps/api/package.json
 
 RUN yarn install --frozen-lockfile
 
-EXPOSE 8001
-
 CMD [ "yarn", "workspace", "api", "dev" ]

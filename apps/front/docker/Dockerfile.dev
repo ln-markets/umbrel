@@ -1,6 +1,5 @@
 FROM node:14.16-alpine
 
-ARG APP_LNMARKETS_PORT
 WORKDIR /usr/src
 
 COPY package.json yarn.lock ./
@@ -10,6 +9,4 @@ RUN yarn install --frozen-lockfile
 
 WORKDIR /usr/src/apps/front
 
-EXPOSE 3000
-
-CMD sed -i "s/'VUE_APP_LNMARKETS_PORT'/${APP_LNMARKETS_PORT}/g" src/plugins/client.js && yarn workspace front dev 
+CMD ["yarn", "workspace", "front", "dev"] 

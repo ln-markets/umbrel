@@ -1,5 +1,7 @@
 FROM node:14.17-alpine as builder
 
+ENV NODE_ENV="production"
+
 WORKDIR /usr/tmp
 
 COPY package.json yarn.lock ./
@@ -17,12 +19,7 @@ RUN yarn config --silent set cache-folder .yarn && \
 
 FROM node:14.17-alpine
 
-ENV NODE_ENV="production"
 ENV APP_VERSION=1.0.0
-ENV API_PORT=4242
-ENV BITCOIN_NETWORK="mainnet"
-ENV LNMARKETS_API_URL="https://api.lnmarkets.com"
-ENV LNMARKETS_API_VERSION="/v1"
 
 WORKDIR /usr/src
 
@@ -40,17 +37,12 @@ RUN yarn config --silent set cache-folder .yarn && \
 
 COPY --chown=node:node ./apps/api/srcs /usr/src/apps/api/srcs
 COPY --chown=node:node ./apps/api/docker/healthcheck.js /usr/src/apps/api/healthcheck.js
-COPY --chown=node:node ./apps/api/entrypoint.sh /usr/src/apps/api/entrypoint.sh
 
 USER node
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \  
     CMD node /usr/src/apps/api/healthcheck.js
 
-EXPOSE 2021
-
 WORKDIR /usr/src/apps/api
 
-RUN chmod +x entrypoint.sh
-
-CMD ["sh", "entrypoint.sh"]
+CMD ["dumb-init", "node", "srcs/index.js"]
