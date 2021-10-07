@@ -12,7 +12,7 @@ function getDevServerConf() {
   } else {
     return {
       host: '0.0.0.0',
-      port: process.env.APP_LNMARKETS_PORT,
+      port: process.env.API_PORT,
     }
   }
 }

@@ -1,7 +1,7 @@
 import Client from '../packages/client.js'
 
 const baseUrl = () => {
-  if (parseInt(window.location.port) === 3000) {
+  if (import.meta.env.MODE === 'development') {
     return `http://localhost:8001`
   } else {
     return `http://${window.location.host}`
