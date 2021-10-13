@@ -8,6 +8,8 @@
   "scripts": {
     "init": "cd infra && ./scripts/init.sh",
     "start": "./scripts/start.sh",
-    "stop": "./scripts/stop.sh"
+    "stop": "./scripts/stop.sh",
+    "lnd-balance": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' walletbalance",
+    "create-channel": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' openchannel '03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431'"
   }
 }
