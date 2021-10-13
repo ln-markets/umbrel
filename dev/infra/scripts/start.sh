@@ -10,5 +10,5 @@ docker network prune -f
 echo -e "\nStarting infra containers..."
 docker-compose up -d 
 
-echo -e "\Unlock LND wallet..."
+echo -e "\nUnlock LND wallet..."
 docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' unlock

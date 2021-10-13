@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "init": "cd infra && ./scripts/init.sh",
-    "start": "./script/start.sh",
-    "stop": "./script/stop.sh"
+    "start": "./scripts/start.sh",
+    "stop": "./scripts/stop.sh"
   }
 }
