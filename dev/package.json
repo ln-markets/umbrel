@@ -6,7 +6,8 @@
   "author": "BOTREL Kilian",
   "license": "MIT",
   "scripts": {
-    "start": "cd infra && docker-compose up -d ; cd .. ; docker-compose up -d",
-    "stop": "docker-compose down ; cd infra ; docker-compose down"
+    "init": "cd infra && ./scripts/init.sh",
+    "start": "./script/start.sh",
+    "stop": "./script/stop.sh"
   }
 }
