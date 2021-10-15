@@ -3,4 +3,4 @@ apps/api/**/*.js:
   - eslint --fix
 apps/front/**/*.{js,vue}:
   - prettier --write
-  - yarn workspace front lint
+  - eslint --fix

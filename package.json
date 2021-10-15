@@ -5,15 +5,19 @@
   "repository": "git@github.com:lnmarkets/umbrel.git",
   "author": "BOTREL Kilian <botrel.kilian1999@gmail.com>",
   "private": true,
+  "engines": {
+    "node": ">=14",
+    "pnpm": ">=6"
+  },
   "scripts": {
     "prepare": "husky install",
-    "format": "prettier --write 'apps/**/*.{js,vue}'"
+    "format": "prettier --write 'apps/**/*.{js,vue}'",
+    "init": "cd dev/infra && ./scripts/init.sh",
+    "start": "cd dev && ./scripts/start.sh",
+    "stop": "cd dev && ./scripts/stop.sh",
+    "lnd-balance": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' walletbalance",
+    "create-channel": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' openchannel '03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431'"
   },
-  "workspaces": [
-    "apps/api",
-    "apps/front",
-    "dev"
-  ],
   "dependencies": {
     "dotenv": "^10.0.0"
   },
@@ -32,10 +36,5 @@
     "lint-staged": "^11.0.0",
     "nodemon": "^2.0.2",
     "prettier": "2.2.1"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
   }
 }

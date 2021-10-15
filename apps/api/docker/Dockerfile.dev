@@ -2,9 +2,12 @@ FROM node:14.16-alpine
 
 WORKDIR /usr/src
 
-COPY package.json yarn.lock ./
+RUN apk add -U jq findutils curl && npm install -g pnpm@6.16.1
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/api/package.json apps/api/package.json
 
-RUN yarn install --frozen-lockfile
+RUN pnpm config set store-dir .pnpm-store
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
-CMD [ "yarn", "workspace", "api", "dev" ]
+CMD ["sh", "-c", "pnpm run -C apps/api dev"] 
