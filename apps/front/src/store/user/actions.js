@@ -3,27 +3,9 @@ import client from '../../plugins/client.js'
 export default {
   async get({ commit }) {
     try {
-      const infos = await client.get({ path: '/api/user' })
+      const data = await client.get({ path: '/api/user' })
 
-      commit('UPDATE_USER', infos)
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  },
-
-  async transactionHistory({ commit }) {
-    try {
-      const { deposits, withdrawals } = await client.get({
-        path: '/api/user/history',
-      })
-
-      if (deposits) {
-        commit('DEPOSIT_TRANSACTIONS', deposits)
-      }
-
-      if (withdrawals) {
-        commit('WITHDRAWAL_TRANSACTIONS', withdrawals)
-      }
+      commit('UPDATE_USER', data)
     } catch (error) {
       return Promise.reject(error)
     }
@@ -43,8 +25,6 @@ export default {
       }
 
       await dispatch('get')
-      await dispatch('transactionHistory')
-
       const { transactions } = state.deposits
       const { id, payment_hash } = transactions[transactions.length - 1]
 
@@ -76,8 +56,6 @@ export default {
       }
 
       dispatch('get')
-      dispatch('transactionHistory')
-
       const { transactions } = state.withdrawals
       const { id, payment_hash } = transactions[transactions.length - 1]
 

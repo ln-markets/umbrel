@@ -1,18 +1,9 @@
 export default {
-  UPDATE_USER(state, infos) {
-    for (const key in infos) {
-      if (key in state) {
-        state[key] = infos[key]
-      }
-    }
-  },
+  UPDATE_USER(state, data) {
+    const { infos, stats } = data
 
-  DEPOSIT_TRANSACTIONS(state, list) {
-    state.deposits.transactions = list
-  },
-
-  WITHDRAWAL_TRANSACTIONS(state, list) {
-    state.withdrawals.transactions = list
+    state.infos = infos
+    state.stats = stats
   },
 
   DEPOSIT_PROCESS(state, infos) {

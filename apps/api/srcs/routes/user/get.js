@@ -7,9 +7,41 @@ module.exports = async (req, res) => {
       endpoint: '/user',
     }
 
-    const response = await LNMarketsAPI.request(payload)
+    const {
+      uid,
+      balance,
+      username,
+      linkingpublickey,
+      total_deposit_success_count: deposits,
+      total_withdraw_success_count: withdrawals,
+      total_open_positions: opened,
+      total_running_positions: running,
+      total_closed_positions: closed,
+      total_canceled_positions: canceled,
+    } = await LNMarketsAPI.request(payload)
 
-    res.json(response)
+    const user = {
+      infos: {
+        uid,
+        username,
+        linkingpublickey,
+        balance,
+      },
+      stats: {
+        transactions: {
+          deposits,
+          withdrawals,
+        },
+        positions: {
+          opened,
+          running,
+          closed,
+          canceled,
+        },
+      },
+    }
+
+    res.json(user)
   } catch (error) {
     res.json(error)
     console.log(error)

@@ -126,12 +126,14 @@ export default {
 
     return {
       disclaimer: computed(() => store.state.disclaimer),
-      username: computed(() => store.state.user.username),
-      uid: computed(() => store.state.user.uid),
-      balance: computed(() => store.state.user.balance),
+      username: computed(() => store.state.user.infos.username),
+      uid: computed(() => store.state.user.infos.uid),
+      balance: computed(() => store.state.user.infos.balance),
       maxDeposit: computed(() => store.getters['user/maxDeposit']),
-      deposits: computed(() => store.getters['user/depositCount']),
-      withdrawals: computed(() => store.getters['user/withdrawalCount']),
+      deposits: computed(() => store.state.user.stats.transactions.deposits),
+      withdrawals: computed(
+        () => store.state.user.stats.transactions.withdrawals
+      ),
       positions: computed(() => store.getters['futures/positionCount']),
       opened: computed(() => store.getters['futures/openedCount']),
       running: computed(() => store.getters['futures/runningCount']),
