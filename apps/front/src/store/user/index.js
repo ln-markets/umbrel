@@ -22,23 +22,12 @@ const defaultState = () => {
         canceled: 0,
       },
     },
-    deposits: {
-      last: {
-        step: 'before',
-        amount: 0,
-        id: null,
-        payment: null,
-        secret: null,
-      },
-    },
-    withdrawals: {
-      last: {
-        step: 'before',
-        amount: 0,
-        id: null,
-        payment: null,
-        secret: null,
-      },
+    transaction: {
+      step: 'before',
+      amount: 0,
+      id: null,
+      payment: null,
+      secret: null,
     },
   }
 }

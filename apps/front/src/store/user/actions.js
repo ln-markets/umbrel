@@ -13,9 +13,9 @@ export default {
 
   async deposit({ commit, dispatch, state }, amount) {
     try {
-      commit('DEPOSIT_PROCESS', { step: 'waiting' })
+      commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { secret, code } = await client.post({
+      const { secret, id, payment_hash, code } = await client.post({
         path: '/api/user/deposit',
         body: { amount },
       })
@@ -25,10 +25,8 @@ export default {
       }
 
       await dispatch('get')
-      const { transactions } = state.deposits
-      const { id, payment_hash } = transactions[transactions.length - 1]
 
-      commit('DEPOSIT_PROCESS', {
+      commit('TRANSACTION_PROCESS', {
         step: 'after',
         id,
         secret,
@@ -36,7 +34,7 @@ export default {
         amount,
       })
     } catch (error) {
-      commit('DEPOSIT_PROCESS', { step: 'faillure' })
+      commit('TRANSACTION_PROCESS', { step: 'faillure' })
       commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
@@ -44,9 +42,9 @@ export default {
 
   async withdraw({ commit, dispatch, state }, amount) {
     try {
-      commit('WITHDRAW_PROCESS', { step: 'waiting' })
+      commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { paymentsecret: secret, code } = await client.post({
+      const { secret, id, payment_hash, code } = await client.post({
         path: '/api/user/withdraw',
         body: { amount },
       })
@@ -56,10 +54,8 @@ export default {
       }
 
       dispatch('get')
-      const { transactions } = state.withdrawals
-      const { id, payment_hash } = transactions[transactions.length - 1]
 
-      commit('WITHDRAW_PROCESS', {
+      commit('TRANSACTION_PROCESS', {
         step: 'after',
         id,
         secret,
@@ -67,7 +63,7 @@ export default {
         amount,
       })
     } catch (error) {
-      commit('WITHDRAW_PROCESS', { step: 'faillure' })
+      commit('TRANSACTION_PROCESS', { step: 'faillure' })
       commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
