@@ -15,7 +15,7 @@ export default {
     try {
       commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { secret, id, payment_hash, code } = await client.post({
+      const { secret, id, payment, code } = await client.post({
         path: '/api/user/deposit',
         body: { amount },
       })
@@ -24,13 +24,19 @@ export default {
         throw code
       }
 
+      const before = state.stats.transactions.deposits
       await dispatch('get')
+      const after = state.stats.transactions.deposits
+
+      if (before === after) {
+        throw 'DepositFaillure'
+      }
 
       commit('TRANSACTION_PROCESS', {
         step: 'after',
         id,
         secret,
-        payment: payment_hash,
+        payment: payment,
         amount,
       })
     } catch (error) {

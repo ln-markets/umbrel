@@ -74,9 +74,9 @@ export default {
     async submit() {
       try {
         await this.$store.dispatch('user/deposit', parseInt(this.amount))
-        this.amount = 1000
       } catch (error) {
         console.log(error)
+      } finally {
         this.amount = 1000
       }
     },

@@ -13,7 +13,10 @@ module.exports = async (req, res) => {
       },
     }
 
-    const { paymentRequest: request } = await LNMarketsAPI.request(payload)
+    const {
+      depositId: id,
+      paymentRequest: request,
+    } = await LNMarketsAPI.request(payload)
 
     const { tokens } = await LND.decodePaymentRequest({ request })
 
@@ -21,9 +24,9 @@ module.exports = async (req, res) => {
       throw new Error('WrongAmountInvoice')
     }
 
-    const response = await LND.pay({ request })
+    const { secret, paths } = await LND.pay({ request })
 
-    res.json(response)
+    res.json({ secret, id, payment: paths[0].payment })
   } catch (error) {
     res.json(error)
   }
