@@ -4,29 +4,31 @@ import mutations from './mutations.js'
 
 const defaultState = () => {
   return {
-    uid: '',
-    linkingpublickey: '',
-    balance: 0,
-    username: '',
-    deposits: {
-      transactions: [],
-      last: {
-        step: 'before',
-        amount: 0,
-        id: null,
-        payment: null,
-        secret: null,
+    infos: {
+      uid: '',
+      linkingpublickey: '',
+      balance: 0,
+      username: '',
+    },
+    stats: {
+      transactions: {
+        deposits: 0,
+        withdrawals: 0,
+      },
+      positions: {
+        opened: 0,
+        running: 0,
+        closed: 0,
+        canceled: 0,
       },
     },
-    withdrawals: {
-      transactions: [],
-      last: {
-        step: 'before',
-        amount: 0,
-        id: null,
-        payment: null,
-        secret: null,
-      },
+    transaction: {
+      step: 'before',
+      amount: 0,
+      id: null,
+      payment: null,
+      secret: null,
+      fee: 0,
     },
   }
 }

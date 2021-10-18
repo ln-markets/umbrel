@@ -126,16 +126,18 @@ export default {
 
     return {
       disclaimer: computed(() => store.state.disclaimer),
-      username: computed(() => store.state.user.username),
-      uid: computed(() => store.state.user.uid),
-      balance: computed(() => store.state.user.balance),
+      username: computed(() => store.state.user.infos.username),
+      uid: computed(() => store.state.user.infos.uid),
+      balance: computed(() => store.state.user.infos.balance),
       maxDeposit: computed(() => store.getters['user/maxDeposit']),
-      deposits: computed(() => store.getters['user/depositCount']),
-      withdrawals: computed(() => store.getters['user/withdrawalCount']),
-      positions: computed(() => store.getters['futures/positionCount']),
-      opened: computed(() => store.getters['futures/openedCount']),
-      running: computed(() => store.getters['futures/runningCount']),
-      closed: computed(() => store.getters['futures/closedCount']),
+      deposits: computed(() => store.state.user.stats.transactions.deposits),
+      withdrawals: computed(
+        () => store.state.user.stats.transactions.withdrawals
+      ),
+      positions: computed(() => store.getters['user/positionCount']),
+      opened: computed(() => store.state.user.stats.positions.opened),
+      running: computed(() => store.state.user.stats.positions.running),
+      closed: computed(() => store.state.user.stats.positions.closed),
       pl: computed(() => store.getters['futures/computePL']),
       showDepositModal: ref(false),
       showWithdrawModal: ref(false),

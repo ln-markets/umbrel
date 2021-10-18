@@ -4,9 +4,7 @@ import mutations from './mutations.js'
 
 const defaultState = () => {
   return {
-    opened: [],
-    running: [],
-    closed: [],
+    positions: [],
   }
 }
 

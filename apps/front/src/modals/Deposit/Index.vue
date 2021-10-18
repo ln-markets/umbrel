@@ -41,15 +41,16 @@ export default {
     const store = useStore()
 
     return {
-      step: computed(() => store.state.user.deposits.last.step),
-      depositProcess: (infos) => store.commit('user/DEPOSIT_PROCESS', infos),
+      step: computed(() => store.state.user.transaction.step),
+      transactionProcess: (infos) =>
+        store.commit('user/TRANSACTION_PROCESS', infos),
     }
   },
 
   methods: {
     closeModal() {
       this.$emit('update:showModal', false)
-      this.depositProcess({
+      this.transactionProcess({
         step: 'before',
         amount: 0,
         id: null,

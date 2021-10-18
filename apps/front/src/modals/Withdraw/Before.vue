@@ -61,7 +61,7 @@ export default {
     const store = useStore()
 
     return {
-      balance: computed(() => store.state.user.balance),
+      balance: computed(() => store.state.user.infos.balance),
       amount: ref(1000),
       isInteger,
     }
@@ -76,9 +76,9 @@ export default {
     async submit() {
       try {
         await this.$store.dispatch('user/withdraw', parseInt(this.amount))
-        this.amount = 1000
       } catch (error) {
         console.log(error)
+      } finally {
         this.amount = 1000
       }
     },

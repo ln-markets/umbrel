@@ -41,20 +41,22 @@ export default {
     const store = useStore()
 
     return {
-      step: computed(() => store.state.user.withdrawals.last.step),
-      withdrawProcess: (infos) => store.commit('user/WITHDRAW_PROCESS', infos),
+      step: computed(() => store.state.user.transaction.step),
+      transactionProcess: (infos) =>
+        store.commit('user/TRANSACTION_PROCESS', infos),
     }
   },
 
   methods: {
     closeModal() {
       this.$emit('update:showModal', false)
-      this.withdrawProcess({
+      this.transactionProcess({
         step: 'before',
         amount: 0,
         id: null,
         payment: null,
         secret: null,
+        fee: 0,
       })
     },
   },

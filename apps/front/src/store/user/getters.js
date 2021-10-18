@@ -1,13 +1,11 @@
 export default {
-  depositCount: (state) => {
-    return state.deposits.transactions.filter((el) => el.success).length
-  },
-
-  withdrawalCount: (state) => {
-    return state.withdrawals.transactions.filter((el) => el.success).length
-  },
-
   maxDeposit: (state) => {
-    return 1000000 - state.balance
+    return 1000000 - state.infos.balance
+  },
+
+  positionCount: (state) => {
+    return Object.values(state.stats.positions).reduce(
+      (total, current) => total + current
+    )
   },
 }
