@@ -50,7 +50,7 @@ export default {
     try {
       commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { secret, id, payment_hash, code } = await client.post({
+      const { secret, id, payment, code, fee } = await client.post({
         path: '/api/user/withdraw',
         body: { amount },
       })
@@ -59,14 +59,21 @@ export default {
         throw code
       }
 
-      dispatch('get')
+      const before = state.stats.transactions.withdrawals
+      await dispatch('get')
+      const after = state.stats.transactions.withdrawals
+
+      if (before === after) {
+        throw 'WithdrawFaillure'
+      }
 
       commit('TRANSACTION_PROCESS', {
         step: 'after',
         id,
         secret,
-        payment: payment_hash,
+        payment,
         amount,
+        fee,
       })
     } catch (error) {
       commit('TRANSACTION_PROCESS', { step: 'faillure' })

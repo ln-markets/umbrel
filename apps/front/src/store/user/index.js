@@ -28,6 +28,7 @@ const defaultState = () => {
       id: null,
       payment: null,
       secret: null,
+      fee: 0,
     },
   }
 }

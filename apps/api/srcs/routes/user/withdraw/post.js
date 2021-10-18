@@ -18,9 +18,14 @@ module.exports = async (req, res) => {
       },
     }
 
-    const response = await LNMarketsAPI.request(payload)
+    const {
+      paymentsecret: secret,
+      paymenthash: payment,
+      id,
+      fee,
+    } = await LNMarketsAPI.request(payload)
 
-    res.json(response)
+    res.json({ secret, id, payment, fee })
   } catch (error) {
     res.json(error)
   }
