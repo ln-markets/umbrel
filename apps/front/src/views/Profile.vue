@@ -134,10 +134,10 @@ export default {
       withdrawals: computed(
         () => store.state.user.stats.transactions.withdrawals
       ),
-      positions: computed(() => store.getters['futures/positionCount']),
-      opened: computed(() => store.getters['futures/openedCount']),
-      running: computed(() => store.getters['futures/runningCount']),
-      closed: computed(() => store.getters['futures/closedCount']),
+      positions: computed(() => store.getters['user/positionCount']),
+      opened: computed(() => store.state.user.stats.positions.opened),
+      running: computed(() => store.state.user.stats.positions.running),
+      closed: computed(() => store.state.user.stats.positions.closed),
       pl: computed(() => store.getters['futures/computePL']),
       showDepositModal: ref(false),
       showWithdrawModal: ref(false),
