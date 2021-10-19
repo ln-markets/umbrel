@@ -5,9 +5,9 @@ const config = {
   },
   lnmarkets: {
     url:
-      process.env.BITCOIN_NETWORK === 'testnet'
-        ? 'https://api.testnet.lnmarkets.com'
-        : 'https://api.lnmarkets.com',
+      process.env.BITCOIN_NETWORK === 'mainnet'
+        ? 'https://api.lnmarkets.com'
+        : 'https://api.testnet.lnmarkets.com',
     version: process.env.LNMARKETS_API_VERSION || '/v1',
   },
 }
