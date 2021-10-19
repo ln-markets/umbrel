@@ -12,11 +12,12 @@
   "scripts": {
     "prepare": "husky install",
     "format": "prettier --write 'apps/**/*.{js,vue}'",
-    "init": "cd dev/infra && ./scripts/init.sh",
-    "start": "cd dev && ./scripts/start.sh",
-    "stop": "cd dev && ./scripts/stop.sh",
-    "lnd-balance": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' walletbalance",
-    "create-channel": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' openchannel '03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431'"
+    "env:init": "cd dev/infra && ./scripts/init.sh",
+    "env:start": "cd dev && ./scripts/start.sh",
+    "env:stop": "cd dev && ./scripts/stop.sh",
+    "lnd:balance": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' walletbalance",
+    "lnd:unlock": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' unlock",
+    "lnd:create-channel": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' openchannel '03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431'"
   },
   "dependencies": {
     "dotenv": "^10.0.0"
