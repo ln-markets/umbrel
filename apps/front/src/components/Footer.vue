@@ -20,6 +20,15 @@
         <font-awesome-icon :icon="['fab', 'telegram']" />
       </a>
       <a
+        aria-label="Github"
+        class="social-icon text-3xl"
+        href="https://github.com/lnmarkets/umbrel"
+        rel="noopener"
+        target="_blank"
+      >
+        <font-awesome-icon :icon="['fab', 'github']" />
+      </a>
+      <a
         aria-label="Twitter"
         class="social-icon text-3xl"
         href="https://twitter.com/LNMarkets"
