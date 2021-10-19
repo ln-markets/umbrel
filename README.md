@@ -16,7 +16,7 @@ This environment is linked to the **testnet** version of LN Markets. **Meant for
 ### Setting up the app:
 
 ```shell
- $> yarn workspace dev init
+ $> pnpm env:init
 ```
 
 It will setup bitcoin testnet blockchain and a LND node for you. In addition it will connect itself to LNMarkets node but you'll need to create the channel yourself since you need tBTC to create it. You'll get a wallet address from the `init` script above, copy this adress and get tBTC from faucets like these:
@@ -31,19 +31,25 @@ It will setup bitcoin testnet blockchain and a LND node for you. In addition it 
 You can check how much your wallet contains.
 
 ```shell
-  $> yarn workspace dev lnd-balance
+  $> pnpm lnd:balance
 ```
 
 Now that you have money create a channel with LN Markets.
 
 ```shell
-  $> yarn workspace dev create-channel AMOUNT
+  $> pnpm lnd:create-channel AMOUNT
 ```
 
 Once that's done restart environment.
 
 ```shell
-  $> yarn workspace dev start
+  $> pnpm env:start
+```
+
+Then unlock the wallet and start using the local env.
+
+```shell
+  $> pnpm lnd:unlock
 ```
 
 These following services ar now accessible on any web browser.
