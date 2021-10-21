@@ -22,6 +22,12 @@ export default {
 
 <style lang="postcss" scoped>
 .app-container {
-  @apply flex flex-col h-full p-0 m-0 overflow-auto bg-gray-100 text-gray-800;
+  @apply flex flex-col p-0 m-0 overflow-auto bg-gray-100 text-gray-800;
+}
+
+@media screen and (min-height: 720px), screen and (min-width: 1280px) {
+  .app-container {
+    height: 100%;
+  }
 }
 </style>
