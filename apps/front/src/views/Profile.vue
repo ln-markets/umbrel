@@ -8,19 +8,28 @@
         <ul>
           <li>
             <span class="font-bold">{{ positions.toLocaleString('en') }}</span>
-            positions
+            Positions
           </li>
           <li>
             <span class="font-bold">{{ deposits.toLocaleString('en') }}</span>
-            deposits
+            Deposits
           </li>
           <li>
             <span class="font-bold">{{
               withdrawals.toLocaleString('en')
             }}</span>
-            withdrawals
+            Withdrawals
           </li>
         </ul>
+      </div>
+    </div>
+    <div class="section mx-auto w-5/6 sm:w-2/3">
+      <p class="text-center font-bold text-xl">Market Data</p>
+      <hr />
+      <div class="category-row">
+        <span>Index: <b>0</b></span>
+        <span>Bid: <b>0</b></span>
+        <span>Offer: <b>0</b></span>
       </div>
     </div>
     <div class="infos-container">
@@ -28,41 +37,41 @@
         <p class="text-center font-bold text-xl">Account</p>
         <hr />
         <div class="category-row">
-          <span>Balance</span>
+          <span>Balance:</span>
           <span
             ><b>{{ balance.toLocaleString('en') }}</b> sats</span
           >
         </div>
         <hr />
         <div class="category-row">
-          <span>UID</span>
-          <span>{{ uid.substring(0, 13) }}...</span>
+          <span>UID:</span>
+          <span class="ml-2 truncate">{{ uid }}</span>
         </div>
       </div>
       <div class="section category">
         <p class="text-center font-bold text-xl">Positions</p>
         <hr />
         <div class="category-row">
-          <span>Opened</span>
+          <span>Opened:</span>
           <span
             ><b>{{ opened.toLocaleString('en') }}</b> positions</span
           >
         </div>
         <div class="category-row">
-          <span>Running</span>
+          <span>Running:</span>
           <span
             ><b>{{ running.toLocaleString('en') }}</b> positions</span
           >
         </div>
         <div class="category-row">
-          <span>Closed</span>
+          <span>Closed:</span>
           <span
             ><b>{{ closed.toLocaleString('en') }}</b> positions</span
           >
         </div>
         <hr />
         <div class="category-row mb-1">
-          <span>P&L</span>
+          <span>P&L:</span>
           <span
             :class="pl > 0 ? 'text-green-500' : pl < 0 ? 'text-red-500' : ''"
           >
@@ -187,13 +196,13 @@ hr {
 }
 
 .category {
-  @apply w-2/3 m-auto;
-  @apply xl:w-full;
+  @apply w-5/6 m-auto;
+  @apply sm:w-2/3 xl:w-full;
 }
 
 .category-row {
   @apply flex flex-row justify-between text-xs px-2;
-  @apply sm:px-8 sm:text-sm md:text-base;
+  @apply sm:px-8 md:text-sm 2xl:text-base;
 }
 
 .section {
@@ -201,7 +210,7 @@ hr {
 }
 
 .profile-card {
-  @apply w-5/6 mx-auto mt-8;
+  @apply w-5/6 mx-auto my-8;
   @apply sm:w-1/2;
 }
 </style>
