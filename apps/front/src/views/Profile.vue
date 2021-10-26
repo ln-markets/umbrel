@@ -154,7 +154,7 @@ export default {
       running: computed(() => store.state.user.stats.positions.running),
       closed: computed(() => store.state.user.stats.positions.closed),
       pl: computed(() => store.getters['futures/computePL']),
-      index: computed(() => store.state.futures.market.index),
+      index: computed(() => store.getters['futures/market/fixedIndex']),
       bid: computed(() => store.state.futures.market.bid),
       offer: computed(() => store.state.futures.market.offer),
       showDepositModal: ref(false),
