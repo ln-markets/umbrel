@@ -27,9 +27,15 @@
       <p class="text-center font-bold text-xl">Market Data</p>
       <hr />
       <div class="category-row">
-        <span>Index: <b>0</b></span>
-        <span>Bid: <b>0</b></span>
-        <span>Offer: <b>0</b></span>
+        <span
+          >Index: <b>{{ index.toLocaleString('en') }}</b></span
+        >
+        <span
+          >Bid: <b>{{ bid.toLocaleString('en') }}</b></span
+        >
+        <span
+          >Offer: <b>{{ offer.toLocaleString('en') }}</b></span
+        >
       </div>
     </div>
     <div class="infos-container">
@@ -148,6 +154,9 @@ export default {
       running: computed(() => store.state.user.stats.positions.running),
       closed: computed(() => store.state.user.stats.positions.closed),
       pl: computed(() => store.getters['futures/computePL']),
+      index: computed(() => store.state.futures.market.index),
+      bid: computed(() => store.state.futures.market.bid),
+      offer: computed(() => store.state.futures.market.offer),
       showDepositModal: ref(false),
       showWithdrawModal: ref(false),
     }
