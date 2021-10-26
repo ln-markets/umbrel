@@ -5,6 +5,7 @@ const config = require('@config')
 const expressConfig = require('@loaders/express.js')
 
 const LND = require('@classes/lnd.js')
+const WebsocketServer = require('./websockets/server.js')
 
 const createApp = async () => {
   try {
@@ -21,6 +22,8 @@ const createApp = async () => {
 const createServer = (app) => {
   const server = http.createServer(app)
 
+  WebsocketServer.create(server)
+
   server.on('error', (error) => {
     console.error(error)
   })
@@ -32,8 +35,6 @@ const createServer = (app) => {
   })
 
   server.listen(config.app.port, '0.0.0.0')
-
-  return server
 }
 
 const startDependencies = async () => {
@@ -49,9 +50,8 @@ module.exports = async () => {
     await startDependencies()
 
     const app = await createApp()
-    const server = createServer(app)
 
-    return server
+    await createServer(app)
   } catch (error) {
     return Promise.reject(error)
   }
