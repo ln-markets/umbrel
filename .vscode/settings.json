@@ -1,0 +1,39 @@
+{
+    "editor.formatOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "vue",
+    ],
+    "eslint.options": {
+        "extensions": [
+            ".html",
+            ".js",
+            ".vue"
+        ]
+    },
+    "eslint.workingDirectories": [
+        {
+            "directory": "apps/api",
+        },
+        {
+            "directory": "apps/front",
+            "changeProcessCWD": true
+        },
+    ],
+    "eslint.format.enable": true,
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "css.validate": false,
+    "javascript.validate.enable": false,
+    "javascript.format.enable": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.quickSuggestions": {
+        "strings": true
+    }
+}
