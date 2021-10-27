@@ -14,6 +14,6 @@ module.exports = async (app) => {
   })
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../../front/')))
+    app.use(express.static(path.join(__dirname, '../../public')))
   }
 }
