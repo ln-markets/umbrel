@@ -1,8 +1,18 @@
-import mitt from 'mitt'
+import { wait } from '../../plugins/utils.js'
 
-import { wait, isJSONRPCMessage } from '../../plugins/utils.js'
+const JSONRPC = '2.0'
 
-const event = mitt()
+const isJSONRPCMessage = (payload) => {
+  if (!payload) {
+    return false
+  } else {
+    return (
+      payload.jsonrpc === JSONRPC &&
+      payload.method !== undefined &&
+      payload.params !== undefined
+    )
+  }
+}
 
 export default {
   open({ commit }) {
@@ -46,57 +56,6 @@ export default {
       }
 
       console.error(error)
-    }
-  },
-
-  async subscribe({ dispatch, state, commit }, events) {
-    const params = JSON.parse(JSON.stringify(events))
-
-    for (const event of events) {
-      if (state.currentSubscription.indexOf(event) > -1) {
-        params.splice(params.indexOf(event), 1)
-      }
-    }
-
-    if (params.length === 0) {
-      return
-    }
-
-    const payload = {
-      method: 'subscribe',
-      params,
-    }
-
-    dispatch('send', payload).then(({ data }) => {
-      commit('SUBSCRIBE', data)
-    })
-  },
-
-  unsubscribe({ dispatch, commit }, params) {
-    const payload = {
-      method: 'unsubscribe',
-      params,
-    }
-    dispatch('send', payload)
-    commit('UNSUBSCRIBE', params)
-  },
-
-  send({ commit }, { method, params, notification }) {
-    const payload = {
-      jsonrpc: '2.0',
-      method,
-      params,
-      id: notification ? null : '_' + Math.random().toString(36).substr(2, 9),
-    }
-
-    commit('SEND', JSON.stringify(payload))
-
-    if (payload.id) {
-      return new Promise((resolve, reject) => {
-        event.on(payload.id, (data) => {
-          resolve({ payload, data })
-        })
-      })
     }
   },
 }

@@ -9,16 +9,17 @@ module.exports = {
     module: true,
   },
   extends: [
+    'plugin:tailwindcss/recommended',
     'plugin:vue/vue3-recommended',
     'plugin:prettier/recommended',
     'eslint:recommended',
   ],
-  plugins: ['prettier'],
+  plugins: ['prettier', 'tailwindcss'],
   rules: {
     camelcase: 0,
     'prefer-destructuring': ['error', { object: true, array: true }],
     'no-unused-vars': ['error', { args: 'none' }],
-    'vue/no-v-html': 0,
     'no-empty': ['error', { allowEmptyCatch: true }],
+    'vue/no-multiple-template-root': 'off',
   },
 }

@@ -1,11 +1,8 @@
-const got = require('got')
+const { LNMarketsRest } = require('@ln-markets/api')
+const { createLnurlAuthPubkeyAndSignature } = require('@/helpers/lnurl.js')
 
-const config = require('@/config.js')
-
-const LNURL = require('@/wrappers/lnurl.js')
-
-const convertBase64 = async (input) => {
-  try {
+const isTokenExpired = (token) => {
+  const convertBase64 = (input) => {
     input = input.replace(/-/g, '+').replace(/_/g, '/')
 
     const pad = input.length % 4
@@ -18,97 +15,49 @@ const convertBase64 = async (input) => {
     }
 
     return input
-  } catch (error) {
-    return Promise.reject(error)
   }
+
+  const convertedString = convertBase64(token.split('.')[1])
+  const payload = Buffer.from(convertedString, 'base64').toString()
+
+  const { exp } = JSON.parse(payload)
+  const now = Math.floor(Date.now() / 1000)
+
+  return now >= exp
 }
 
-class LNMarketsAPI {
+class LNMarketsAPI extends LNMarketsRest {
   constructor() {
-    this.token = undefined
+    super({ network: process.env.BITCOIN_NETWORK })
+    this.doNotCheckToken = false
   }
 
-  async tokenCheck() {
+  async beforeRequestApi(options) {
     try {
-      if (this.token) {
-        const convertedString = await convertBase64(this.token.split('.')[1])
-        const payload = Buffer.from(convertedString, 'base64').toString()
+      if (!this.doNotCheckToken) {
+        if (!this.token || isTokenExpired(this.token)) {
+          // Mutex du pauvre
+          this.doNotCheckToken = true
+          this.token = await this.createToken()
 
-        const { jti, exp } = JSON.parse(payload)
-        const now = Math.floor(Date.now() / 1000)
-
-        if (now > exp) {
-          const { token } = await this.generateToken()
-
-          this.token = token
-
-          const payload = {
-            method: 'DELETE',
-            endpoint: '/user/jwt',
-            params: { jti },
-          }
-
-          await this.request(payload)
+          this.doNotCheckToken = false
         }
-      } else {
-        const { token } = await this.generateToken()
-
-        this.token = token
       }
+
+      return this.requestAPI(options)
     } catch (error) {
       return Promise.reject(error)
     }
   }
 
-  async generateToken() {
+  async createToken() {
     try {
-      const params = await LNURL.auth()
-      const payload = {
-        method: 'GET',
-        endpoint: '/lnurl/auth',
-        params,
-      }
-
-      const { token } = await this.request(payload)
-
-      this.token = token
-
-      return { token }
+      const { lnurl } = await this.getLnurlAuth()
+      const params = await createLnurlAuthPubkeyAndSignature({ lnurl })
+      const { token } = await this.lnurlAuth(params)
+      return token
     } catch (error) {
       return Promise.reject(error)
-    }
-  }
-
-  async request({ method, endpoint, params }) {
-    try {
-      const options = {
-        method,
-        responseType: 'json',
-        https: {
-          rejectUnauthorized: config.lnmarkets.url === 'https://localhost',
-        },
-      }
-
-      if (method.match(/^(PUT|POST)$/) && params) {
-        Object.assign(options, { json: params })
-      } else if (method.match(/^(GET|DELETE)$/) && params) {
-        Object.assign(options, { searchParams: params })
-      }
-
-      if (!endpoint.match(/^\/lnurl\/auth$/)) {
-        await this.tokenCheck()
-
-        Object.assign(options, {
-          headers: { Authorization: `Bearer ${this.token}` },
-        })
-      }
-
-      const { url, version } = config.lnmarkets
-      const { body } = await got(`${url}${version}${endpoint}`, options)
-
-      return body
-    } catch (error) {
-      return Promise.reject(error.response.body)
     }
   }
 }

@@ -1,12 +1,7 @@
 const LNMarketsAPI = require('@/classes/lnmarkets-api.js')
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
   try {
-    const payload = {
-      method: 'GET',
-      endpoint: '/user',
-    }
-
     const {
       uid,
       balance,
@@ -18,7 +13,7 @@ module.exports = async (req, res) => {
       total_running_positions: running,
       total_closed_positions: closed,
       total_canceled_positions: canceled,
-    } = await LNMarketsAPI.request(payload)
+    } = await LNMarketsAPI.getUser()
 
     const user = {
       infos: {
@@ -43,7 +38,6 @@ module.exports = async (req, res) => {
 
     res.json(user)
   } catch (error) {
-    res.json(error)
-    console.log(error)
+    next(error)
   }
 }

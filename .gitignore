@@ -1,5 +1,3 @@
-# Local environment
-
 node_modules
 dev/infra/lnd.conf
 dev/infra/bitcoin.conf

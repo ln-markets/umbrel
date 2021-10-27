@@ -1,19 +1,14 @@
 const LNMarketsAPI = require('@/classes/lnmarkets-api.js')
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
   try {
-    const positions = await LNMarketsAPI.request({
-      method: 'GET',
-      endpoint: '/futures',
-      params: {
-        type: 'running',
-        limit: 50,
-      },
+    const positions = await LNMarketsAPI.futuresGetPositions({
+      type: 'running',
+      limit: 50,
     })
 
     res.json(positions)
   } catch (error) {
-    res.json(error)
-    console.log(error)
+    next(error)
   }
 }

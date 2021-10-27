@@ -1,22 +1,22 @@
 <template>
   <modal :title="title">
     <template #body>
-      <p class="text-center text-sm sm:text-base mb-4 text-green-500">
+      <p class="mb-4 text-sm sm:text-base text-center text-green-500">
         You successfully deposited
         {{ transaction.amount.toLocaleString('en') }} sats to your account!
       </p>
       <div class="info-row">
-        <span class="font-semibold mr-1 md:mr-0">ID</span>
+        <span class="mr-1 md:mr-0 font-semibold">ID</span>
         <span>{{ transaction.id }}</span>
       </div>
       <hr class="my-2 sm:mx-4 lg:mx-8 xl:mx-16" />
       <div class="info-row">
-        <span class="font-semibold mr-1 md:mr-0">Hash</span>
+        <span class="mr-1 md:mr-0 font-semibold">Hash</span>
         <span>{{ transaction.payment }}</span>
       </div>
       <hr class="my-2 sm:mx-4 lg:mx-8 xl:mx-16" />
       <div class="info-row">
-        <span class="font-semibold mr-1 md:mr-0">Secret</span>
+        <span class="mr-1 md:mr-0 font-semibold">Secret</span>
         <span>{{ transaction.secret }}</span>
       </div>
     </template>

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 import before from './Before.vue'
@@ -35,7 +35,7 @@ export default {
     },
   },
 
-  emits: ['update:showModal'],
+  emits: ['update:show-modal'],
 
   setup() {
     const store = useStore()
@@ -49,7 +49,7 @@ export default {
 
   methods: {
     closeModal() {
-      this.$emit('update:showModal', false)
+      this.$emit('update:show-modal', false)
       this.transactionProcess({
         step: 'before',
         amount: 0,

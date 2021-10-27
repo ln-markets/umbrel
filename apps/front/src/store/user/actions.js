@@ -1,9 +1,9 @@
-import client from '../../plugins/client.js'
+import api from '@/plugins/api.js'
 
 export default {
   async get({ commit }) {
     try {
-      const data = await client.get({ path: '/api/user' })
+      const data = await api.get({ path: '/api/user' })
 
       commit('UPDATE_USER', data)
     } catch (error) {
@@ -15,7 +15,7 @@ export default {
     try {
       commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { secret, id, payment, code } = await client.post({
+      const { secret, id, payment, code } = await api.post({
         path: '/api/user/deposit',
         body: { amount },
       })
@@ -50,7 +50,7 @@ export default {
     try {
       commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { secret, id, payment, code, fee } = await client.post({
+      const { secret, id, payment, code, fee } = await api.post({
         path: '/api/user/withdraw',
         body: { amount },
       })
@@ -82,9 +82,7 @@ export default {
     }
   },
 
-  async getAuthenticationToken() {
-    const { token } = await client.get({ path: '/api/user/token' })
-
-    return token
+  getAuthenticationToken() {
+    return api.get({ path: '/api/auth' })
   },
 }

@@ -8,17 +8,18 @@
 
 <script>
 import { useStore } from 'vuex'
+import NavFooter from '@/layout/Footer.vue'
+import NavHeader from '@/layout/Header.vue'
 
 export default {
+  components: { NavFooter, NavHeader },
   setup() {
     const store = useStore()
 
-    store.dispatch('user/get')
-    store.dispatch('futures/get')
+    store.dispatch('user/get').then(() => {
+      store.dispatch('futures/get')
+    })
 
-    setTimeout(() => {
-      store.dispatch('futures/market/subscribeToMarketData')
-    }, 250)
     return {}
   },
 }

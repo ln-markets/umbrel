@@ -1,7 +1,7 @@
 <template>
   <modal :title="title">
     <template #body>
-      <p class="text-center text-sm sm:text-base mb-4">
+      <p class="mb-4 text-sm sm:text-base text-center">
         Select the amount to withdraw using one of the options bellow.
       </p>
       <slider
@@ -11,11 +11,11 @@
         :step="(balance - 1000) / 1000"
         @update="amount = parseInt($event)"
       />
-      <div class="mt-4 flex justify-center">
+      <div class="flex justify-center mt-4">
         <lnm-button class="mr-4" @click="amount = balance"> Max </lnm-button>
         <input
           v-model="amount"
-          class="border-2 border-gray-300 pr-2 text-right rounded text-sm w-1/2 sm:w-auto"
+          class="pr-2 w-1/2 sm:w-auto text-sm text-right rounded border-2 border-gray-300"
           inputmode="decimal"
           placeholder="Amount"
           @keypress="isInteger($event)"

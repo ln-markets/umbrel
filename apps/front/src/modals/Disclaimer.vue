@@ -1,7 +1,7 @@
 <template>
   <modal :title="'Welcome to the LN Markets app on Umbrel'">
     <template #body>
-      <p class="text-center text-sm sm:text-base py-1">
+      <p class="py-1 text-sm sm:text-base text-center">
         Start managing your LN Markets account directly from this pannel!
       </p>
       <p class="text-xs text-center">

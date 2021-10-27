@@ -1,12 +1,13 @@
 const LNMarketsAPI = require('@/classes/lnmarkets-api.js')
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
   try {
-    const response = await LNMarketsAPI.generateToken()
+    const parts = LNMarketsAPI.hostname.split('.')
+    parts.shift()
+    const token = await LNMarketsAPI.createToken()
 
-    res.json(response)
+    res.json({ hostname: parts.join('.'), token })
   } catch (error) {
-    res.json(error)
-    console.log(error)
+    next(error)
   }
 }

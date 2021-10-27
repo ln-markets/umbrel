@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button whitespace-nowrap"
+    class="whitespace-nowrap button"
     :disabled="disabled"
     :class="colorClass"
   >

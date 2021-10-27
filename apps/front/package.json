@@ -12,7 +12,7 @@
     "serve": "vite preview",
     "eslint": "eslint --fix",
     "prettier": "prettier --write",
-    "lint": "eslint --color 'src/**/*.{js,vue}'",
+    "lint": "eslint --color 'src/**/*.{js,vue}' --fix",
     "format": "prettier --write 'src/**/*.js'"
   },
   "dependencies": {
@@ -20,18 +20,18 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
-    "autoprefixer": "^10.2.5",
     "mitt": "^3.0.0",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.7",
-    "vue": "^3.0.5",
-    "vue-router": "4",
-    "vuex": "^4.0.0",
+    "vue": "^3.2.20",
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.2",
-    "@vue/compiler-sfc": "^3.0.5",
-    "vite": "^2.4.3"
+    "@vitejs/plugin-vue": "^1.9.4",
+    "@vue/compiler-sfc": "^3.2.20",
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.17",
+    "vite": "^2.6.13"
   }
 }

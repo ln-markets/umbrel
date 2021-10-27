@@ -23,24 +23,24 @@
         </ul>
       </div>
     </div>
-    <div class="section mx-auto w-5/6 sm:w-2/3">
-      <p class="text-center font-bold text-xl">Market Data</p>
+    <div class="mx-auto w-5/6 sm:w-2/3 section">
+      <p class="text-xl font-bold text-center">Market Data</p>
       <hr />
       <div class="category-row">
         <span
-          >Index: <b>{{ index.toLocaleString('en') }}</b></span
+          >Index: <b>{{ withCommasAndFixed(index) }}</b></span
         >
         <span
-          >Bid: <b>{{ bid.toLocaleString('en') }}</b></span
+          >Bid: <b>{{ withCommasAndFixed(bid) }}</b></span
         >
         <span
-          >Offer: <b>{{ offer.toLocaleString('en') }}</b></span
+          >Offer: <b>{{ withCommasAndFixed(offer) }}</b></span
         >
       </div>
     </div>
     <div class="infos-container">
       <div class="section category">
-        <p class="text-center font-bold text-xl">Account</p>
+        <p class="text-xl font-bold text-center">Account</p>
         <hr />
         <div class="category-row">
           <span>Balance:</span>
@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="section category">
-        <p class="text-center font-bold text-xl">Positions</p>
+        <p class="text-xl font-bold text-center">Positions</p>
         <hr />
         <div class="category-row">
           <span>Opened:</span>
@@ -76,7 +76,7 @@
           >
         </div>
         <hr />
-        <div class="category-row mb-1">
+        <div class="mb-1 category-row">
           <span>P&L:</span>
           <span
             :class="pl > 0 ? 'text-green-500' : pl < 0 ? 'text-red-500' : ''"
@@ -86,11 +86,11 @@
         </div>
       </div>
       <div class="section category">
-        <p class="text-center font-bold text-xl">Actions</p>
+        <p class="text-xl font-bold text-center">Actions</p>
         <hr />
         <div class="h-full">
           <lnm-button
-            class="w-1/2 sm:w-1/3 block mx-auto mt-6 my-4"
+            class="block my-4 mx-auto mt-6 w-1/2 sm:w-1/3"
             :color="'default'"
             :disabled="!balance || balance < 1000"
             @click="showWithdrawModal = true"
@@ -98,7 +98,7 @@
             Withdraw
           </lnm-button>
           <lnm-button
-            class="w-1/2 sm:w-1/3 block mx-auto my-4"
+            class="block my-4 mx-auto w-1/2 sm:w-1/3"
             :color="'default'"
             :disabled="maxDeposit < 1000"
             @click="showDepositModal = true"
@@ -106,7 +106,7 @@
             Deposit
           </lnm-button>
           <lnm-button
-            class="w-1/2 sm:w-1/3 block mx-auto my-4"
+            class="block my-4 mx-auto w-1/2 sm:w-1/3"
             :color="'default'"
             @click="toLNMarkets"
           >
@@ -116,18 +116,18 @@
       </div>
     </div>
   </div>
-  <deposit-modal v-model:showModal="showDepositModal" />
-  <withdraw-modal v-model:showModal="showWithdrawModal" />
+  <deposit-modal :show-modal="showDepositModal" />
+  <withdraw-modal :show-modal="showWithdrawModal" />
   <disclaimer-modal v-if="disclaimer" />
 </template>
 
 <script>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-
-import Deposit from '../modals/Deposit/Index.vue'
-import Withdraw from '../modals/Withdraw/Index.vue'
-import Disclaimer from '../modals/Disclaimer.vue'
+import { withCommasAndFixed } from '@/plugins/utils.js'
+import Deposit from '@/modals/Deposit/Index.vue'
+import Withdraw from '@/modals/Withdraw/Index.vue'
+import Disclaimer from '@/modals/Disclaimer.vue'
 
 export default {
   components: {
@@ -163,14 +163,13 @@ export default {
   },
 
   methods: {
+    withCommasAndFixed,
     async toLNMarkets() {
-      const token = await this.$store.dispatch('user/getAuthenticationToken')
-      const { hostnameAPI: url } = await this.$store.dispatch('LNMarketsInfos')
-
-      window.open(
-        `https://${url.substring(12)}/login/token?token=${token}`,
-        '_blank'
+      const { token, hostname } = await this.$store.dispatch(
+        'user/getAuthenticationToken'
       )
+
+      window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
     },
   },
 }

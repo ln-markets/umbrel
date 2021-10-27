@@ -1,5 +1,3 @@
-const JSONRPC = '2.0'
-
 export const isInteger = (event) => {
   event = event || window.event
 
@@ -16,14 +14,9 @@ export const wait = (ms) => {
   })
 }
 
-export const isJSONRPCMessage = (payload) => {
-  if (!payload) {
-    return false
-  } else {
-    return (
-      payload.jsonrpc === JSONRPC &&
-      payload.method !== undefined &&
-      payload.params !== undefined
-    )
-  }
+export const withCommasAndFixed = (number, fixed = 1) => {
+  if (!number) return 0
+  const parts = parseFloat(number).toFixed(fixed).toString().split('.')
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  return parts.join('.')
 }
