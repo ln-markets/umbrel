@@ -17,8 +17,8 @@ COPY apps/front/public /usr/tmp/apps/front/public
 COPY apps/front/src /usr/tmp/apps/front/src
 
 RUN pnpm config set store-dir .pnpm-store && \
-    pnpm install --frozen-lockfile --ignore-scripts && \
-    modclean --no-progress --run
+  pnpm install --frozen-lockfile --ignore-scripts && \
+  modclean --no-progress --run
 
 RUN pnpm -C apps/front build
 
@@ -45,7 +45,7 @@ USER node
 EXPOSE 8001
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \  
-    CMD node /usr/src/apps/api/healthcheck.js
+  CMD node /usr/src/apps/api/healthcheck.js
 
 WORKDIR /usr/src/apps/api
 
