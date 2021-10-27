@@ -34,7 +34,7 @@ class LND {
       cert: base64Certificate(),
       macaroon: base64Macaroon(),
       host: `${process.env.LND_IP}`,
-      port: `${process.env.LND_GRPC_PORT}`,
+      port: `${process.env.LND_GRPC_PORT}` || 10009,
     }
   }
 

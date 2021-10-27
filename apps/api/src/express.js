@@ -1,10 +1,10 @@
 const express = require('express')
-const routes = require('@routes')
+const routes = require('@/routes/index.js')
 const path = require('path')
 const bodyParser = require('body-parser')
 
 module.exports = async (app) => {
-  app.use(require('@middleware/cors.js'))
+  app.use(require('@/middleware/cors.js'))
   app.use(bodyParser.json({ extended: false }))
   app.use(bodyParser.text())
   app.use(bodyParser.urlencoded({ extended: false }))

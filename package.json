@@ -1,9 +1,9 @@
 {
   "name": "ln-markets-umbrel",
   "version": "1.0.0",
-  "description": "LN Markets Umbrel Mono Repo",
+  "description": "LN Markets Umbrel App",
   "repository": "git@github.com:lnmarkets/umbrel.git",
-  "author": "BOTREL Kilian <botrel.kilian1999@gmail.com>",
+  "author": "BOTREL Kilian <kilian.botrel@ito.am>",
   "private": true,
   "engines": {
     "node": ">=14",
@@ -20,18 +20,19 @@
     "lnd:create-channel": "docker exec --user lnd -it lnmarkets_umbrel_lnd lncli --network='testnet' openchannel '03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431'"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
-    "eslint": "^7.31.0",
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
+    "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-vue": "^7.5.0",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "eslint-plugin-vue": "^7.20.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
     "nodemon": "^2.0.14",
     "prettier": "2.2.1"
   }

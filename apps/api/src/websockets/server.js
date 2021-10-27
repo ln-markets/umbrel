@@ -1,4 +1,4 @@
-const { LNMarketsWebsocket } = require('@lnmarkets/api')
+const { LNMarketsWebsocket } = require('@ln-markets/api')
 const { Server } = require('ws')
 
 const OPEN = 1

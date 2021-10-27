@@ -1,4 +1,4 @@
-const LND = require('@classes/lnd.js')
+const LND = require('@/classes/lnd.js')
 
 const got = require('got')
 const queryString = require('querystring')
@@ -10,7 +10,7 @@ const secp256k1 = require('secp256k1')
 
 const { createHmac } = require('crypto')
 
-const config = require('@config')
+const config = require('@/config.js')
 
 const hexStringToArray = (string) => {
   return new Uint8Array(

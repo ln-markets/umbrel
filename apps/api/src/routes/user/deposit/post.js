@@ -1,5 +1,5 @@
-const LNMarketsAPI = require('@classes/lnmarkets-api.js')
-const LND = require('@classes/lnd.js')
+const LNMarketsAPI = require('@/classes/lnmarkets-api.js')
+const LND = require('@/classes/lnd.js')
 
 module.exports = async (req, res) => {
   try {

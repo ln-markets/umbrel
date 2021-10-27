@@ -37,16 +37,16 @@ COPY --chown=node:node --from=builder /usr/tmp/apps/front/dist /usr/src/apps/api
 COPY --chown=node:node --from=builder /usr/tmp/node_modules /usr/src/node_modules
 COPY --chown=node:node --from=builder /usr/tmp/apps/api/node_modules /usr/src/apps/api/node_modules
 COPY --chown=node:node ./apps/api/docker/healthcheck.js /usr/src/apps/api/healthcheck.js
-COPY --chown=node:node ./apps/api/srcs /usr/src/apps/api/srcs
+COPY --chown=node:node ./apps/api/src /usr/src/apps/api/src
 COPY --chown=node:node ./apps/api/package.json /usr/src/apps/api/package.json
 
 USER node
 
-EXPOSE 8001
+EXPOSE 4242
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \  
     CMD node /usr/src/apps/api/healthcheck.js
 
 WORKDIR /usr/src/apps/api
 
-CMD ["dumb-init", "node", "srcs/index.js"]
+CMD ["dumb-init", "node", "src/index.js"]

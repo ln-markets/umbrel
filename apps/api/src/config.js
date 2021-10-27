@@ -1,7 +1,7 @@
 const config = {
   app: {
     url: process.env.APP_URL || 'http://localhost',
-    port: process.env.API_PORT || 8001,
+    port: process.env.API_PORT || 4242,
   },
   lnmarkets: {
     url:

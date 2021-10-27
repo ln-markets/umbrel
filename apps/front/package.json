@@ -10,7 +10,10 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "eslint --color 'src/**/*.{js,vue}' --fix"
+    "eslint": "eslint --fix",
+    "prettier": "prettier --write",
+    "lint": "eslint --color 'src/**/*.{js,vue}'",
+    "format": "prettier --write 'src/**/*.js'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",

@@ -1,8 +1,8 @@
 const got = require('got')
 
-const config = require('@config')
+const config = require('@/config.js')
 
-const LNURL = require('@wrappers/lnurl.js')
+const LNURL = require('@/wrappers/lnurl.js')
 
 const convertBase64 = async (input) => {
   try {

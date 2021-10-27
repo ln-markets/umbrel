@@ -1,11 +1,11 @@
 const express = require('express')
 const http = require('http')
 
-const config = require('@config')
-const expressConfig = require('@loaders/express.js')
+const config = require('@/config.js')
+const expressConfig = require('@/loaders/express.js')
 
-const LND = require('@classes/lnd.js')
-const WebsocketServer = require('./websockets/server.js')
+const LND = require('@/classes/lnd.js')
+const WebsocketServer = require('@/websockets/server.js')
 
 const createApp = async () => {
   try {

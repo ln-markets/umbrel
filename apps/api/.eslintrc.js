@@ -13,9 +13,6 @@ module.exports = {
     node: true,
     es2020: true,
   },
-  globals: {
-    module: true,
-  },
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
@@ -30,11 +27,13 @@ module.exports = {
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-missing-require': 'off',
     'no-global-assign': ['error', { exceptions: ['require'] }],
-    'node/no-unpublished-require': [
-      'error',
-      {
-        allowModules: ['redis-mock'],
+  },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [['@', './src']],
+        extensions: ['.js', '.json'],
       },
-    ],
+    },
   },
 }

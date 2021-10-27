@@ -1,4 +1,4 @@
-const LNMarketsAPI = require('@classes/lnmarkets-api.js')
+const LNMarketsAPI = require('@/classes/lnmarkets-api.js')
 
 module.exports = async (req, res) => {
   try {
