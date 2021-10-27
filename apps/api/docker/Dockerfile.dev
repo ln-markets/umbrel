@@ -2,7 +2,7 @@ FROM node:14.16-alpine
 
 WORKDIR /usr/src
 
-RUN apk add -U jq findutils curl && npm install -g pnpm@6.16.1
+RUN apk add -U jq findutils curl && npm install -g pnpm@66.19.1
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/api/package.json apps/api/package.json

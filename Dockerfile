@@ -2,7 +2,7 @@ FROM node:14.17-alpine as builder
 
 WORKDIR /usr/tmp
 
-RUN npm install -g pnpm@6.18.0 modclean
+RUN npm install -g pnpm@66.19.1 modclean
 
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 
