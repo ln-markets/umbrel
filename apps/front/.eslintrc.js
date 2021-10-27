@@ -1,11 +1,24 @@
 module.exports = {
+  root: true,
   env: {
     node: true,
+    browser: true,
   },
-  extends: ['plugin:vue/vue3-recommended', 'prettier'],
+  globals: {
+    window: true,
+    module: true,
+  },
+  extends: [
+    'plugin:vue/vue3-recommended',
+    'plugin:prettier/recommended',
+    'eslint:recommended',
+  ],
   plugins: ['prettier'],
   rules: {
     camelcase: 0,
-    'no-unused-expressions': 0,
+    'prefer-destructuring': ['error', { object: true, array: true }],
+    'no-unused-vars': ['error', { args: 'none' }],
+    'vue/no-v-html': 0,
+    'no-empty': ['error', { allowEmptyCatch: true }],
   },
 }
