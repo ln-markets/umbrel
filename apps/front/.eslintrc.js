@@ -6,11 +6,11 @@ module.exports = {
   },
   globals: {
     window: true,
-    module: true,
   },
+  ignorePatterns: ['**/*.css'],
   extends: [
     'plugin:tailwindcss/recommended',
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/vue3-strongly-recommended',
     'plugin:prettier/recommended',
     'eslint:recommended',
   ],
