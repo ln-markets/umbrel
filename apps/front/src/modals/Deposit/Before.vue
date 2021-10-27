@@ -43,7 +43,7 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
-import { isInteger } from '../../plugins/utils.js'
+import { isInteger } from '@/plugins/utils.js'
 
 export default {
   props: {

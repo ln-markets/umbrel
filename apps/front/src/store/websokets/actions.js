@@ -1,4 +1,4 @@
-import { wait } from '../../plugins/utils.js'
+import { wait } from '@/plugins/utils.js'
 
 const JSONRPC = '2.0'
 

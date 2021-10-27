@@ -1,4 +1,4 @@
-import api from '../../plugins/api.js'
+import api from '@/plugins/api.js'
 
 import market from './modules/market.js'
 

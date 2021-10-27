@@ -5,7 +5,7 @@ import user from './user/index.js'
 import futures from './futures/index.js'
 import websockets from './websokets/index.js'
 
-import websocket from '../plugins/websocket.js'
+import websocket from '@/plugins/websocket.js'
 
 const defaultState = () => {
   return {
