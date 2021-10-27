@@ -15,6 +15,10 @@ export default {
 
     store.dispatch('user/get')
     store.dispatch('futures/get')
+
+    setTimeout(() => {
+      store.dispatch('futures/market/subscribeToMarketData')
+    }, 250)
     return {}
   },
 }

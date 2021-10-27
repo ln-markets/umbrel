@@ -2,11 +2,11 @@ import getters from './getters.js'
 import actions from './actions.js'
 import mutations from './mutations.js'
 
-import market from './market/index.js'
-
 const defaultState = () => {
   return {
-    positions: [],
+    index: 0.0,
+    bid: 0.0,
+    offer: 0.0,
   }
 }
 
@@ -16,7 +16,4 @@ export default {
   getters,
   actions,
   mutations,
-  modules: {
-    market,
-  },
 }
