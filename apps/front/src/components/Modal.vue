@@ -13,7 +13,7 @@
       <section class="p-4">
         <slot name="body"></slot>
       </section>
-      <footer class="flex justify-around py-4 h-16 bg-gray-100 border-t-2">
+      <footer class="flex justify-around py-4 bg-gray-100 border-t-2">
         <slot name="footer"></slot>
       </footer>
     </div>
