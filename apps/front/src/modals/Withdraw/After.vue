@@ -1,10 +1,6 @@
 <template>
   <modal :title="title">
     <template #body>
-      <p class="mb-4 text-sm sm:text-base text-center text-green-500">
-        You successfully withdrawed
-        {{ transaction.amount.toLocaleString('en') }} sats from your account!
-      </p>
       <div class="info-row">
         <span class="mr-1 md:mr-0 font-semibold">ID</span>
         <span>{{ transaction.id }}</span>

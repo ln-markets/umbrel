@@ -74,6 +74,13 @@ export default {
     async submit() {
       try {
         await this.$store.dispatch('user/deposit', parseInt(this.amount))
+
+        this.$notify({
+          type: 'success',
+          message: `Deposit success! - ${this.amount.toLocaleString(
+            'en'
+          )} sats.`,
+        })
       } catch (error) {
         console.log(error)
       } finally {

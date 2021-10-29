@@ -11,10 +11,13 @@ import Button from './components/Button.vue'
 import Modal from './components/Modal.vue'
 import Slider from './components/Slider.vue'
 
+import Notify from './plugins/notifications/index.js'
+
 const app = createApp(App)
 
 app.use(store)
 app.use(router)
+app.use(Notify)
 
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 app.component('LnmButton', Button)

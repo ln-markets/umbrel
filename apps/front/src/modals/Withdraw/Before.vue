@@ -76,6 +76,13 @@ export default {
     async submit() {
       try {
         await this.$store.dispatch('user/withdraw', parseInt(this.amount))
+
+        this.$notify({
+          type: 'success',
+          message: `Withdraw success! - ${this.amount.toLocaleString(
+            'en'
+          )} sats.`,
+        })
       } catch (error) {
         console.log(error)
       } finally {

@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <nav-header />
+    <notifications />
     <router-view />
     <nav-footer />
   </div>
