@@ -22,7 +22,7 @@
       </div>
     </template>
     <template #footer>
-      <lnm-button :color="'red'" class="w-1/3 sm:w-1/4" @click="closeModal">
+      <lnm-button color="primary" class="w-1/3 sm:w-1/4" @click="closeModal">
         Close
       </lnm-button>
     </template>
@@ -34,6 +34,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
+  name: 'WithdrawAfter',
   props: {
     title: {
       type: String,
