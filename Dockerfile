@@ -1,4 +1,4 @@
-FROM node:14.17-alpine as builder
+FROM node:16.13.0-alpine3.14 as builder
 
 WORKDIR /usr/tmp
 
@@ -25,10 +25,9 @@ RUN pnpm -C apps/front build
 # Remove dev packages
 RUN pnpm prune --prod || true
 
-FROM node:14.17-alpine
+FROM node:16.13.0-alpine3.14
 
 ENV NODE_ENV="production"
-ENV APP_VERSION=1.0.0
 
 WORKDIR /usr/src
 
