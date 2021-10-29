@@ -30,7 +30,7 @@ export default {
   @apply flex flex-col p-0 m-0 overflow-auto bg-gray-100 text-gray-800;
 }
 
-@media screen and (min-height: 720px), screen and (min-width: 1280px) {
+@media screen and (min-height: 740px), screen and (min-width: 1280px) {
   .app-container {
     height: 100%;
   }
