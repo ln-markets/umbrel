@@ -116,8 +116,8 @@
       </div>
     </div>
   </div>
-  <deposit-modal :show-modal="showDepositModal" />
-  <withdraw-modal :show-modal="showWithdrawModal" />
+  <deposit-modal v-model:showModal="showDepositModal" />
+  <withdraw-modal v-model:showModal="showWithdrawModal" />
   <disclaimer-modal v-if="disclaimer" />
 </template>
 
