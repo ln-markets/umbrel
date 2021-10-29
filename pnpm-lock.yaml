@@ -40,7 +40,7 @@ importers:
 
   apps/api:
     specifiers:
-      '@ln-markets/api': ^1.3.7
+      '@ln-markets/api': ^1.4.0
       bech32: ^2.0.0
       bip32: ^2.0.6
       bip39: ^3.0.4
@@ -51,13 +51,13 @@ importers:
       express: ^4.17.1
       express-winston: ^4.2.0
       helmet: ^4.6.0
-      ln-service: ^52.14.0
+      ln-service: ^52.14.2
       module-alias: ^2.2.2
       secp256k1: ^4.0.2
       winston: ^3.3.3
       ws: ^8.2.3
     dependencies:
-      '@ln-markets/api': 1.3.7
+      '@ln-markets/api': 1.4.0
       bech32: 2.0.0
       bip32: 2.0.6
       bip39: 3.0.4
@@ -68,7 +68,7 @@ importers:
       express: 4.17.1
       express-winston: 4.2.0_winston@3.3.3
       helmet: 4.6.0
-      ln-service: 52.14.0
+      ln-service: 52.14.2
       module-alias: 2.2.2
       secp256k1: 4.0.2
       winston: 3.3.3
@@ -358,12 +358,12 @@ packages:
       vue: 3.2.20
     dev: false
 
-  /@grpc/grpc-js/1.4.1:
-    resolution: {integrity: sha512-/chkA48TdAvATHA7RXJPeHQLdfFhpu51974s8htjO/XTDHA41j5+SkR5Io+lr9XsLmkZD6HxLyRAFGmA9wjO2w==}
+  /@grpc/grpc-js/1.4.2:
+    resolution: {integrity: sha512-aUN6oGk9un8rfYWz73nQgFxPCYJQYd8LpIGguZHBsNduBMyqG6EWANrsVBuTG+nl/l4dKb3x+qi1l9+oxDxqGg==}
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.6.6
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
     dev: false
 
   /@grpc/proto-loader/0.6.6:
@@ -393,8 +393,9 @@ packages:
     resolution: {integrity: sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==}
     dev: true
 
-  /@ln-markets/api/1.3.7:
-    resolution: {integrity: sha512-mR3G8cXHGbc7i1R7M76mEvgpJTvMt01ONVsVjCZ6evg8Xao2bQiNsfJ62BkVmjGLK7gWvX4tOjIOKydJBvJnLw==}
+  /@ln-markets/api/1.4.0:
+    resolution: {integrity: sha512-nX8ZQVAbaLassyYMNhvVzModqXiuMqpJBBwLZ07tn0A/SnRJAJDWYBx2IrVAtSxt/CDcobaKKS11sx9t5unWJA==}
+    engines: {node: '>=14', pnpm: '>=6'}
     dependencies:
       eventemitter3: 4.0.7
       ws: 8.2.3
@@ -483,7 +484,7 @@ packages:
     resolution: {integrity: sha512-a6bTJ21vFOGIkwM0kzh9Yr89ziVxq4vYH2fQ6N8AeipEzai/cFK6aGMArIkUeIdRIgpwQa+2bXiLuUJCpSf2Cg==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
     dev: false
 
   /@types/caseless/0.12.2:
@@ -493,13 +494,13 @@ packages:
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
     dev: false
 
   /@types/express-serve-static-core/4.17.24:
     resolution: {integrity: sha512-3UJuW+Qxhzwjq3xhwXm2onQcFHn76frIYVbTu+kn24LFxI+dEhdfISDFovPB8VpEgW8oQCTpRuCe+0zJxB7NEA==}
     dependencies:
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: false
@@ -537,8 +538,8 @@ packages:
     resolution: {integrity: sha512-Exw4yUWMBXM3X+8oqzJNRqZSwUAaS4+7NdvHqQuFi/d+synz++xmX3QIf+BFqneW8N31R8Ky+sikfZUXq07ggQ==}
     dev: false
 
-  /@types/node/16.11.4:
-    resolution: {integrity: sha512-TMgXmy0v2xWyuCSCJM6NCna2snndD8yvQF67J29ipdzMcsPa9u+o0tjF5+EQNdhcuZplYuouYqpc4zcd5I6amQ==}
+  /@types/node/16.11.6:
+    resolution: {integrity: sha512-ua7PgUoeQFjmWPcoo9khiPum3Pd60k4/2ZGXt18sm2Slk0W0xZTqt5Y0Ny1NyBiN1EVQ/+FaF9NcY4Qe6rwk5w==}
     dev: false
 
   /@types/normalize-package-data/2.4.1:
@@ -561,7 +562,7 @@ packages:
     resolution: {integrity: sha512-GWP9AZW7foLd4YQxyFZDBepl0lPsWLMEXDZUjQ/c1gqVPDPECrRZyEzuhJdnPWioFCq3Tv0qoGpMD6U+ygd4ZA==}
     dependencies:
       '@types/caseless': 0.12.2
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
       '@types/tough-cookie': 4.0.1
       form-data: 2.5.1
     dev: false
@@ -570,7 +571,7 @@ packages:
     resolution: {integrity: sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
     dev: false
 
   /@types/tough-cookie/4.0.1:
@@ -580,7 +581,7 @@ packages:
   /@types/ws/8.2.0:
     resolution: {integrity: sha512-cyeefcUCgJlEk+hk2h3N+MqKKsPViQgF5boi9TTHSK+PoR9KWBb/C5ccPcDyAqgsbAYHTwulch725DV84+pSpg==}
     dependencies:
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
     dev: false
 
   /@vitejs/plugin-vue/1.9.4_vite@2.6.13:
@@ -849,18 +850,14 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /async/3.2.0:
-    resolution: {integrity: sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==}
+  /async/3.2.2:
+    resolution: {integrity: sha512-H0E+qZaDEfx/FY4t7iLRv1W2fFI6+pyCeTw1uN20AQPiwqwM6ojPxHxdLv4z8hi2DtnW9BOckSspLucW7pIE5g==}
     dev: false
 
-  /async/3.2.1:
-    resolution: {integrity: sha512-XdD5lRO/87udXCMC9meWdYiR+Nq6ZjUfXidViUZGu2F1MO4T3XwZ1et0hb2++BgLfhyJwy44BGB/yx80ABx8hg==}
-    dev: false
-
-  /asyncjs-util/1.2.6:
-    resolution: {integrity: sha512-PxQ2drzeOUe20HsjIXOlfw76Ci8RQkF2B95arcQap02jJ3lByNKkC3MtVFhIWF+FYl738tD/tZHOlUuYfamFvw==}
+  /asyncjs-util/1.2.7:
+    resolution: {integrity: sha512-+NoBU9in09GHOWgRv+HhF3kDxqgJ6KowRA7xwHZKxajnh+ybBJhp24i2nOyulZtpdn+4eyrfLvTD6VoRk7TWyQ==}
     dependencies:
-      async: 3.2.0
+      async: 3.2.2
     dev: false
 
   /asynckit/0.4.0:
@@ -1001,15 +998,10 @@ packages:
       type-is: 1.6.18
     dev: false
 
-  /bolt07/1.7.3:
-    resolution: {integrity: sha512-zXhf60qEpFXwRTeoaJ+0SyPw/jzBtIHZLCJBvaa0rFGiiQKdWXdaiIWeyIkxl74p/UGUv4BQsbkAgB0Em/1QOQ==}
+  /bolt07/1.7.4:
+    resolution: {integrity: sha512-y82Na9vEBY+rqjJhjYMFAch70nWvbL5OiEPFqNf7cGTtQfG7g/Vui2KnemrX1mxEw2SgccF+Rn1NSRm9HFtu3w==}
     dependencies:
       bn.js: 5.2.0
-    dev: false
-
-  /bolt09/0.1.5:
-    resolution: {integrity: sha512-oT1+erg21vat55oXNd7nNEkCO0FQnmaraFZuyXFyeVk7dZCm/3vgic0qK1VuUSV+ksYXJfRKYC4AqfYrtHNPZg==}
-    engines: {node: '>=10.4.0'}
     dev: false
 
   /bolt09/0.2.0:
@@ -2013,7 +2005,7 @@ packages:
     dependencies:
       fast-glob: 3.2.7
       postcss: 8.3.11
-      tailwindcss: 2.2.17_postcss@8.3.11
+      tailwindcss: 2.2.19_postcss@8.3.11
     transitivePeerDependencies:
       - autoprefixer
       - ts-node
@@ -2763,15 +2755,15 @@ packages:
       side-channel: 1.0.4
     dev: true
 
-  /invoices/2.0.0:
-    resolution: {integrity: sha512-UnU0bS3+cMA2UvYrF5RXp/Hm7v/nYiA3F0GVCOeRmDiZmXAt/eO7KdqyRzewopvhBlev7F7t7GZzRRYY1XE3xg==}
+  /invoices/2.0.1:
+    resolution: {integrity: sha512-qd6Os70iotC/P09ArTWsXB3/G8MJRYMkrJQ1k2983kzdKVlROgWobKmdvrA/IFmjg0Ztg/wDkhx49dIQqT8PzQ==}
     engines: {node: '>=10.4.0'}
     dependencies:
       bech32: 2.0.0
       bitcoinjs-lib: 5.2.0
       bn.js: 5.2.0
-      bolt07: 1.7.3
-      bolt09: 0.1.5
+      bolt07: 1.7.4
+      bolt09: 0.2.0
       secp256k1: 4.0.2
     dev: false
 
@@ -3059,26 +3051,26 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /lightning/4.12.0:
-    resolution: {integrity: sha512-HP9Ip6NVC8L4RgSCU8GBecpTdeuyxa7NPKKNw78pR3IuwlIi0hU+Dn6B5W5SGlc1NEY5S+zvVi9OLmcOrjI09g==}
+  /lightning/4.12.2:
+    resolution: {integrity: sha512-vYdmsIeYq5Tzd4k9HQ41VfP26jZfjtyemZEX1TUfhTBxgqgJvlXubhXfkxXaVb9FF2URdJfZRNo2YYHacFozmQ==}
     engines: {node: '>=12'}
     dependencies:
-      '@grpc/grpc-js': 1.4.1
+      '@grpc/grpc-js': 1.4.2
       '@grpc/proto-loader': 0.6.6
       '@types/express': 4.17.13
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
       '@types/request': 2.48.7
       '@types/ws': 8.2.0
-      async: 3.2.1
-      asyncjs-util: 1.2.6
+      async: 3.2.2
+      asyncjs-util: 1.2.7
       bitcoinjs-lib: 5.2.0
       bn.js: 5.2.0
       body-parser: 1.19.0
-      bolt07: 1.7.3
+      bolt07: 1.7.4
       bolt09: 0.2.0
       cbor: 8.0.2
       express: 4.17.1
-      invoices: 2.0.0
+      invoices: 2.0.1
       psbt: 1.1.10
     dev: false
 
@@ -3127,15 +3119,15 @@ packages:
       wrap-ansi: 7.0.0
     dev: true
 
-  /ln-service/52.14.0:
-    resolution: {integrity: sha512-V3auvbHLulRyWwd11ZFVNhOP7SAQ/2Y924i/VciUDP0w22VgYISZaXtE3lf7ZGJLC/jLU/z5EfVXxHPNTrxF5g==}
+  /ln-service/52.14.2:
+    resolution: {integrity: sha512-Fd48a8g26I4Bz9HR50PjSpXWPryiZTfy57v3oRaBlZdZIpiwoyYRc8Bod25lvJeq0aKwsSl87TQjTqXDF+eXeA==}
     engines: {node: '>=12'}
     dependencies:
-      bolt07: 1.7.3
+      bolt07: 1.7.4
       cors: 2.8.5
       express: 4.17.1
-      invoices: 2.0.0
-      lightning: 4.12.0
+      invoices: 2.0.1
+      lightning: 4.12.2
       macaroon: 3.0.4
       morgan: 1.10.0
       ws: 8.2.3
@@ -3881,7 +3873,7 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.1
-      '@types/node': 16.11.4
+      '@types/node': 16.11.6
       long: 4.0.0
     dev: false
 
@@ -4523,8 +4515,8 @@ packages:
       - ts-node
     dev: true
 
-  /tailwindcss/2.2.17_postcss@8.3.11:
-    resolution: {integrity: sha512-WgRpn+Pxn7eWqlruxnxEbL9ByVRWi3iC10z4b6dW0zSdnkPVC4hPMSWLQkkW8GCyBIv/vbJ0bxIi9dVrl4CfoA==}
+  /tailwindcss/2.2.19_postcss@8.3.11:
+    resolution: {integrity: sha512-6Ui7JSVtXadtTUo2NtkBBacobzWiQYVjYW0ZnKaP9S1ZCKQ0w7KVNz+YSDI/j7O7KCMHbOkz94ZMQhbT9pOqjw==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -4957,7 +4949,7 @@ packages:
     engines: {node: '>= 6.4.0'}
     dependencies:
       '@dabh/diagnostics': 2.0.2
-      async: 3.2.1
+      async: 3.2.2
       is-stream: 2.0.1
       logform: 2.3.0
       one-time: 1.0.0
