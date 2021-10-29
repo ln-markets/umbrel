@@ -26,9 +26,16 @@ const isTokenExpired = (token) => {
   return now >= exp
 }
 
+const network = process.env.BITCOIN_NETWORK
+
+const customHeaders = {
+  'X-Umbrel': 'yes',
+}
+
 class LNMarketsAPI extends LNMarketsRest {
   constructor() {
-    super({ network: process.env.BITCOIN_NETWORK })
+    super({ network, customHeaders })
+
     this.doNotCheckToken = false
   }
 
