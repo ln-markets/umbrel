@@ -31,7 +31,7 @@ services:
       - NODE_TLS_REJECT_UNAUTHORIZED=0
       - NODE_ENV=development
       - LND_IP=lnmarkets_lnd_user
-      - LNMARKETS_API_URL=api.lnmarkets.test
+      - LNMARKETS_API_DOMAIN=api.lnmarkets.test
       - BITCOIN_NETWORK=regtest
     volumes:
       - ${PWD}/../../apps/api/src:/usr/src/apps/api/src:cached
@@ -75,7 +75,7 @@ services:
     environment:
       - NODE_TLS_REJECT_UNAUTHORIZED=0
       - LND_IP=lnmarkets_lnd_user
-      - LNMARKETS_API_URL=api.lnmarkets.test
+      - LNMARKETS_API_DOMAIN=api.lnmarkets.test
       - BITCOIN_NETWORK=regtest
     volumes:
       - lnmarkets_infra_lnd_user:/lnd/:ro

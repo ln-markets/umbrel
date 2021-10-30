@@ -15,7 +15,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-promise: ^5.1.1
       eslint-plugin-tailwindcss: ^1.17.0
-      eslint-plugin-vue: ^8.0.2
+      eslint-plugin-vue: ^8.0.3
       husky: ^7.0.4
       lint-staged: ^11.2.6
       nodemon: ^2.0.14
@@ -32,7 +32,7 @@ importers:
       eslint-plugin-prettier: 4.0.0_35d87e757626cb60af41e5865da68ede
       eslint-plugin-promise: 5.1.1_eslint@8.1.0
       eslint-plugin-tailwindcss: 1.17.0
-      eslint-plugin-vue: 8.0.2_eslint@8.1.0
+      eslint-plugin-vue: 8.0.3_eslint@8.1.0
       husky: 7.0.4
       lint-staged: 11.2.6
       nodemon: 2.0.14
@@ -40,7 +40,7 @@ importers:
 
   apps/api:
     specifiers:
-      '@ln-markets/api': ^1.4.0
+      '@ln-markets/api': ^1.4.2
       bech32: ^2.0.0
       bip32: ^2.0.6
       bip39: ^3.0.4
@@ -57,7 +57,7 @@ importers:
       winston: ^3.3.3
       ws: ^8.2.3
     dependencies:
-      '@ln-markets/api': 1.4.0
+      '@ln-markets/api': 1.4.2
       bech32: 2.0.0
       bip32: 2.0.6
       bip39: 3.0.4
@@ -393,8 +393,8 @@ packages:
     resolution: {integrity: sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==}
     dev: true
 
-  /@ln-markets/api/1.4.0:
-    resolution: {integrity: sha512-nX8ZQVAbaLassyYMNhvVzModqXiuMqpJBBwLZ07tn0A/SnRJAJDWYBx2IrVAtSxt/CDcobaKKS11sx9t5unWJA==}
+  /@ln-markets/api/1.4.2:
+    resolution: {integrity: sha512-Aniem77l1pebEQ7RzHblFrcraXmEWFHU+zcE9ebNAJTwznVlm4iYRLVZfhUq1COb914ye7tMEPLGX4rV7TFzWQ==}
     engines: {node: '>=14', pnpm: '>=6'}
     dependencies:
       eventemitter3: 4.0.7
@@ -2003,8 +2003,8 @@ packages:
       - ts-node
     dev: true
 
-  /eslint-plugin-vue/8.0.2_eslint@8.1.0:
-    resolution: {integrity: sha512-8X421wnZBOpH/cT6KljjMXCvkVNSABZa3+kBI/R+jgT+EUe6iy71LvtYKYd3nAnIHFYpY65tPYVzprzuSGJAcQ==}
+  /eslint-plugin-vue/8.0.3_eslint@8.1.0:
+    resolution: {integrity: sha512-Rlhhy5ltzde0sRwSkqHuNePTXLMMaJ5+qsQubM4RYloYsQ8cXlnJT5MDaCzSirkGADipOHtmQXIbbPFAzUrADg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
@@ -2013,7 +2013,7 @@ packages:
       eslint-utils: 3.0.0_eslint@8.1.0
       natural-compare: 1.4.0
       semver: 7.3.5
-      vue-eslint-parser: 8.0.0_eslint@8.1.0
+      vue-eslint-parser: 8.0.1_eslint@8.1.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4815,8 +4815,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vue-eslint-parser/8.0.0_eslint@8.1.0:
-    resolution: {integrity: sha512-YxN5bkPDji+XLQ4sx+ULLxckL+y/oS3xzgFRkcjJL2asfVcRhzbrNRwMtWgj/70fXsrr+hkFjkxze8PBZ5O3ug==}
+  /vue-eslint-parser/8.0.1_eslint@8.1.0:
+    resolution: {integrity: sha512-lhWjDXJhe3UZw2uu3ztX51SJAPGPey1Tff2RK3TyZURwbuI4vximQLzz4nQfCv8CZq4xx7uIiogHMMoSJPr33A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
