@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 import before from './Before.vue'
@@ -35,26 +35,28 @@ export default {
     },
   },
 
-  emits: ['update:showModal'],
+  emits: ['update:show-modal'],
 
   setup() {
     const store = useStore()
 
     return {
-      step: computed(() => store.state.user.withdrawals.last.step),
-      withdrawProcess: (infos) => store.commit('user/WITHDRAW_PROCESS', infos),
+      step: computed(() => store.state.user.transaction.step),
+      transactionProcess: (infos) =>
+        store.commit('user/TRANSACTION_PROCESS', infos),
     }
   },
 
   methods: {
     closeModal() {
-      this.$emit('update:showModal', false)
-      this.withdrawProcess({
+      this.$emit('update:show-modal', false)
+      this.transactionProcess({
         step: 'before',
         amount: 0,
         id: null,
         payment: null,
         secret: null,
+        fee: 0,
       })
     },
   },

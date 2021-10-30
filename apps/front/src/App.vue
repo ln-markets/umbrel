@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <nav-header />
+    <notifications />
     <router-view />
     <nav-footer />
   </div>
@@ -8,16 +9,18 @@
 
 <script>
 import { useStore } from 'vuex'
+import NavFooter from '@/layout/Footer.vue'
+import NavHeader from '@/layout/Header.vue'
 
 export default {
+  components: { NavFooter, NavHeader },
   setup() {
     const store = useStore()
 
-    setInterval(() => {
-      store.dispatch('user/get')
-      store.dispatch('user/transactionHistory')
+    store.dispatch('user/get').then(() => {
       store.dispatch('futures/get')
-    }, 15000)
+    })
+
     return {}
   },
 }
@@ -25,6 +28,12 @@ export default {
 
 <style lang="postcss" scoped>
 .app-container {
-  @apply flex flex-col h-full p-0 m-0 overflow-auto bg-gray-100 text-gray-800;
+  @apply flex flex-col p-0 m-0 overflow-auto bg-gray-100 text-gray-800;
+}
+
+@media screen and (min-height: 740px), screen and (min-width: 1280px) {
+  .app-container {
+    height: 100%;
+  }
 }
 </style>

@@ -1,26 +1,24 @@
 import { createApp } from 'vue'
 
+import './index.css'
 import App from './App.vue'
 import store from './store/index.js'
 import router from './router/index.js'
 
 import { FontAwesomeIcon } from './plugins/font-awesome.js'
 
-import './assets/styles/index.css'
-
-import Navigation from './components/Navigation.vue'
-import Footer from './components/Footer.vue'
 import Button from './components/Button.vue'
 import Modal from './components/Modal.vue'
 import Slider from './components/Slider.vue'
+
+import Notify from './plugins/notifications/index.js'
 
 const app = createApp(App)
 
 app.use(store)
 app.use(router)
+app.use(Notify)
 
-app.component('NavHeader', Navigation)
-app.component('NavFooter', Footer)
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 app.component('LnmButton', Button)
 app.component('Modal', Modal)

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button whitespace-nowrap"
+    class="whitespace-nowrap button"
     :disabled="disabled"
     :class="colorClass"
   >
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed } from 'vue'
 
 export default {
   props: {

@@ -1,33 +1,14 @@
 export default {
-  UPDATE_USER(state, infos) {
-    for (const key in infos) {
-      if (key in state) {
-        state[key] = infos[key]
-      }
-    }
+  UPDATE_USER(state, data) {
+    const { infos, stats } = data
+
+    state.infos = infos
+    state.stats = stats
   },
 
-  DEPOSIT_TRANSACTIONS(state, list) {
-    state.deposits.transactions = list
-  },
-
-  WITHDRAWAL_TRANSACTIONS(state, list) {
-    state.withdrawals.transactions = list
-  },
-
-  DEPOSIT_PROCESS(state, infos) {
-    for (const key in infos) {
-      if (key in state.deposits.last) {
-        state.deposits.last[key] = infos[key]
-      }
-    }
-  },
-
-  WITHDRAW_PROCESS(state, infos) {
-    for (const key in infos) {
-      if (key in state.withdrawals.last) {
-        state.withdrawals.last[key] = infos[key]
-      }
+  TRANSACTION_PROCESS(state, data) {
+    for (const key in data) {
+      state.transaction[key] = data[key]
     }
   },
 }

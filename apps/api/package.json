@@ -6,64 +6,43 @@
   "author": "Kilian Botrel",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
+    "eslint": "eslint --fix",
+    "prettier": "prettier --write",
+    "lint": "eslint --color 'src/**/*.js'",
+    "format": "prettier --write 'src/**/*.js'",
     "dev": "nodemon"
   },
   "dependencies": {
+    "@ln-markets/api": "^1.4.2",
     "bech32": "^2.0.0",
     "bip32": "^2.0.6",
     "bip39": "^3.0.4",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "cuid": "^2.1.8",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "got": "^11.8.2",
-    "ln-service": "^51.10.0",
+    "express-winston": "^4.2.0",
+    "helmet": "^4.6.0",
+    "ln-service": "^52.14.2",
     "module-alias": "^2.2.2",
-    "secp256k1": "^4.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
+    "secp256k1": "^4.0.2",
+    "winston": "^3.3.3",
+    "ws": "^8.2.3"
   },
   "_moduleAliases": {
-    "@srcs": "srcs/",
-    "@config": "srcs/config.js",
-    "@loaders": "srcs/loaders",
-    "@routes": "srcs/routes",
-    "@classes": "srcs/classes",
-    "@services": "srcs/services",
-    "@wrappers": "srcs/wrappers",
-    "@middleware": "srcs/middleware"
+    "@": "src/"
   },
   "nodemonConfig": {
-    "exec": "node srcs/index.js",
+    "exec": "node src/index.js",
     "watch": [
-      "srcs/",
+      "src/",
       ".env"
     ],
-    "ignore": [
-      "script",
-      "database"
-    ],
-    "ext": "js,json,yaml,yml"
-  },
-  "eslintConfig": {
-    "extends": [
-      "standard",
-      "prettier"
-    ],
-    "plugins": [
-      "import",
-      "prettier"
-    ],
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "space-before-function-paren": 0,
-      "new-cap": 0,
-      "prettier/prettier": 2,
-      "camelcase": 0
-    }
+    "ext": "js"
   }
 }

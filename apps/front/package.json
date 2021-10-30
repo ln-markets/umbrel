@@ -10,73 +10,28 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "eslint --color 'src/**/*.{js,vue}' --fix"
+    "eslint": "eslint --fix",
+    "prettier": "prettier --write",
+    "lint": "eslint --color 'src/**/*.{js,vue}' --fix",
+    "format": "prettier --write 'src/**/*.js'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.7",
-    "vue": "^3.0.5",
-    "vue-router": "4",
-    "vuex": "^4.0.0",
+    "mitt": "^3.0.0",
+    "vue": "^3.2.20",
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.2",
-    "@vue/compiler-sfc": "^3.0.5",
-    "vite": "^2.4.3"
-  },
-  "stylelint": {
-    "extends": [
-      "stylelint-config-standard"
-    ],
-    "rules": {
-      "selector-type-no-unknown": [
-        true,
-        {
-          "ignoreTypes": [
-            "custom-namespace"
-          ]
-        }
-      ],
-      "at-rule-no-unknown": [
-        true,
-        {
-          "ignoreAtRules": [
-            "tailwind",
-            "apply",
-            "variants",
-            "responsive",
-            "screen"
-          ]
-        }
-      ],
-      "declaration-block-trailing-semicolon": null,
-      "no-descending-specificity": null
-    }
-  },
-  "eslintConfig": {
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-recommended",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "ignorePatterns": [
-      "public/*",
-      "docker/*"
-    ],
-    "rules": {
-      "camelcase": 0,
-      "no-unused-expressions": 0
-    }
+    "@vitejs/plugin-vue": "^1.9.4",
+    "@vue/compiler-sfc": "^3.2.20",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "vite": "^2.6.13"
   }
 }

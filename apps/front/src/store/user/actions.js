@@ -1,29 +1,11 @@
-import client from '../../plugins/client.js'
+import api from '@/plugins/api.js'
 
 export default {
   async get({ commit }) {
     try {
-      const infos = await client.get({ path: '/api/user' })
+      const data = await api.get({ path: '/api/user' })
 
-      commit('UPDATE_USER', infos)
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  },
-
-  async transactionHistory({ commit }) {
-    try {
-      const { deposits, withdrawals } = await client.get({
-        path: '/api/user/history',
-      })
-
-      if (deposits) {
-        commit('DEPOSIT_TRANSACTIONS', deposits)
-      }
-
-      if (withdrawals) {
-        commit('WITHDRAWAL_TRANSACTIONS', withdrawals)
-      }
+      commit('UPDATE_USER', data)
     } catch (error) {
       return Promise.reject(error)
     }
@@ -31,9 +13,9 @@ export default {
 
   async deposit({ commit, dispatch, state }, amount) {
     try {
-      commit('DEPOSIT_PROCESS', { step: 'waiting' })
+      commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { secret, code } = await client.post({
+      const { secret, id, payment, code } = await api.post({
         path: '/api/user/deposit',
         body: { amount },
       })
@@ -42,21 +24,23 @@ export default {
         throw code
       }
 
+      const before = state.stats.transactions.deposits
       await dispatch('get')
-      await dispatch('transactionHistory')
+      const after = state.stats.transactions.deposits
 
-      const { transactions } = state.deposits
-      const { id, payment_hash } = transactions[transactions.length - 1]
+      if (before === after) {
+        throw 'DepositFaillure'
+      }
 
-      commit('DEPOSIT_PROCESS', {
+      commit('TRANSACTION_PROCESS', {
         step: 'after',
         id,
         secret,
-        payment: payment_hash,
+        payment: payment,
         amount,
       })
     } catch (error) {
-      commit('DEPOSIT_PROCESS', { step: 'faillure' })
+      commit('TRANSACTION_PROCESS', { step: 'faillure' })
       commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
@@ -64,9 +48,9 @@ export default {
 
   async withdraw({ commit, dispatch, state }, amount) {
     try {
-      commit('WITHDRAW_PROCESS', { step: 'waiting' })
+      commit('TRANSACTION_PROCESS', { step: 'waiting' })
 
-      const { paymentsecret: secret, code } = await client.post({
+      const { secret, id, payment, code, fee } = await api.post({
         path: '/api/user/withdraw',
         body: { amount },
       })
@@ -75,29 +59,30 @@ export default {
         throw code
       }
 
-      dispatch('get')
-      dispatch('transactionHistory')
+      const before = state.stats.transactions.withdrawals
+      await dispatch('get')
+      const after = state.stats.transactions.withdrawals
 
-      const { transactions } = state.withdrawals
-      const { id, payment_hash } = transactions[transactions.length - 1]
+      if (before === after) {
+        throw 'WithdrawFaillure'
+      }
 
-      commit('WITHDRAW_PROCESS', {
+      commit('TRANSACTION_PROCESS', {
         step: 'after',
         id,
         secret,
-        payment: payment_hash,
+        payment,
         amount,
+        fee,
       })
     } catch (error) {
-      commit('WITHDRAW_PROCESS', { step: 'faillure' })
+      commit('TRANSACTION_PROCESS', { step: 'faillure' })
       commit('API_ERROR', error, { root: true })
       return Promise.reject(error)
     }
   },
 
-  async getAuthenticationToken() {
-    const { token } = await client.get({ path: '/api/user/token' })
-
-    return token
+  getAuthenticationToken() {
+    return api.get({ path: '/api/auth' })
   },
 }

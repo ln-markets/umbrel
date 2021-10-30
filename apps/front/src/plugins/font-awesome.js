@@ -6,10 +6,28 @@ import {
   faHome,
   faIdCard,
   faTimes,
+  faExclamationCircle,
+  faCheckCircle,
+  faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
-import { faTwitter, faTelegram } from '@fortawesome/free-brands-svg-icons'
+import {
+  faTwitter,
+  faTelegram,
+  faGithub,
+} from '@fortawesome/free-brands-svg-icons'
 
-library.add(faBars, faHome, faIdCard, faTimes, faTwitter, faTelegram)
+library.add(
+  faBars,
+  faHome,
+  faIdCard,
+  faTimes,
+  faTwitter,
+  faTelegram,
+  faGithub,
+  faExclamationCircle,
+  faCheckCircle,
+  faQuestionCircle
+)
 
 export { FontAwesomeIcon }

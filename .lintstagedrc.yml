@@ -1,6 +1,0 @@
-apps/api/**/*.js:
-  - prettier --write
-  - eslint --fix
-apps/front/**/*.{js,vue}:
-  - prettier --write
-  - yarn workspace front lint

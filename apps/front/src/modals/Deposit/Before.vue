@@ -1,7 +1,7 @@
 <template>
   <modal :title="title">
     <template #body>
-      <p class="text-center text-sm sm:text-base mb-4">
+      <p class="mb-4 text-sm sm:text-base text-center">
         Select the amount to deposit using one of the options bellow.
       </p>
       <slider
@@ -11,11 +11,11 @@
         :step="(max - 1000) / 1000"
         @update="amount = parseInt($event)"
       />
-      <div class="mt-4 flex justify-center">
+      <div class="flex justify-center mt-4">
         <lnm-button class="mr-4" @click="amount = max"> Max </lnm-button>
         <input
           v-model="amount"
-          class="border-2 border-gray-300 pr-2 text-right rounded text-sm w-1/2 sm:w-auto"
+          class="pr-2 w-1/2 sm:w-auto text-sm text-right rounded border-2 border-gray-300"
           inputmode="decimal"
           placeholder="Amount"
           @keypress="isInteger($event)"
@@ -43,7 +43,7 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
-import { isInteger } from '../../plugins/utils.js'
+import { isInteger } from '@/plugins/utils.js'
 
 export default {
   props: {
@@ -74,9 +74,16 @@ export default {
     async submit() {
       try {
         await this.$store.dispatch('user/deposit', parseInt(this.amount))
-        this.amount = 1000
+
+        this.$notify({
+          type: 'success',
+          message: `Deposit success! - ${this.amount.toLocaleString(
+            'en'
+          )} sats.`,
+        })
       } catch (error) {
         console.log(error)
+      } finally {
         this.amount = 1000
       }
     },

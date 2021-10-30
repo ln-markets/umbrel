@@ -3,8 +3,9 @@ import createPersistedState from 'vuex-persistedstate'
 
 import user from './user/index.js'
 import futures from './futures/index.js'
+import websockets from './websokets/index.js'
 
-import client from '../plugins/client.js'
+import websocket from '@/plugins/websocket.js'
 
 const defaultState = () => {
   return {
@@ -15,21 +16,14 @@ const defaultState = () => {
 
 const store = createStore({
   strict: process.env.NODE_ENV !== 'production',
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState(), websocket()],
   modules: {
     user,
     futures,
+    websockets,
   },
   state: defaultState(),
   actions: {
-    async LNMarketsInfos() {
-      try {
-        return await client.get({ path: '/api/infos' })
-      } catch (error) {
-        return Promise.reject(error)
-      }
-    },
-
     async updateDisclaimer({ commit }) {
       commit('UPDATE_DISCLAIMER')
     },

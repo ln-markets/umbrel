@@ -1,0 +1,85 @@
+version: '3.7'
+
+x-logging: &default-logging
+  driver: 'json-file'
+  options:
+    max-size: '5m'
+    max-file: '10'
+    tag: '{{.Name}}'
+
+networks:
+  lnmarkets_backend:
+    external: true
+  reverse_proxy:
+    external: true
+
+volumes:
+  lnmarkets_infra_lnd_user:
+    external: true
+
+services:
+  api:
+    container_name: lnmarkets_umbrel_local_api
+    restart: 'on-failure'
+    build:
+      context: ../..
+      dockerfile: ./apps/api/docker/Dockerfile.dev
+    dns: 172.81.1.253
+    ports:
+      - 8001:4242
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - NODE_ENV=development
+      - LND_IP=lnmarkets_lnd_user
+      - LNMARKETS_API_DOMAIN=api.lnmarkets.test
+      - BITCOIN_NETWORK=regtest
+    volumes:
+      - ${PWD}/../../apps/api/src:/usr/src/apps/api/src:cached
+      - lnmarkets_infra_lnd_user:/lnd/:ro
+    networks:
+      - lnmarkets_backend
+      - reverse_proxy
+    logging: *default-logging
+
+  front:
+    container_name: lnmarkets_umbrel_local_front
+    restart: 'on-failure'
+    build:
+      context: ../..
+      dockerfile: ./apps/front/docker/Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ${PWD}/../../apps/front/src:/usr/src/apps/front/src
+      - ${PWD}/../../apps/front/public:/usr/src/apps/front/public
+      - ${PWD}/../../apps/front/postcss.config.js:/usr/src/apps/front/postcss.config.js
+      - ${PWD}/../../apps/front/tailwind.config.js:/usr/src/apps/front/tailwind.config.js
+      - ${PWD}/../../apps/front/vite.config.js:/usr/src/apps/front/vite.config.js
+      - ${PWD}/../../apps/front/index.html:/usr/src/apps/front/index.html
+    environment:
+      - NODE_ENV=development
+    logging: *default-logging
+
+  # This service is used to test the production container
+  # We run as root to avoid permissions issues in the lnd volume
+  app:
+    container_name: lnmarkets_umbrel_local
+    restart: 'on-failure'
+    build:
+      context: ../..
+      dockerfile: ./Dockerfile
+    dns: 172.81.1.253
+    user: root
+    ports:
+      - 4242:4242
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - LND_IP=lnmarkets_lnd_user
+      - LNMARKETS_API_DOMAIN=api.lnmarkets.test
+      - BITCOIN_NETWORK=regtest
+    volumes:
+      - lnmarkets_infra_lnd_user:/lnd/:ro
+    networks:
+      - lnmarkets_backend
+      - reverse_proxy
+    logging: *default-logging

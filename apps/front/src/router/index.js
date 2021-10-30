@@ -1,9 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import routes from './routes/index.js'
+import Profile from '@/views/Profile.vue'
 
 const options = {
   history: createWebHistory(),
-  routes,
+  routes: [
+    {
+      path: '/',
+      name: 'profile',
+      component: Profile,
+    },
+  ],
 }
 
 const router = createRouter(options)

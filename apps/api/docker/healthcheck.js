@@ -1,9 +1,10 @@
+/* eslint-disable no-process-exit */
+
 const http = require('http')
-const { config } = require('process')
 
 const options = {
   host: 'localhost',
-  port: config.app.port,
+  port: process.env.APP_PORT || 4242,
   timeout: 2000,
   method: 'GET',
   path: '/status',
