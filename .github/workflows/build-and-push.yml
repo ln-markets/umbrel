@@ -26,7 +26,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            ghcr.io/lnmarkets/umbrel
+            ghcr.io/ln-markets/umbrel
           tags: |
             type=ref,event=branch
             type=ref,event=pr
