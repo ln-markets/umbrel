@@ -1,13 +1,13 @@
 import api from '@/plugins/api.js'
 
 export default {
-  async get({ commit }) {
+  async get({ commit, dispatch }) {
     try {
       const data = await api.get({ path: '/api/user' })
 
       commit('UPDATE_USER', data)
     } catch (error) {
-      return Promise.reject(error)
+      return dispatch('error', error)
     }
   },
 
@@ -41,8 +41,7 @@ export default {
       })
     } catch (error) {
       commit('TRANSACTION_PROCESS', { step: 'faillure' })
-      commit('API_ERROR', error, { root: true })
-      return Promise.reject(error)
+      return dispatch('error', error)
     }
   },
 
@@ -77,12 +76,16 @@ export default {
       })
     } catch (error) {
       commit('TRANSACTION_PROCESS', { step: 'faillure' })
-      commit('API_ERROR', error, { root: true })
-      return Promise.reject(error)
+      return dispatch('error', error)
     }
   },
 
-  getAuthenticationToken() {
-    return api.get({ path: '/api/auth' })
+  async loginToLNMarkets({ dispatch }) {
+    try {
+      const { token, hostname } = await api.get({ path: '/api/auth' })
+      window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
+    } catch (error) {
+      return dispatch('error', error)
+    }
   },
 }

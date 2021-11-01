@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { onMounted } from 'vue'
 import { useStore } from 'vuex'
 import NavFooter from '@/layout/Footer.vue'
 import NavHeader from '@/layout/Header.vue'
@@ -17,11 +18,22 @@ export default {
   setup() {
     const store = useStore()
 
-    store.dispatch('user/get').then(() => {
-      store.dispatch('futures/get')
+    const getUser = () => store.dispatch('user/get')
+    const getFutures = () => store.dispatch('futures/get')
+    const updateProfileInterval = () => store.dispatch('updateProfileInterval')
+
+    onMounted(() => {
+      getUser().then(() => {
+        getFutures()
+        updateProfileInterval()
+      })
     })
 
-    return {}
+    return {
+      getUser,
+      getFutures,
+      updateProfileInterval,
+    }
   },
 }
 </script>

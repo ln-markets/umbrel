@@ -1,6 +1,4 @@
-import getters from './getters.js'
 import actions from './actions.js'
-import mutations from './mutations.js'
 
 const defaultState = () => {
   return {
@@ -36,7 +34,30 @@ const defaultState = () => {
 export default {
   namespaced: true,
   state: defaultState(),
-  getters,
   actions,
-  mutations,
+  mutations: {
+    UPDATE_USER(state, data) {
+      const { infos, stats } = data
+
+      state.infos = infos
+      state.stats = stats
+    },
+
+    TRANSACTION_PROCESS(state, data) {
+      for (const key in data) {
+        state.transaction[key] = data[key]
+      }
+    },
+  },
+  getters: {
+    maxDeposit: (state) => {
+      return 1000000 - state.infos.balance
+    },
+
+    positionCount: (state) => {
+      return Object.values(state.stats.positions).reduce(
+        (total, current) => total + current
+      )
+    },
+  },
 }

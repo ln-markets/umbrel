@@ -1,5 +1,4 @@
 import api from '@/plugins/api.js'
-
 import market from './modules/market.js'
 
 const defaultState = () => {
@@ -11,11 +10,8 @@ const defaultState = () => {
 export default {
   namespaced: true,
   state: defaultState(),
-  modules: {
-    market,
-  },
   actions: {
-    async get({ commit }) {
+    async get({ commit, dispatch }) {
       try {
         const positions = await api.get({
           path: '/api/futures',
@@ -23,7 +19,7 @@ export default {
 
         commit('POSITIONS', positions)
       } catch (error) {
-        return Promise.reject(error)
+        return dispatch('error', error)
       }
     },
   },
@@ -37,5 +33,8 @@ export default {
       return state.positions.reduce((a, b) => ({ pl: a.pl + b.pl }), { pl: 0 })
         .pl
     },
+  },
+  modules: {
+    market,
   },
 }

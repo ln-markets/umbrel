@@ -3,40 +3,52 @@ import createPersistedState from 'vuex-persistedstate'
 
 import user from './user/index.js'
 import futures from './futures/index.js'
-import websockets from './websokets/index.js'
+import websockets from './websockets/index.js'
 
 import websocket from '@/plugins/websocket.js'
+
+const UPDATE_INTERVAL = 15
 
 const defaultState = () => {
   return {
     disclaimer: true,
-    errorCode: '',
     updateInterval: undefined,
   }
 }
 
-const store = createStore({
+export default createStore({
   strict: process.env.NODE_ENV !== 'production',
   plugins: [createPersistedState(), websocket()],
-  modules: {
-    user,
-    futures,
-    websockets,
-  },
   state: defaultState(),
   actions: {
     updateDisclaimer({ commit }) {
       commit('UPDATE_DISCLAIMER')
+    },
+    updateProfileInterval({ dispatch }) {
+      setInterval(() => {
+        dispatch('user/get')
+        dispatch('futures/get')
+      }, UPDATE_INTERVAL * 1000)
     },
   },
   mutations: {
     UPDATE_DISCLAIMER(state) {
       state.disclaimer = false
     },
-    API_ERROR(state, errorCode) {
-      state.errorCode = errorCode
+    error({ rootGetters }, error) {
+      const { message, code } = error
+      this.$app.$notify({
+        type: 'error',
+        message: `${message || code || error}`,
+      })
+
+      console.error(error)
     },
   },
+  getters: {},
+  modules: {
+    user,
+    futures,
+    websockets,
+  },
 })
-
-export default store

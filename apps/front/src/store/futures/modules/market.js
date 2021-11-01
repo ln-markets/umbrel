@@ -9,11 +9,6 @@ const defaultState = () => {
 export default {
   namespaced: true,
   state: defaultState(),
-  getters: {
-    fixedIndex: (state) => {
-      return Math.round((state.index + Number.EPSILON) * 10) / 10
-    },
-  },
   actions: {
     'bid-offer'({ commit }, data) {
       commit('NEW_BID_OFFER', data)
@@ -31,6 +26,11 @@ export default {
 
     NEW_INDEX(state, { index }) {
       state.index = parseFloat(index)
+    },
+  },
+  getters: {
+    fixedIndex: (state) => {
+      return Math.round((state.index + Number.EPSILON) * 10) / 10
     },
   },
 }

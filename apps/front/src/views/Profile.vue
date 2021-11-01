@@ -108,7 +108,7 @@
           <lnm-umbrel-button
             class="block my-4 mx-auto w-1/2 sm:w-1/3"
             :color="'default'"
-            @click="toLNMarkets"
+            @click="loginToLNMarkets"
           >
             Trade
           </lnm-umbrel-button>
@@ -160,18 +160,12 @@ export default {
       offer: computed(() => store.state.futures.market.offer),
       showDepositModal: ref(false),
       showWithdrawModal: ref(false),
+      loginToLNMarkets: () => store.dispatch('user/loginToLNMarkets'),
     }
   },
 
   methods: {
     withCommasAndFixed,
-    async toLNMarkets() {
-      const { token, hostname } = await this.$store.dispatch(
-        'user/getAuthenticationToken'
-      )
-
-      window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
-    },
   },
 }
 </script>
