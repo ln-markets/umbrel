@@ -49,10 +49,10 @@ export default {
 
     positionCount: (state) => {
       return (
-        state.total_open_positions +
-        state.total_running_positions +
-        state.total_closed_positions +
-        state.total_canceled_positions
+        state.infos.total_open_positions +
+        state.infos.total_running_positions +
+        state.infos.total_closed_positions +
+        state.infos.total_canceled_positions
       )
     },
   },
