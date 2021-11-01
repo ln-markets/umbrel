@@ -24,4 +24,5 @@ app.component('LnmUmbrelButton', Button)
 app.component('LnmUmbrelModal', Modal)
 app.component('LnmUmbrelSlider', Slider)
 
-app.mount('#app')
+const vm = app.mount('#app')
+store.$vm = vm

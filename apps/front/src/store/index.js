@@ -30,19 +30,20 @@ export default createStore({
         dispatch('futures/get')
       }, UPDATE_INTERVAL * 1000)
     },
-  },
-  mutations: {
-    UPDATE_DISCLAIMER(state) {
-      state.disclaimer = false
-    },
     error({ rootGetters }, error) {
       const { message, code } = error
-      this.$app.$notify({
+      this.$vm.$notify({
         type: 'error',
         message: `${message || code || error}`,
       })
 
       console.error(error)
+      return Promise.reject(error)
+    },
+  },
+  mutations: {
+    UPDATE_DISCLAIMER(state) {
+      state.disclaimer = false
     },
   },
   getters: {},

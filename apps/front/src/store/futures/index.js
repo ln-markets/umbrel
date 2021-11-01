@@ -19,7 +19,7 @@ export default {
 
         commit('POSITIONS', positions)
       } catch (error) {
-        return dispatch('error', error)
+        return dispatch('error', error, { root: true })
       }
     },
   },

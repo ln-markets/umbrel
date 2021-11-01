@@ -1,24 +1,20 @@
 import actions from './actions.js'
 
+const MAX_DEPOSIT_AMOUNT = 1000000
+
 const defaultState = () => {
   return {
     infos: {
       uid: '',
-      linkingpublickey: '',
       balance: 0,
       username: '',
-    },
-    stats: {
-      transactions: {
-        deposits: 0,
-        withdrawals: 0,
-      },
-      positions: {
-        opened: 0,
-        running: 0,
-        closed: 0,
-        canceled: 0,
-      },
+      linkingpublickey: '',
+      total_deposit_success_count: 0,
+      total_withdraw_success_count: 0,
+      total_open_positions: 0,
+      total_running_positions: 0,
+      total_closed_positions: 0,
+      total_canceled_positions: 0,
     },
     transaction: {
       step: 'before',
@@ -36,11 +32,8 @@ export default {
   state: defaultState(),
   actions,
   mutations: {
-    UPDATE_USER(state, data) {
-      const { infos, stats } = data
-
+    UPDATE_USER(state, infos) {
       state.infos = infos
-      state.stats = stats
     },
 
     TRANSACTION_PROCESS(state, data) {
@@ -51,12 +44,15 @@ export default {
   },
   getters: {
     maxDeposit: (state) => {
-      return 1000000 - state.infos.balance
+      return MAX_DEPOSIT_AMOUNT - state.infos.balance
     },
 
     positionCount: (state) => {
-      return Object.values(state.stats.positions).reduce(
-        (total, current) => total + current
+      return (
+        state.total_open_positions +
+        state.total_running_positions +
+        state.total_closed_positions +
+        state.total_canceled_positions
       )
     },
   },

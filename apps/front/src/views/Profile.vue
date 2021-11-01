@@ -7,16 +7,20 @@
       <div class="profile-stats">
         <ul>
           <li>
-            <span class="font-bold">{{ positions.toLocaleString('en') }}</span>
+            <span class="font-bold">{{
+              total_positions.toLocaleString('en')
+            }}</span>
             Positions
           </li>
           <li>
-            <span class="font-bold">{{ deposits.toLocaleString('en') }}</span>
+            <span class="font-bold">{{
+              total_deposit_success_count.toLocaleString('en')
+            }}</span>
             Deposits
           </li>
           <li>
             <span class="font-bold">{{
-              withdrawals.toLocaleString('en')
+              total_withdraw_success_count.toLocaleString('en')
             }}</span>
             Withdrawals
           </li>
@@ -60,19 +64,22 @@
         <div class="category-row">
           <span>Opened:</span>
           <span
-            ><b>{{ opened.toLocaleString('en') }}</b> positions</span
+            ><b>{{ total_open_positions.toLocaleString('en') }}</b>
+            positions</span
           >
         </div>
         <div class="category-row">
           <span>Running:</span>
           <span
-            ><b>{{ running.toLocaleString('en') }}</b> positions</span
+            ><b>{{ total_running_positions.toLocaleString('en') }}</b>
+            positions</span
           >
         </div>
         <div class="category-row">
           <span>Closed:</span>
           <span
-            ><b>{{ closed.toLocaleString('en') }}</b> positions</span
+            ><b>{{ total_closed_positions.toLocaleString('en') }}</b>
+            positions</span
           >
         </div>
         <hr />
@@ -139,21 +146,28 @@ export default {
 
   setup() {
     const store = useStore()
-
     return {
       disclaimer: computed(() => store.state.disclaimer),
       username: computed(() => store.state.user.infos.username),
       uid: computed(() => store.state.user.infos.uid),
       balance: computed(() => store.state.user.infos.balance),
       maxDeposit: computed(() => store.getters['user/maxDeposit']),
-      deposits: computed(() => store.state.user.stats.transactions.deposits),
-      withdrawals: computed(
-        () => store.state.user.stats.transactions.withdrawals
+      total_deposit_success_count: computed(
+        () => store.state.user.infos.total_deposit_success_count
       ),
-      positions: computed(() => store.getters['user/positionCount']),
-      opened: computed(() => store.state.user.stats.positions.opened),
-      running: computed(() => store.state.user.stats.positions.running),
-      closed: computed(() => store.state.user.stats.positions.closed),
+      total_withdraw_success_count: computed(
+        () => store.state.user.infos.total_withdraw_success_count
+      ),
+      total_positions: computed(() => store.getters['user/positionCount']),
+      total_open_positions: computed(
+        () => store.state.user.infos.total_open_positions
+      ),
+      total_running_positions: computed(
+        () => store.state.user.infos.total_running_positions
+      ),
+      total_closed_positions: computed(
+        () => store.state.user.infos.total_closed_positions
+      ),
       pl: computed(() => store.getters['futures/computePL']),
       index: computed(() => store.getters['futures/market/fixedIndex']),
       bid: computed(() => store.state.futures.market.bid),

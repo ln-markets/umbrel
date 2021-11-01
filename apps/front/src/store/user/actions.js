@@ -3,11 +3,11 @@ import api from '@/plugins/api.js'
 export default {
   async get({ commit, dispatch }) {
     try {
-      const data = await api.get({ path: '/api/user' })
+      const infos = await api.get({ path: '/api/user' })
 
-      commit('UPDATE_USER', data)
+      commit('UPDATE_USER', infos)
     } catch (error) {
-      return dispatch('error', error)
+      return dispatch('error', error, { root: true })
     }
   },
 
@@ -41,7 +41,7 @@ export default {
       })
     } catch (error) {
       commit('TRANSACTION_PROCESS', { step: 'faillure' })
-      return dispatch('error', error)
+      return dispatch('error', error, { root: true })
     }
   },
 
@@ -76,7 +76,7 @@ export default {
       })
     } catch (error) {
       commit('TRANSACTION_PROCESS', { step: 'faillure' })
-      return dispatch('error', error)
+      return dispatch('error', error, { root: true })
     }
   },
 
@@ -85,7 +85,7 @@ export default {
       const { token, hostname } = await api.get({ path: '/api/auth' })
       window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
     } catch (error) {
-      return dispatch('error', error)
+      return dispatch('error', error, { root: true })
     }
   },
 }
