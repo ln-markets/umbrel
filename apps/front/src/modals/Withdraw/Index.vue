@@ -21,6 +21,7 @@ import after from './After.vue'
 import faillure from './Faillure.vue'
 
 export default {
+  name: 'ModalWithdraw',
   components: {
     before,
     waiting,
@@ -35,7 +36,7 @@ export default {
     },
   },
 
-  emits: ['update:show-modal'],
+  emits: ['update:showModal'],
 
   setup() {
     const store = useStore()
@@ -49,7 +50,7 @@ export default {
 
   methods: {
     closeModal() {
-      this.$emit('update:show-modal', false)
+      this.$emit('update:showModal', false)
       this.transactionProcess({
         step: 'before',
         amount: 0,

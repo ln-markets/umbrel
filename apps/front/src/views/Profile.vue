@@ -89,51 +89,52 @@
         <p class="text-xl font-bold text-center">Actions</p>
         <hr />
         <div class="h-full">
-          <lnm-button
+          <lnm-umbrel-button
             class="block my-4 mx-auto mt-6 w-1/2 sm:w-1/3"
             :color="'default'"
             :disabled="!balance || balance < 1000"
             @click="showWithdrawModal = true"
           >
             Withdraw
-          </lnm-button>
-          <lnm-button
+          </lnm-umbrel-button>
+          <lnm-umbrel-button
             class="block my-4 mx-auto w-1/2 sm:w-1/3"
             :color="'default'"
             :disabled="maxDeposit < 1000"
             @click="showDepositModal = true"
           >
             Deposit
-          </lnm-button>
-          <lnm-button
+          </lnm-umbrel-button>
+          <lnm-umbrel-button
             class="block my-4 mx-auto w-1/2 sm:w-1/3"
             :color="'default'"
             @click="toLNMarkets"
           >
             Trade
-          </lnm-button>
+          </lnm-umbrel-button>
         </div>
       </div>
     </div>
   </div>
-  <deposit-modal v-model:showModal="showDepositModal" />
-  <withdraw-modal v-model:showModal="showWithdrawModal" />
-  <disclaimer-modal v-if="disclaimer" />
+  <modal-deposit v-model:showModal="showDepositModal" />
+  <modal-withdraw v-model:showModal="showWithdrawModal" />
+  <modal-disclaimer v-if="disclaimer" />
 </template>
 
 <script>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { withCommasAndFixed } from '@/plugins/utils.js'
-import Deposit from '@/modals/Deposit/Index.vue'
-import Withdraw from '@/modals/Withdraw/Index.vue'
-import Disclaimer from '@/modals/Disclaimer.vue'
+import ModalDeposit from '@/modals/Deposit/Index.vue'
+import ModalWithdraw from '@/modals/Withdraw/Index.vue'
+import ModalDisclaimer from '@/modals/Disclaimer.vue'
 
 export default {
+  name: 'LnmUmbrelProfile',
   components: {
-    depositModal: Deposit,
-    withdrawModal: Withdraw,
-    disclaimerModal: Disclaimer,
+    ModalDeposit,
+    ModalWithdraw,
+    ModalDisclaimer,
   },
 
   setup() {

@@ -17,9 +17,32 @@ module.exports = {
   plugins: ['prettier', 'tailwindcss'],
   rules: {
     camelcase: 0,
-    'prefer-destructuring': ['error', { object: true, array: true }],
     'no-unused-vars': ['error', { args: 'none' }],
     'no-empty': ['error', { allowEmptyCatch: true }],
     'vue/no-multiple-template-root': 'off',
+    'tailwindcss/no-custom-classname': 'off',
+    'prefer-destructuring': [
+      'error',
+      {
+        VariableDeclarator: {
+          array: false,
+          object: true,
+        },
+        AssignmentExpression: {
+          array: true,
+          object: false,
+        },
+      },
+      {
+        enforceForRenamedProperties: false,
+      },
+    ],
+    'require-await': 'error',
+    'no-return-await': 'error',
+    'no-return-assign': 'error',
+    eqeqeq: 'error',
+    'no-var': 'error',
+    'prefer-const': 'error',
+    'prefer-arrow-callback': 'error',
   },
 }

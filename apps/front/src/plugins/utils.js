@@ -9,7 +9,7 @@ export const isInteger = (event) => {
 }
 
 export const wait = (ms) => {
-  return new Promise(function (resolve) {
+  return new Promise((resolve) => {
     return setTimeout(resolve, ms)
   })
 }

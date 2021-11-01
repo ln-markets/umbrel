@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'LnmUmbrelSlider',
   props: {
     value: {
       type: Number,

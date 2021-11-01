@@ -75,7 +75,7 @@
 
 <script>
 export default {
-  name: 'Footer',
+  name: 'LnmUmbrelFooter',
 
   setup() {
     return {}

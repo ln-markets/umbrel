@@ -20,8 +20,8 @@ app.use(router)
 app.use(Notify)
 
 app.component('FontAwesomeIcon', FontAwesomeIcon)
-app.component('LnmButton', Button)
-app.component('Modal', Modal)
-app.component('Slider', Slider)
+app.component('LnmUmbrelButton', Button)
+app.component('LnmUmbrelModal', Modal)
+app.component('LnmUmbrelSlider', Slider)
 
 app.mount('#app')

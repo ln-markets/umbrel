@@ -22,10 +22,11 @@
 
 <script>
 export default {
+  name: 'LnmUmbrelModal',
   props: {
     title: {
       type: String,
-      default: '',
+      default: 'Default Title',
     },
   },
 

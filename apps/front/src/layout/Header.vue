@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'Navigation',
+  name: 'LnmUmbrelHeader',
 
   setup() {
     return {}

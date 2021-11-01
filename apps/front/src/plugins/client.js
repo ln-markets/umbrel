@@ -18,11 +18,11 @@ export default class Client {
     }
   }
 
-  async interceptResponse(response) {
+  interceptResponse(response) {
     return Promise.resolve(response)
   }
 
-  async interceptError(error) {
+  interceptError(error) {
     return Promise.reject(error)
   }
 
@@ -63,28 +63,28 @@ export default class Client {
       })
   }
 
-  async post({ path, body, options = {} }) {
+  post({ path, body, options = {} }) {
     const method = 'POST'
 
     Object.assign(options, { body, method })
     return this.request({ path, options })
   }
 
-  async put({ path, body, options = {} }) {
+  put({ path, body, options = {} }) {
     const method = 'PUT'
 
     Object.assign(options, { body, method })
     return this.request({ path, options })
   }
 
-  async get({ path, params, options = {} }) {
+  get({ path, params, options = {} }) {
     const method = 'GET'
 
     Object.assign(options, { method })
     return this.request({ path, params, options })
   }
 
-  async delete({ path, params, options = {} }) {
+  delete({ path, params, options = {} }) {
     const method = 'DELETE'
 
     Object.assign(options, { method })

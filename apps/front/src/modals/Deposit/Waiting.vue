@@ -1,16 +1,17 @@
 <template>
-  <modal :title="title">
+  <lnm-umbrel-modal :title="title">
     <template #body>
       <div class="spinner" />
     </template>
     <template #footer>
       <p class="text-gray-100">You found an easter egg!</p>
     </template>
-  </modal>
+  </lnm-umbrel-modal>
 </template>
 
 <script>
 export default {
+  name: 'ModalDepositWaiting',
   props: {
     title: {
       type: String,

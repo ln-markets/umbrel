@@ -1,5 +1,5 @@
 <template>
-  <modal :title="title">
+  <lnm-umbrel-modal :title="title">
     <template #body>
       <div class="info-row">
         <span class="mr-1 md:mr-0 font-semibold">ID</span>
@@ -22,11 +22,15 @@
       </div>
     </template>
     <template #footer>
-      <lnm-button color="primary" class="w-1/3 sm:w-1/4" @click="closeModal">
+      <lnm-umbrel-button
+        color="primary"
+        class="w-1/3 sm:w-1/4"
+        @click="closeModal"
+      >
         Close
-      </lnm-button>
+      </lnm-umbrel-button>
     </template>
-  </modal>
+  </lnm-umbrel-modal>
 </template>
 
 <script>
@@ -34,7 +38,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
-  name: 'WithdrawAfter',
+  name: 'ModalWithdrawAfter',
   props: {
     title: {
       type: String,

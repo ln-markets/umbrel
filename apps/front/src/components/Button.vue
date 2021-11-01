@@ -12,6 +12,7 @@
 import { computed } from 'vue'
 
 export default {
+  name: 'LnmUmbrelButton',
   props: {
     disabled: {
       type: Boolean,

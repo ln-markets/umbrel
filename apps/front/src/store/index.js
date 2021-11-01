@@ -11,6 +11,7 @@ const defaultState = () => {
   return {
     disclaimer: true,
     errorCode: '',
+    updateInterval: undefined,
   }
 }
 
@@ -24,7 +25,7 @@ const store = createStore({
   },
   state: defaultState(),
   actions: {
-    async updateDisclaimer({ commit }) {
+    updateDisclaimer({ commit }) {
       commit('UPDATE_DISCLAIMER')
     },
   },

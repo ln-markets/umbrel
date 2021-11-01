@@ -1,5 +1,5 @@
 <template>
-  <modal :title="'Welcome to the LN Markets app on Umbrel'">
+  <lnm-umbrel-modal title="Welcome to the LN Markets app on Umbrel">
     <template #body>
       <p class="py-1 text-sm sm:text-base text-center">
         Start managing your LN Markets account directly from this pannel!
@@ -25,15 +25,16 @@
       </p>
     </template>
     <template #footer>
-      <lnm-button class="w-1/3 sm:w-1/4" @click="closeModal">
+      <lnm-umbrel-button class="w-1/3 sm:w-1/4" @click="closeModal">
         Close
-      </lnm-button>
+      </lnm-umbrel-button>
     </template>
-  </modal>
+  </lnm-umbrel-modal>
 </template>
 
 <script>
 export default {
+  name: 'ModalDisclaimer',
   setup() {
     return {}
   },

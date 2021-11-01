@@ -27,6 +27,29 @@ module.exports = {
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-missing-require': 'off',
     'no-global-assign': ['error', { exceptions: ['require'] }],
+    'prefer-destructuring': [
+      'error',
+      {
+        VariableDeclarator: {
+          array: false,
+          object: true,
+        },
+        AssignmentExpression: {
+          array: true,
+          object: false,
+        },
+      },
+      {
+        enforceForRenamedProperties: false,
+      },
+    ],
+    'require-await': 'error',
+    'no-return-await': 'error',
+    'no-return-assign': 'error',
+    eqeqeq: 'error',
+    'no-var': 'error',
+    'prefer-const': 'error',
+    'prefer-arrow-callback': 'error',
   },
   settings: {
     'import/resolver': {

@@ -1,10 +1,10 @@
 <template>
-  <modal :title="title">
+  <lnm-umbrel-modal :title="title">
     <template #body>
       <p class="mb-4 text-sm sm:text-base text-center">
         Select the amount to deposit using one of the options bellow.
       </p>
-      <slider
+      <lnm-umbrel-slider
         :min="1000"
         :max="max"
         :value="parseInt(amount)"
@@ -12,7 +12,9 @@
         @update="amount = parseInt($event)"
       />
       <div class="flex justify-center mt-4">
-        <lnm-button class="mr-4" @click="amount = max"> Max </lnm-button>
+        <lnm-umbrel-button class="mr-4" @click="amount = max">
+          Max
+        </lnm-umbrel-button>
         <input
           v-model="amount"
           class="pr-2 w-1/2 sm:w-auto text-sm text-right rounded border-2 border-gray-300"
@@ -24,19 +26,23 @@
       </div>
     </template>
     <template #footer>
-      <lnm-button :color="'red'" class="w-1/3 sm:w-1/4" @click="closeModal">
+      <lnm-umbrel-button
+        :color="'red'"
+        class="w-1/3 sm:w-1/4"
+        @click="closeModal"
+      >
         Close
-      </lnm-button>
-      <lnm-button
+      </lnm-umbrel-button>
+      <lnm-umbrel-button
         class="w-1/3 sm:w-1/4"
         :color="'green'"
         :disabled="!amount || parseInt(amount) > max || parseInt(amount) < 1000"
         @click="submit"
       >
         Deposit
-      </lnm-button>
+      </lnm-umbrel-button>
     </template>
-  </modal>
+  </lnm-umbrel-modal>
 </template>
 
 <script>
@@ -46,6 +52,7 @@ import { useStore } from 'vuex'
 import { isInteger } from '@/plugins/utils.js'
 
 export default {
+  name: 'ModalDepositBefore',
   props: {
     title: {
       type: String,

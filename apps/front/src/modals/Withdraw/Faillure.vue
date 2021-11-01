@@ -1,5 +1,5 @@
 <template>
-  <modal :title="title">
+  <lnm-umbrel-modal :title="title">
     <template #body>
       <p class="text-sm sm:text-base text-center text-red-500">
         An error occured during withdraw. Please try again later.
@@ -7,11 +7,15 @@
       <p class="text-xs text-center text-red-500">(Code: {{ errorCode }})</p>
     </template>
     <template #footer>
-      <lnm-button :color="'red'" class="w-1/3 sm:w-1/4" @click="closeModal">
+      <lnm-umbrel-button
+        :color="'red'"
+        class="w-1/3 sm:w-1/4"
+        @click="closeModal"
+      >
         Close
-      </lnm-button>
+      </lnm-umbrel-button>
     </template>
-  </modal>
+  </lnm-umbrel-modal>
 </template>
 
 <script>
@@ -19,6 +23,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
+  name: 'ModalWithdrawFailure',
   props: {
     title: {
       type: String,

@@ -3,7 +3,7 @@ import events from './events.js'
 
 export default {
   install(app) {
-    app.component('Notifications', Notifications)
+    app.component('LnmUmbrelNotifications', Notifications)
 
     app.config.globalProperties.$notify = (params) => {
       if (typeof params === 'string') {

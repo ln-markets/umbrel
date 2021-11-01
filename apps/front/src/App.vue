@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <nav-header />
-    <notifications />
+    <lnm-umbrel-notifications />
     <router-view />
     <nav-footer />
   </div>

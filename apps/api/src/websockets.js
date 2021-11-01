@@ -17,7 +17,7 @@ module.exports = async (server) => {
     })
 
     lnm.on('message', (message) => {
-      ws.clients.forEach(function each(client) {
+      ws.clients.forEach((client) => {
         if (client.readyState === OPEN) {
           client.send(JSON.stringify(message))
         }
