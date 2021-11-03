@@ -15,6 +15,7 @@ import {
   faTwitter,
   faTelegram,
   faGithub,
+  faDiscord,
 } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
@@ -27,7 +28,8 @@ library.add(
   faGithub,
   faExclamationCircle,
   faCheckCircle,
-  faQuestionCircle
+  faQuestionCircle,
+  faDiscord
 )
 
 export default FontAwesomeIcon

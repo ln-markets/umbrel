@@ -12,7 +12,16 @@
         </a>
       </div>
     </div>
-    <div class="flex flex-row justify-between items-center w-36">
+    <div class="flex flex-row justify-between items-center w-48">
+      <a
+        aria-label="Telegram"
+        class="text-3xl social-icon"
+        href="https://discord.gg/5HwDJFx2Jz"
+        rel="noopener"
+        target="_blank"
+      >
+        <font-awesome-icon :icon="['fab', 'discord']" />
+      </a>
       <a
         aria-label="Telegram"
         class="text-3xl social-icon"
