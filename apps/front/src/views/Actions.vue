@@ -30,6 +30,8 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { $vfm } from 'vue-final-modal'
+
 import ModalDeposit from '@/modals/Deposit.vue'
 import ModalWithdraw from '@/modals/Withdraw.vue'
 
@@ -47,28 +49,28 @@ export default {
 
   methods: {
     showModalDeposit() {
-      this.$vfm.show({
+      $vfm.show({
         component: ModalDeposit,
         bind: {
           name: 'ModalDeposit',
         },
         on: {
           close: () => {
-            this.$vfm.hide('ModalDeposit')
+            $vfm.hide('ModalDeposit')
           },
         },
       })
     },
 
     showModalWithdraw() {
-      this.$vfm.show({
+      $vfm.show({
         component: ModalWithdraw,
         bind: {
           name: 'ModalWithdraw',
         },
         on: {
           close: () => {
-            this.$vfm.hide('ModalWithdraw')
+            $vfm.hide('ModalWithdraw')
           },
         },
       })

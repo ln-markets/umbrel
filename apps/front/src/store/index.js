@@ -1,11 +1,12 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import { $vfm } from 'vue-final-modal'
+import websocket from '@/plugins/websocket.js'
 
 import user from './user/index.js'
 import futures from './futures/index.js'
 import websockets from './websockets/index.js'
 
-import websocket from '@/plugins/websocket.js'
 import ModalDisclaimer from '@/modals/Disclaimer.vue'
 
 const defaultState = () => {
@@ -21,14 +22,14 @@ export default createStore({
   actions: {
     showDisclaimer({ state }) {
       if (!state.readDisclaimer) {
-        this.$vm.$vfm.show({
+        $vfm.show({
           component: ModalDisclaimer,
           bind: {
             name: 'ModalDisclaimer',
           },
           on: {
             close: () => {
-              this.$vm.$vfm.hide('ModalDisclaimer')
+              $vfm.hide('ModalDisclaimer')
             },
           },
         })
