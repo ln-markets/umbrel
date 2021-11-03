@@ -27,11 +27,14 @@ export default {
         state[key] = infos[key]
       }
     },
-    REMOVE_BALANCE(state, amount) {
+    WITHDRAW_SUCCESS(state, amount) {
       state.balance = state.balance - parseInt(amount)
+      state.total_withdraw_success_count =
+        state.total_withdraw_success_count + 1
     },
-    ADD_BALANCE(state, amount) {
+    DEPOSIT_SUCCESS(state, amount) {
       state.balance = state.balance + parseInt(amount)
+      state.total_deposit_success_count = state.total_deposit_success_count + 1
     },
   },
   getters: {

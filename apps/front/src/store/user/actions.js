@@ -27,7 +27,7 @@ export default {
         body: { amount },
       })
 
-      commit('ADD_BALANCE', amount)
+      commit('DEPOSIT_SUCCESS', amount)
 
       this.$vm.$notify({
         type: 'success',
@@ -49,7 +49,7 @@ export default {
         body: { amount },
       })
 
-      commit('REMOVE_BALANCE', amount)
+      commit('WITHDRAW_SUCCESS', amount)
 
       this.$vm.$notify({
         type: 'success',
