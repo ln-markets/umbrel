@@ -1,18 +1,25 @@
 <template>
   <lnm-umbrel-modal>
-    <template #title>Welcome to the LN Markets app on Umbrel</template>
+    <template #title>Welcome to the Umbrel LN Markets app !</template>
     <template #content>
       <p class="py-1 text-sm sm:text-base text-center">
         Start managing your LN Markets account directly from this pannel!
       </p>
       <p class="text-xs text-center">
-        <i>This app may get extra features in the future...</i>
+        <i>This app will get extra features in the future !</i>
       </p>
       <p class="text-xs text-center">
         <i
           >If you find any bugs or want a feature, contact us on
           <a href="https://www.t.me/lnmarkets" rel="noopener" target="_blank">
             Telegram
+          </a>
+          <a
+            href="https://discord.gg/5HwDJFx2Jz"
+            rel="noopener"
+            target="_blank"
+          >
+            Discord
           </a>
           or open an issue on
           <a
