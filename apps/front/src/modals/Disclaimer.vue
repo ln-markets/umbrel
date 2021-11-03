@@ -1,6 +1,7 @@
 <template>
-  <lnm-umbrel-modal title="Welcome to the LN Markets app on Umbrel">
-    <template #body>
+  <lnm-umbrel-modal>
+    <template #title>Welcome to the LN Markets app on Umbrel</template>
+    <template #content>
       <p class="py-1 text-sm sm:text-base text-center">
         Start managing your LN Markets account directly from this pannel!
       </p>
@@ -35,13 +36,12 @@
 <script>
 export default {
   name: 'ModalDisclaimer',
-  setup() {
-    return {}
-  },
+  emits: ['close'],
 
   methods: {
     closeModal() {
-      this.$store.dispatch('updateDisclaimer')
+      this.$emit('close')
+      this.$store.commit('DISCLAIMER_READ')
     },
   },
 }

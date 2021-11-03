@@ -1,3 +1,21 @@
+const HttpRequestError = class HttpRequestError extends Error {
+  constructor({ status, code, message, details, id, path }) {
+    if (!status) throw new Error('An HTTP Error need a status')
+    if (!code) code = status
+
+    super(code)
+
+    this.name = 'HttpRequestError'
+    this.status = status
+    this.code = code
+    this.id = id
+    this.path = path
+
+    if (message) this.message = message
+    if (details) this.details = details
+  }
+}
+
 export default class Client {
   constructor(options = {}) {
     if (options.baseUrl) {
@@ -36,8 +54,40 @@ export default class Client {
         return response.text()
       }
     } else {
-      return response
+      return this.parseError(response)
     }
+  }
+
+  async parseError(error) {
+    const text = await error.text()
+    const url = new URL(error.url)
+    const { pathname: path } = url
+    const { status } = error
+
+    try {
+      const { code, message, details } = JSON.parse(text)
+      return Promise.reject(
+        new HttpRequestError({
+          status,
+          code,
+          message: message || text,
+          details,
+          path,
+        })
+      )
+    } catch (_) {}
+
+    if (status) {
+      return Promise.reject(
+        new HttpRequestError({
+          status,
+          message: text,
+          path,
+        })
+      )
+    }
+
+    return Promise.reject(error)
   }
 
   request({ path, params, options = {} }) {

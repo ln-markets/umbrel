@@ -30,4 +30,4 @@ library.add(
   faQuestionCircle
 )
 
-export { FontAwesomeIcon }
+export default FontAwesomeIcon

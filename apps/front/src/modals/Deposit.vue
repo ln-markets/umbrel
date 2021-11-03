@@ -1,18 +1,19 @@
 <template>
-  <lnm-umbrel-modal :title="title">
-    <template #body>
+  <lnm-umbrel-modal>
+    <template #title>Deposit to LN Markets</template>
+    <template #content>
       <p class="mb-4 text-sm sm:text-base text-center">
         Select the amount to deposit using one of the options bellow.
       </p>
       <lnm-umbrel-slider
         :min="1000"
-        :max="max"
+        :max="maxDeposit"
         :value="parseInt(amount)"
-        :step="(max - 1000) / 1000"
+        :step="(maxDeposit - 1000) / 1000"
         @update="amount = parseInt($event)"
       />
       <div class="flex justify-center mt-4">
-        <lnm-umbrel-button class="mr-4" @click="amount = max">
+        <lnm-umbrel-button class="mr-4" @click="amount = maxDeposit">
           Max
         </lnm-umbrel-button>
         <input
@@ -26,18 +27,17 @@
       </div>
     </template>
     <template #footer>
-      <lnm-umbrel-button
-        :color="'red'"
-        class="w-1/3 sm:w-1/4"
-        @click="closeModal"
-      >
+      <lnm-umbrel-button class="w-1/3 sm:w-1/4" @click="$emit('close')">
         Close
       </lnm-umbrel-button>
       <lnm-umbrel-button
         class="w-1/3 sm:w-1/4"
-        :color="'green'"
-        :disabled="!amount || parseInt(amount) > max || parseInt(amount) < 1000"
-        @click="submit"
+        color="green"
+        :disabled="
+          !amount || parseInt(amount) > maxDeposit || parseInt(amount) < 1000
+        "
+        :click="deposit"
+        :click-params="amount"
       >
         Deposit
       </lnm-umbrel-button>
@@ -48,52 +48,23 @@
 <script>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-
 import { isInteger } from '@/plugins/utils.js'
 
 export default {
-  name: 'ModalDepositBefore',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-  },
-
+  name: 'ModalDeposit',
   emits: ['close'],
-
   setup() {
     const store = useStore()
 
     return {
-      max: computed(() => store.getters['user/maxDeposit']),
+      maxDeposit: computed(() => store.getters['user/maxDeposit']),
       amount: ref(1000),
-      isInteger,
+      deposit: (amount) => store.dispatch('user/deposit', amount),
     }
   },
 
   methods: {
-    closeModal() {
-      this.amount = 1000
-      this.$emit('close')
-    },
-
-    async submit() {
-      try {
-        await this.$store.dispatch('user/deposit', parseInt(this.amount))
-
-        this.$notify({
-          type: 'success',
-          message: `Deposit success! - ${this.amount.toLocaleString(
-            'en'
-          )} sats.`,
-        })
-      } catch (error) {
-        console.log(error)
-      } finally {
-        this.amount = 1000
-      }
-    },
+    isInteger,
   },
 }
 </script>

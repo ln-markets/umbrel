@@ -1,15 +1,16 @@
 <template>
   <button
     class="whitespace-nowrap button"
-    :disabled="disabled"
+    :disabled="disableButton"
     :class="colorClass"
+    @click="onClick"
   >
     <slot></slot>
   </button>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 export default {
   name: 'LnmUmbrelButton',
@@ -21,6 +22,16 @@ export default {
     color: {
       type: String,
       default: 'primary',
+    },
+    click: {
+      type: Function,
+      default: undefined,
+    },
+    clickParams: {
+      type: [Object, Array, String, Number],
+      default() {
+        return {}
+      },
     },
   },
 
@@ -37,8 +48,31 @@ export default {
     })
 
     return {
+      clicked: ref(false),
       colorClass,
     }
+  },
+  computed: {
+    disableButton() {
+      return this.disabled || this.clicked
+    },
+  },
+
+  methods: {
+    onClick() {
+      if (!this.click) return
+
+      this.clicked = true
+      const pr = this.click(this.clickParams)
+
+      Promise.resolve(pr)
+        .then(() => {
+          this.clicked = false
+        })
+        .catch(() => {
+          this.clicked = false
+        })
+    },
   },
 }
 </script>

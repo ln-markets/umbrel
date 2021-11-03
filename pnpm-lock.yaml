@@ -88,6 +88,7 @@ importers:
       tailwindcss: ^2.2.19
       vite: ^2.6.13
       vue: ^3.2.20
+      vue-final-modal: ^3.4.3
       vue-router: ^4.0.12
       vuex: ^4.0.2
       vuex-persistedstate: ^4.0.0
@@ -98,6 +99,7 @@ importers:
       '@fortawesome/vue-fontawesome': 3.0.0-5_33491c0562c6fa409d94218bdac8a819
       mitt: 3.0.0
       vue: 3.2.20
+      vue-final-modal: 3.4.3
       vue-router: 4.0.12_vue@3.2.20
       vuex: 4.0.2_vue@3.2.20
       vuex-persistedstate: 4.1.0_vuex@4.0.2
@@ -4832,6 +4834,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-final-modal/3.4.3:
+    resolution: {integrity: sha512-sp6M09oXGcRM3d3Jr80UywWx4C9I18nH/549fgNrs8qbCcw+DJc8QSUFkJ91lqWndGQ1q5rYen4i4IIrpHPVYA==}
+    dev: false
 
   /vue-router/4.0.12_vue@3.2.20:
     resolution: {integrity: sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg==}

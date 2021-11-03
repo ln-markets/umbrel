@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Profile from '@/views/Profile.vue'
+import Index from '@/views/Index.vue'
 
 const options = {
   history: createWebHistory(),
@@ -7,7 +7,7 @@ const options = {
     {
       path: '/',
       name: 'profile',
-      component: Profile,
+      component: Index,
     },
   ],
 }

@@ -1,6 +1,15 @@
 import api from '@/plugins/api.js'
 
+const UPDATE_INTERVAL = 15
+
 export default {
+  updateProfileInterval({ dispatch }) {
+    setInterval(() => {
+      dispatch('get')
+      dispatch('futures/get', undefined, { root: true })
+    }, UPDATE_INTERVAL * 1000)
+  },
+
   async get({ commit, dispatch }) {
     try {
       const infos = await api.get({ path: '/api/user' })
@@ -11,71 +20,46 @@ export default {
     }
   },
 
-  async deposit({ commit, dispatch, state }, amount) {
+  async deposit({ commit, dispatch }, amount) {
     try {
-      commit('TRANSACTION_PROCESS', { step: 'waiting' })
-
-      const { secret, id, payment, code } = await api.post({
+      const { secret, id, payment } = await api.post({
         path: '/api/user/deposit',
         body: { amount },
       })
 
-      if (code) {
-        throw code
-      }
+      commit('ADD_BALANCE', amount)
 
-      const before = state.stats.transactions.deposits
-      await dispatch('get')
-      const after = state.stats.transactions.deposits
-
-      if (before === after) {
-        throw 'DepositFaillure'
-      }
-
-      commit('TRANSACTION_PROCESS', {
-        step: 'after',
-        id,
-        secret,
-        payment: payment,
-        amount,
+      this.$vm.$notify({
+        type: 'success',
+        message: `Deposit success! - ${amount.toLocaleString('en')} sats.`,
       })
+
+      this.$vm.$vfm.hide('ModalDeposit')
+
+      return { secret, id, payment }
     } catch (error) {
-      commit('TRANSACTION_PROCESS', { step: 'faillure' })
       return dispatch('error', error, { root: true })
     }
   },
 
   async withdraw({ commit, dispatch, state }, amount) {
     try {
-      commit('TRANSACTION_PROCESS', { step: 'waiting' })
-
-      const { secret, id, payment, code, fee } = await api.post({
+      const { secret, id, payment, fee } = await api.post({
         path: '/api/user/withdraw',
         body: { amount },
       })
 
-      if (code) {
-        throw code
-      }
+      commit('REMOVE_BALANCE', amount)
 
-      const before = state.stats.transactions.withdrawals
-      await dispatch('get')
-      const after = state.stats.transactions.withdrawals
-
-      if (before === after) {
-        throw 'WithdrawFaillure'
-      }
-
-      commit('TRANSACTION_PROCESS', {
-        step: 'after',
-        id,
-        secret,
-        payment,
-        amount,
-        fee,
+      this.$vm.$notify({
+        type: 'success',
+        message: `Withdraw success! - ${amount.toLocaleString('en')} sats.`,
       })
+
+      this.$vm.$vfm.hide('ModalWithdraw')
+
+      return { secret, id, payment, fee }
     } catch (error) {
-      commit('TRANSACTION_PROCESS', { step: 'faillure' })
       return dispatch('error', error, { root: true })
     }
   },

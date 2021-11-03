@@ -1,6 +1,7 @@
 <template>
-  <lnm-umbrel-modal :title="title">
-    <template #body>
+  <lnm-umbrel-modal>
+    <template #title>Withdraw from LN Markets</template>
+    <template #content>
       <p class="mb-4 text-sm sm:text-base text-center">
         Select the amount to withdraw using one of the options bellow.
       </p>
@@ -26,20 +27,17 @@
       </div>
     </template>
     <template #footer>
-      <lnm-umbrel-button
-        :color="'red'"
-        class="w-1/3 sm:w-1/4"
-        @click="closeModal"
-      >
+      <lnm-umbrel-button class="w-1/3 sm:w-1/4" @click="$emit('close')">
         Close
       </lnm-umbrel-button>
       <lnm-umbrel-button
         class="w-1/3 sm:w-1/4"
-        :color="'green'"
+        color="green"
         :disabled="
           !amount || parseInt(amount) > balance || parseInt(amount) < 1000
         "
-        @click="submit"
+        :click="withdraw"
+        :click-params="amount"
       >
         Withdraw
       </lnm-umbrel-button>
@@ -50,52 +48,22 @@
 <script>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-
 import { isInteger } from '@/plugins/utils.js'
 
 export default {
-  name: 'ModalWithdrawBefore',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-  },
-
+  name: 'ModalWithdraw',
   emits: ['close'],
-
   setup() {
     const store = useStore()
 
     return {
-      balance: computed(() => store.state.user.infos.balance),
+      balance: computed(() => store.state.user.balance),
       amount: ref(1000),
-      isInteger,
+      withdraw: (amount) => store.dispatch('user/withdraw', amount),
     }
   },
-
   methods: {
-    closeModal() {
-      this.amount = 1000
-      this.$emit('close')
-    },
-
-    async submit() {
-      try {
-        await this.$store.dispatch('user/withdraw', parseInt(this.amount))
-
-        this.$notify({
-          type: 'success',
-          message: `Withdraw success! - ${this.amount.toLocaleString(
-            'en'
-          )} sats.`,
-        })
-      } catch (error) {
-        console.log(error)
-      } finally {
-        this.amount = 1000
-      }
-    },
+    isInteger,
   },
 }
 </script>

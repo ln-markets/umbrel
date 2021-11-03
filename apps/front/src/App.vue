@@ -1,10 +1,11 @@
 <template>
   <div class="app-container">
     <nav-header />
-    <lnm-umbrel-notifications />
     <router-view />
     <nav-footer />
   </div>
+  <lnm-umbrel-notifications />
+  <modals-container />
 </template>
 
 <script>
@@ -12,17 +13,21 @@ import { onMounted } from 'vue'
 import { useStore } from 'vuex'
 import NavFooter from '@/layout/Footer.vue'
 import NavHeader from '@/layout/Header.vue'
+import { ModalsContainer } from 'vue-final-modal'
 
 export default {
-  components: { NavFooter, NavHeader },
+  components: { NavFooter, NavHeader, ModalsContainer },
   setup() {
     const store = useStore()
 
     const getUser = () => store.dispatch('user/get')
     const getFutures = () => store.dispatch('futures/get')
-    const updateProfileInterval = () => store.dispatch('updateProfileInterval')
+    const updateProfileInterval = () =>
+      store.dispatch('user/updateProfileInterval')
+    const showDisclaimer = () => store.dispatch('showDisclaimer')
 
     onMounted(() => {
+      showDisclaimer()
       getUser().then(() => {
         getFutures()
         updateProfileInterval()
@@ -32,7 +37,6 @@ export default {
     return {
       getUser,
       getFutures,
-      updateProfileInterval,
     }
   },
 }

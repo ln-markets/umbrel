@@ -6,13 +6,11 @@ import futures from './futures/index.js'
 import websockets from './websockets/index.js'
 
 import websocket from '@/plugins/websocket.js'
-
-const UPDATE_INTERVAL = 15
+import ModalDisclaimer from '@/modals/Disclaimer.vue'
 
 const defaultState = () => {
   return {
-    disclaimer: true,
-    updateInterval: undefined,
+    readDisclaimer: false,
   }
 }
 
@@ -21,15 +19,22 @@ export default createStore({
   plugins: [createPersistedState(), websocket()],
   state: defaultState(),
   actions: {
-    updateDisclaimer({ commit }) {
-      commit('UPDATE_DISCLAIMER')
+    showDisclaimer({ state }) {
+      if (!state.readDisclaimer) {
+        this.$vm.$vfm.show({
+          component: ModalDisclaimer,
+          bind: {
+            name: 'ModalDisclaimer',
+          },
+          on: {
+            close: () => {
+              this.$vm.$vfm.hide('ModalDisclaimer')
+            },
+          },
+        })
+      }
     },
-    updateProfileInterval({ dispatch }) {
-      setInterval(() => {
-        dispatch('user/get')
-        dispatch('futures/get')
-      }, UPDATE_INTERVAL * 1000)
-    },
+
     error({ rootGetters }, error) {
       const { message, code } = error
       this.$vm.$notify({
@@ -38,15 +43,13 @@ export default createStore({
       })
 
       console.error(error)
-      return Promise.reject(error)
     },
   },
   mutations: {
-    UPDATE_DISCLAIMER(state) {
-      state.disclaimer = false
+    DISCLAIMER_READ(state) {
+      state.readDisclaimer = true
     },
   },
-  getters: {},
   modules: {
     user,
     futures,

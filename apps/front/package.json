@@ -22,6 +22,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
     "mitt": "^3.0.0",
     "vue": "^3.2.20",
+    "vue-final-modal": "^3.4.3",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.0.0"
