@@ -14,6 +14,9 @@
           <a href="https://www.t.me/lnmarkets" rel="noopener" target="_blank">
             Telegram
           </a>
+        </i>
+        ,
+        <i>
           <a
             href="https://discord.gg/5HwDJFx2Jz"
             rel="noopener"
