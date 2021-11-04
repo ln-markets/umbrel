@@ -8,8 +8,5 @@ docker-compose pull
 docker-compose rm -fsv
 docker network prune -f
 
-echo -e "\nStarting infra..."
-./lnd.sh
-
 echo -e "\nStarting Umbrel containers..."
 docker-compose up -d

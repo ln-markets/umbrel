@@ -15,7 +15,6 @@ docker-compose up -d
 
 echo -e "\nCreating LND wallet..."
 docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' create
-sleep 5
 
 echo -e '\nConnecting to LNMarkets node...'
 LNMARKETS_URI='03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431@34.192.102.161:9735'

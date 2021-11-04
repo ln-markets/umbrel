@@ -1,31 +1,44 @@
 # Umbrel App
 
-As a regular user you should use the official integrated application through [Umbrel](https://github.com/getumbrel/umbrel) (to be released soon). This way you could switch between mainnet and testnet network.
+As a regular user you must use the official integrated application through [Umbrel](https://github.com/getumbrel/umbrel) (to be released soon). This way you could switch between mainnet and testnet network.
 
-
-## Install development env
-
-This environment is linked to the **testnet** version of LN Markets. **Meant for development use only**.
-
-### Prerequisites:
+## Prerequisites:
 
 - [docker](https://docs.docker.com/get-docker/)
 - [docker-compose](https://docs.docker.com/compose/install/)
 - [jq](https://stedolan.github.io/jq/)
 
+## Install local env
+
+This environment is linked to the **regtest** version of LN Markets. **Meant for development use only**.
+
 ### Setting up the app:
 
+You must launch LN Markets local env beforehand.
+
 ```shell
- $> pnpm env:init
+ $> pnpm local:start
 ```
 
-It will setup bitcoin testnet blockchain and a LND node for you. In addition it will connect itself to LNMarkets node but you'll need to create the channel yourself since you need tBTC to create it. You'll get a wallet address from the `init` script above, copy this adress and get tBTC from faucets like these:
+## Install testnet env
 
-| tBTC Faucets                          |
+This environment is linked to the **testnet** version of LN Markets. **Meant for development use only**.
+
+### Setting up the app:
+
+If it's the first time running the app in this mode, you must setup a channel between your node and LN Markets.
+
+```shell
+ $> pnpm testnet:init
+```
+
+This command will output you a wallet address that you must use to get tBTC in order to open a channel. You can get those via faucets, here is a small selection of them.
+
+|             tBTC Faucets              |
 | :-----------------------------------: |
 | https://coinfaucet.eu/en/btc-testnet/ |
-| https://testnet-faucet.mempool.co/    |
-| https://bitcoinfaucet.uo1.net/        |
+|  https://testnet-faucet.mempool.co/   |
+|    https://bitcoinfaucet.uo1.net/     |
 |                                       |
 
 You can check how much your wallet contains.
@@ -40,23 +53,25 @@ Now that you have money create a channel with LN Markets.
   $> pnpm lnd:create-channel AMOUNT
 ```
 
-Once that's done restart environment.
+If it's not the first time simply start the env.
 
 ```shell
-  $> pnpm env:start
+  $> pnpm testnet:start
 ```
 
-Then unlock the wallet and start using the local env.
+In both case you'll have to unlock your wallet and restart the API to get access to your node!
 
 ```shell
   $> pnpm lnd:unlock
+  $> pnpm testnet:restart-api
 ```
 
-These following services ar now accessible on any web browser.
+## Services
 
-| Service | URL                       |
+These following services ar now accessible on any web browser no matter which env you launched.
+
+| Service |            URL            |
 | :-----: | :-----------------------: |
-| API     | http://localhost:8001/api | 
-| Front   | http://localhost:3000     |
+|   API   | http://localhost:8001/api |
+|  Front  |   http://localhost:3000   |
 |         |                           |
-
