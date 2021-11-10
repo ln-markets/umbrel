@@ -1,38 +1,17 @@
 const cors = require('cors')
 
-const noCorsPaths = ['/lnurl/a', '/lnurl/a/c']
-
-const origin = (origin, callback) => {
-  if (
-    !origin ||
-    origin.match(/^http:\/\/localhost:\d+$/) ||
-    origin.match(/^http:\/\/umbrel(.*?).local(:\d+)?$/) ||
-    origin.match(`http://${process.env.APP_HIDDEN_SERVICE}`)
-  ) {
-    callback(null, true)
-  } else {
-    callback(new Error('Not allowed by CORS'))
-  }
-}
-
-const corsOptions = {
-  exposedHeaders: [
-    'X-RequestId',
-    'Retry-After',
-    'X-RateLimit-Reset',
-    'X-RateLimit-Remaining',
-  ],
-  origin: origin,
-}
-
-function except(paths, fn) {
-  return function (req, res, next) {
-    if (paths.indexOf(req.path) > -1) {
-      res.header('Access-Control-Allow-Origin', '*')
+module.exports = cors({
+  origin: (origin, callback) => {
+    if (
+      !origin ||
+      origin.match(/^http:\/\/localhost:\d+$/) ||
+      origin.match(/^http:\/\/umbrel(.*?).local(:\d+)?$/) ||
+      origin.match(`http://${process.env.APP_HIDDEN_SERVICE}`) ||
+      origin.match(`http://${process.env.APP_DOMAIN}`)
+    ) {
+      callback(null, true)
     } else {
-      return fn(req, res, next)
+      callback(new Error('Not allowed by CORS'))
     }
-  }
-}
-
-module.exports = except(noCorsPaths, cors(corsOptions))
+  },
+})

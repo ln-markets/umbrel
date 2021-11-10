@@ -29,7 +29,7 @@ const isTokenExpired = (token) => {
 const network = process.env.BITCOIN_NETWORK
 
 const customHeaders = {
-  'X-Umbrel': 'yes',
+  'LNM-ACCESS-APP': 'Umbrel',
 }
 
 class LNMarketsAPI extends LNMarketsRest {
