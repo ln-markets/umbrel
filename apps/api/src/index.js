@@ -27,7 +27,7 @@ const main = async () => {
       console.log(`Server listening on ${address}:${port}`)
     })
 
-    const port = process.env.APP_PORT || 4242
+    const port = process.env.API_PORT || 4242
     const host = process.env.APP_HOST || '0.0.0.0'
 
     server.listen(port, host)
