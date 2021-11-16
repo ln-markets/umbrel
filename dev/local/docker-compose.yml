@@ -33,6 +33,7 @@ services:
       - LND_IP=lnmarkets_lnd_user
       - LNMARKETS_API_HOSTNAME=api.lnmarkets.test
       - BITCOIN_NETWORK=regtest
+      - APP_PASSWORD=lnmarkets
     volumes:
       - ${PWD}/../../apps/api/src:/usr/src/apps/api/src:cached
       - lnmarkets_infra_lnd_user:/lnd/:ro
@@ -77,6 +78,7 @@ services:
       - LND_IP=lnmarkets_lnd_user
       - LNMARKETS_API_HOSTNAME=api.lnmarkets.test
       - BITCOIN_NETWORK=regtest
+      - APP_PASSWORD=lnmarkets
     volumes:
       - lnmarkets_infra_lnd_user:/lnd/:ro
     networks:
