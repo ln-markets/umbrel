@@ -28,6 +28,7 @@ module.exports = () => {
     res.status(200).end()
   })
 
+  app.use(require('@/middleware/session.js'))
   app.use(
     expressWinston.logger({
       transports: [new winston.transports.Console()],

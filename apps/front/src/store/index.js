@@ -44,6 +44,7 @@ export default createStore({
       })
 
       console.error(error)
+      return Promise.reject(error)
     },
   },
   mutations: {
