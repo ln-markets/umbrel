@@ -5,7 +5,7 @@
     <div
       class="float-left my-5 mx-8 w-16 h-auto font-bold hover:text-yellow-300 cursor-pointer"
     >
-      <a href="https://lnmarkets.com" rel="noopener" target="_blank">
+      <a :href="host" rel="noopener" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 643.9364">
           <g fill="currentColor">
             <path
@@ -28,11 +28,22 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
+const mode = import.meta.env.MODE
+
 export default {
   name: 'LnmUmbrelHeader',
 
   setup() {
-    return {}
+    const host = ref(
+      mode === 'development'
+        ? 'https:/testnet.lnmarkets.com'
+        : 'https://lnmarkets.com'
+    )
+    return {
+      host,
+    }
   },
 }
 </script>
