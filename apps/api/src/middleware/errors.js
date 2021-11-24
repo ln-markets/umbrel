@@ -1,3 +1,5 @@
+const HttpError = require('@/helpers/errors.js')
+
 const handleLNMarketsRestError = (error) => {
   const { message, statusCode, code } = error
 
@@ -21,7 +23,17 @@ const internalError = (opt = {}) => {
     statusCode,
     json: {
       code: 'internalError',
-      message: 'Internal error',
+      message: 'Internal error.',
+    },
+  }
+}
+
+const parseHttpError = ({ status, code, message }) => {
+  return {
+    statusCode: status,
+    json: {
+      code,
+      message: message || code,
     },
   }
 }
@@ -30,6 +42,8 @@ module.exports = (error, req, res, next) => {
   let response
   if (error.name === 'LNMarketsRestError') {
     response = handleLNMarketsRestError(error)
+  } else if (error instanceof HttpError) {
+    response = parseHttpError(error)
   } else {
     response = internalError()
   }
