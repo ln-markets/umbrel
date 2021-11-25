@@ -33,6 +33,7 @@ export default class Client {
       }),
       mode: 'cors',
       cache: 'no-cache',
+      credentials: 'include',
     }
   }
 
