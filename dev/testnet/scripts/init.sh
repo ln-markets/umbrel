@@ -21,5 +21,4 @@ LNMARKETS_URI='03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d643
 docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' connect "$LNMARKETS_URI" > /dev/null
 
 echo -e '\nCreating new wallet adress...'
-ADDRESS=`docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' newaddress p2wkh | jq '.address' | awk '{ print substr($0, 2, length($0) - 2) }'`
-printf "Wallet address: %s\n" $ADDRESS
+docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' newaddress p2wkh | jq '.address' | awk '{ print substr($0, 2, length($0) - 2) }'

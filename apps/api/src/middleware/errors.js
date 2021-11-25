@@ -38,7 +38,7 @@ const parseHttpError = ({ status, code, message }) => {
   }
 }
 
-module.exports = (error, req, res, next) => {
+module.exports = (error, req, res) => {
   let response
 
   if (error.name === 'LNMarketsRestError') {

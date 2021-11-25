@@ -31,7 +31,7 @@ ENV NODE_ENV="production"
 
 WORKDIR /usr/src
 
-RUN apk add dumb-init
+RUN apk add --no-cache dumb-init
 
 COPY --chown=node:node --from=builder /usr/tmp/apps/front/dist /usr/src/apps/api/public
 COPY --chown=node:node --from=builder /usr/tmp/node_modules /usr/src/node_modules
