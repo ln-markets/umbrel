@@ -27,7 +27,7 @@ jobs:
         with:
           images: |
             ghcr.io/ln-markets/umbrel
-            umbrel
+            lnmarkets/umbrel
           tags: |
             type=ref,event=branch
             type=ref,event=pr
