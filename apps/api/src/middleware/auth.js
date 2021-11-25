@@ -8,4 +8,5 @@ module.exports = (req, res, next) => {
       'You do not have permission to reach this ressource.'
     )
   }
+  next()
 }
