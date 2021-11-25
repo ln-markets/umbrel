@@ -1,6 +1,7 @@
 import Button from './Button.vue'
 import Modal from './Modal.vue'
 import Slider from './Slider.vue'
+
 import FontAwesomeIcon from './font-awesome.js'
 
 export default (app) => {

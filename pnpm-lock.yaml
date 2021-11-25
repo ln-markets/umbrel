@@ -80,6 +80,7 @@ importers:
     specifiers:
       '@fortawesome/fontawesome-svg-core': ^1.2.35
       '@fortawesome/free-brands-svg-icons': ^5.15.3
+      '@fortawesome/free-regular-svg-icons': ^5.15.4
       '@fortawesome/free-solid-svg-icons': ^5.15.3
       '@fortawesome/vue-fontawesome': ^3.0.0-4
       '@vitejs/plugin-vue': ^1.9.4
@@ -97,6 +98,7 @@ importers:
     dependencies:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-brands-svg-icons': 5.15.4
+      '@fortawesome/free-regular-svg-icons': 5.15.4
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/vue-fontawesome': 3.0.0-5_33491c0562c6fa409d94218bdac8a819
       mitt: 3.0.0
@@ -338,6 +340,14 @@ packages:
 
   /@fortawesome/free-brands-svg-icons/5.15.4:
     resolution: {integrity: sha512-f1witbwycL9cTENJegcmcZRYyawAFbm8+c6IirLmwbbpqz46wyjbQYLuxOc7weXFXfB7QR8/Vd2u5R3q6JYD9g==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 0.2.36
+    dev: false
+
+  /@fortawesome/free-regular-svg-icons/5.15.4:
+    resolution: {integrity: sha512-9VNNnU3CXHy9XednJ3wzQp6SwNwT3XaM26oS4Rp391GsxVYA+0oDR2J194YCIWf7jNRCYKjUCOduxdceLrx+xw==}
     engines: {node: '>=6'}
     requiresBuild: true
     dependencies:

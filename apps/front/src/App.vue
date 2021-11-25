@@ -1,22 +1,34 @@
 <template>
-  <div class="app-container">
-    <nav-header />
+  <div class="app-container" :class="isLandingPage ? 'h-full' : ''">
+    <nav-header v-if="!isLandingPage" />
     <router-view />
-    <nav-footer />
+    <nav-footer v-if="!isLandingPage" />
   </div>
   <lnm-umbrel-notifications />
   <modals-container />
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
+
 import NavFooter from '@/layout/Footer.vue'
 import NavHeader from '@/layout/Header.vue'
 import { ModalsContainer } from 'vue-final-modal'
+import { computed } from 'vue'
 
 export default {
   components: { NavFooter, NavHeader, ModalsContainer },
   setup() {
-    return {}
+    const routeur = useRouter()
+
+    const isLandingPage = computed(() => {
+      return routeur.currentRoute.value.path === '/'
+    })
+
+    return {
+      routeur,
+      isLandingPage,
+    }
   },
 }
 </script>
