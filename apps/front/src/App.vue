@@ -1,42 +1,33 @@
 <template>
-  <div class="app-container">
-    <nav-header />
+  <div class="app-container" :class="isLandingPage ? 'h-full' : ''">
+    <nav-header v-if="!isLandingPage" />
     <router-view />
-    <nav-footer />
+    <nav-footer v-if="!isLandingPage" />
   </div>
   <lnm-umbrel-notifications />
   <modals-container />
 </template>
 
 <script>
-import { onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
 import NavFooter from '@/layout/Footer.vue'
 import NavHeader from '@/layout/Header.vue'
 import { ModalsContainer } from 'vue-final-modal'
+import { computed } from 'vue'
 
 export default {
   components: { NavFooter, NavHeader, ModalsContainer },
   setup() {
-    const store = useStore()
+    const routeur = useRouter()
 
-    const getUser = () => store.dispatch('user/get')
-    const getFutures = () => store.dispatch('futures/get')
-    const updateProfileInterval = () =>
-      store.dispatch('user/updateProfileInterval')
-    const showDisclaimer = () => store.dispatch('showDisclaimer')
-
-    onMounted(() => {
-      showDisclaimer()
-      getUser().then(() => {
-        getFutures()
-        updateProfileInterval()
-      })
+    const isLandingPage = computed(() => {
+      return routeur.currentRoute.value.path === '/'
     })
 
     return {
-      getUser,
-      getFutures,
+      routeur,
+      isLandingPage,
     }
   },
 }

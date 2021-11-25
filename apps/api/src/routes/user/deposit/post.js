@@ -1,6 +1,8 @@
 const LNMarketsAPI = require('@/classes/lnmarkets-api.js')
 const LND = require('@/classes/lnd.js')
 
+const HttpError = require('@/helpers/errors.js')
+
 module.exports = async (req, res, next) => {
   try {
     const { amount } = req.body
@@ -13,7 +15,11 @@ module.exports = async (req, res, next) => {
     const { tokens } = await LND.decodePaymentRequest({ request })
 
     if (amount !== tokens) {
-      throw new Error('WrongAmountInvoice')
+      throw new HttpError(
+        400,
+        'WrongAmountInvoice',
+        'Amount request does not match with tokens in payment request.'
+      )
     }
 
     const { secret, paths } = await LND.pay({ request })

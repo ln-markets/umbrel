@@ -11,6 +11,8 @@ import {
   faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons'
+
 import {
   faTwitter,
   faTelegram,
@@ -29,7 +31,9 @@ library.add(
   faExclamationCircle,
   faCheckCircle,
   faQuestionCircle,
-  faDiscord
+  faDiscord,
+  faEyeSlash,
+  faEye
 )
 
 export default FontAwesomeIcon

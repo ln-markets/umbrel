@@ -1,13 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Index from '@/views/Index.vue'
+
+import Profile from '@/views/profile/Index.vue'
+import Authentication from '@/views/auth/Index.vue'
 
 const options = {
   history: createWebHistory(),
   routes: [
     {
       path: '/',
+      name: 'authentication',
+      component: Authentication,
+    },
+    {
+      path: '/app',
       name: 'profile',
-      component: Index,
+      component: Profile,
     },
   ],
 }
