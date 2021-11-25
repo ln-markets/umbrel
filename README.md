@@ -1,6 +1,9 @@
 # LN Markets Umbrel App
 
 <p align="center">
+  <a href="https://www.codefactor.io/repository/github/ln-markets/umbrel">
+    <img src="https://www.codefactor.io/repository/github/ln-markets/umbrel/badge" alt="CodeFactor" />
+  </a>
   <a href="https://github.com/ln-markets/umbrel/releases" alt="Build">
     <img src="https://img.shields.io/github/workflow/status/ln-markets/umbrel/build" />
   </a>
