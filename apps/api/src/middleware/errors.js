@@ -40,6 +40,7 @@ const parseHttpError = ({ status, code, message }) => {
 
 module.exports = (error, req, res, next) => {
   let response
+
   if (error.name === 'LNMarketsRestError') {
     response = handleLNMarketsRestError(error)
   } else if (error instanceof HttpError) {

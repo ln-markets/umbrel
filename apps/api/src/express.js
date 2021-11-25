@@ -24,11 +24,11 @@ module.exports = () => {
   app.use(bodyParser.json({ extended: false }))
   app.use(bodyParser.text())
   app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(require('@/middleware/session.js'))
   app.get('/status', (req, res) => {
     res.status(200).end()
   })
 
-  app.use(require('@/middleware/session.js'))
   app.use(
     expressWinston.logger({
       transports: [new winston.transports.Console()],

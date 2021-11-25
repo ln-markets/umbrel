@@ -1,6 +1,8 @@
 const cors = require('cors')
 
 module.exports = cors({
+  credentials: true,
+  exposedHeaders: ['Set-Cookie', 'Cookie'],
   origin: (origin, callback) => {
     if (
       !origin ||
