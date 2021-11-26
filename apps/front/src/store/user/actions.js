@@ -4,9 +4,9 @@ const UPDATE_INTERVAL = 30
 
 export default {
   updateProfileInterval({ dispatch }) {
-    setInterval(() => {
-      dispatch('get')
-      dispatch('futures/get', undefined, { root: true })
+    setInterval(async () => {
+      await dispatch('get')
+      await dispatch('futures/get', undefined, { root: true })
     }, UPDATE_INTERVAL * 1000)
   },
 

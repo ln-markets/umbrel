@@ -28,7 +28,7 @@
     "express-session": "^1.17.2",
     "express-winston": "^4.2.0",
     "helmet": "^4.6.0",
-    "ln-service": "^53.0.1",
+    "ln-service": "53.0.1",
     "module-alias": "^2.2.2",
     "secp256k1": "^4.0.2",
     "tiny-secp256k1": "^2.1.2",

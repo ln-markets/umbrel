@@ -22,10 +22,19 @@ module.exports = async (req, res, next) => {
       )
     }
 
-    const { secret, paths } = await LND.pay({ request })
+    const { secret } = await LND.pay({ request, max_paths: 4 })
 
-    res.json({ secret, id, payment: paths[0].payment })
+    res.json({ secret, id })
   } catch (error) {
-    next(error)
+    if (Array.isArray(error)) {
+      // Weird AF ?
+      if (error[1] === 'ExpectedPaymentFeeMillitokensAmountForPendingPayment') {
+        res.end()
+      } else {
+        next(new HttpError(400, 'lndError', error[1]))
+      }
+    } else {
+      next(error)
+    }
   }
 }

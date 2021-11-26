@@ -5,13 +5,16 @@
       <p class="mb-4 text-sm sm:text-base text-center">
         Select the amount to deposit using one of the options bellow.
       </p>
-      <lnm-umbrel-slider
-        :min="1000"
-        :max="maxDeposit"
-        :value="parseInt(amount)"
-        :step="(maxDeposit - 1000) / 1000"
-        @update="amount = parseInt($event)"
-      />
+      <div class="flex justify-center">
+        <lnm-umbrel-slider
+          class="w-1/2"
+          :min="1000"
+          :max="maxDeposit"
+          :value="parseInt(amount)"
+          :step="(maxDeposit - 1000) / 1000"
+          @update="amount = parseInt($event)"
+        />
+      </div>
       <div class="flex justify-center mt-4">
         <lnm-umbrel-button class="mr-4" @click="amount = maxDeposit">
           Max

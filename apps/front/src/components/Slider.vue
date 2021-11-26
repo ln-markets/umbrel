@@ -1,9 +1,10 @@
 <template>
   <input
+    class="range"
     type="range"
+    :step="step"
     :min="min"
     :max="max"
-    :step="step"
     :value="value"
     @input="$emit('update', $event.target.value)"
   />
@@ -11,23 +12,23 @@
 
 <script>
 export default {
-  name: 'LnmUmbrelSlider',
+  name: 'LnmSlider',
   props: {
     value: {
+      default: 0,
       type: Number,
-      default: 1000,
     },
     min: {
+      default: 0,
       type: Number,
-      default: 1000,
     },
     max: {
+      default: 1000,
       type: Number,
-      default: 1000000,
     },
     step: {
+      default: 100,
       type: Number,
-      default: 1000,
     },
   },
 
@@ -40,22 +41,22 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-input[type='range'] {
-  @apply block w-5/6 sm:w-1/2 mx-auto;
+.range input[type='range'] {
+  @apply block m-2 p-0;
 }
 
-input[type='range']:focus {
+.range input[type='range']:focus {
   @apply outline-none;
 }
 
-input[type='range']::-webkit-lnmslider-thumb {
+.range input[type='range']::-webkit-lnmslider-thumb {
   @apply relative w-8 h-8 z-10 rounded-full border-0 cursor-pointer;
 
   background-color: green;
   transition: background 0.1s linear;
 }
 
-input[type='range']::-moz-range-thumb {
+.range input[type='range']::-moz-range-thumb {
   @apply relative w-8 h-8 z-10 rounded-full border-0 cursor-pointer;
 
   background-color: green;
@@ -63,7 +64,7 @@ input[type='range']::-moz-range-thumb {
   transition: background-color 0.1s linear;
 }
 
-input[type='range']::-moz-focus-outer {
+.range input[type='range']::-moz-focus-outer {
   border: 0;
 }
 </style>

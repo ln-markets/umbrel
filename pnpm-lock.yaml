@@ -51,7 +51,7 @@ importers:
       express-session: ^1.17.2
       express-winston: ^4.2.0
       helmet: ^4.6.0
-      ln-service: ^53.0.1
+      ln-service: 53.0.1
       module-alias: ^2.2.2
       secp256k1: ^4.0.2
       tiny-secp256k1: ^2.1.2
@@ -762,7 +762,7 @@ packages:
     resolution: {integrity: sha512-Il80Qs2WjYlJIBNzNkK6KYqlVMTbZLXgHx2oT0pU/fjRHyEp+PEfEPY0R3WCwAGVOtauxh1hOxNgIf5bv7dQpA==}
     engines: {node: '>= 0.6'}
     dependencies:
-      mime-types: 2.1.33
+      mime-types: 2.1.34
       negotiator: 0.6.2
     dev: false
 
@@ -3401,21 +3401,9 @@ packages:
       picomatch: 2.3.0
     dev: true
 
-  /mime-db/1.50.0:
-    resolution: {integrity: sha512-9tMZCDlYHqeERXEHO9f/hKfNXhre5dK2eE/krIvUjZbS2KPcqGDfNShIWS1uW9XOTKQKqK6qbeOci18rbfW77A==}
-    engines: {node: '>= 0.6'}
-    dev: false
-
   /mime-db/1.51.0:
     resolution: {integrity: sha512-5y8A56jg7XVQx2mbv1lu49NR4dokRnhZYTtL+KGfaa27uq4pSTXkwQkFJl4pkRMyNFz/EtYDSkiiEHx3F7UN6g==}
     engines: {node: '>= 0.6'}
-    dev: false
-
-  /mime-types/2.1.33:
-    resolution: {integrity: sha512-plLElXp7pRDd0bNZHw+nMd52vRYjLwQjygaNg7ddJ2uJtTlmnTCjWuPKxVu6//AdaRuME84SvLW91sIkBqGT0g==}
-    engines: {node: '>= 0.6'}
-    dependencies:
-      mime-db: 1.50.0
     dev: false
 
   /mime-types/2.1.34:
@@ -4853,7 +4841,7 @@ packages:
     engines: {node: '>= 0.6'}
     dependencies:
       media-typer: 0.3.0
-      mime-types: 2.1.33
+      mime-types: 2.1.34
     dev: false
 
   /typedarray-to-buffer/3.1.5:
