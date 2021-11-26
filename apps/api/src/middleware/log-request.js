@@ -1,47 +1,27 @@
 const log = require('@/logger/index.js')
 
-const forbidenKeys = [
-  'password',
-  'message',
-  'k1',
-  'sig',
-  'signature',
-  'key',
-  'hmac',
-  'token',
-  'newPassword',
-]
+module.exports = (doNotLogParams) => {
+  return (req, res, next) => {
+    const { path, method } = req
 
-const parseParam = (req) => {
-  let param
-  if (req.method === 'GET' || req.method === 'DELETE') {
-    param = Object.assign({}, req.query)
-  } else {
-    param = Object.assign({}, req.body)
-  }
+    const clone = JSON.parse(JSON.stringify({ ...req.query, ...req.body }))
+    const app = req.headers['LNM-ACCESS-APP'] || null
 
-  if (process.env.NODE_ENV === 'production') {
-    for (const key of forbidenKeys) {
-      delete param[key]
+    if (Object.keys(clone).length > 0) {
+      for (const key in clone) {
+        if (process.env.NODE_ENV !== 'development') {
+          if (doNotLogParams.indexOf(key) > -1) {
+            delete clone[key]
+          }
+        }
+      }
+
+      const params = JSON.stringify(clone)
+      log.info({ method, path, app, params })
+    } else {
+      log.info({ method, path, app })
     }
-  }
 
-  if (JSON.stringify(param) === '{}') {
-    return undefined
-  } else {
-    return param
+    next()
   }
-}
-
-module.exports = (req, res, next) => {
-  const { path, method } = req
-  const param = parseParam(req)
-  const httpRequest = {
-    method,
-    path,
-    param,
-  }
-
-  log.info({ httpRequest })
-  next()
 }

@@ -16,6 +16,11 @@ const options = {
       name: 'profile',
       component: Profile,
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: Authentication,
+    },
   ],
 }
 

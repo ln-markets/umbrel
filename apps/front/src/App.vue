@@ -1,8 +1,8 @@
 <template>
-  <div class="app-container" :class="isLandingPage ? 'h-full' : ''">
-    <nav-header v-if="!isLandingPage" />
+  <div class="app-container" :class="!showHeaderAndFooter ? 'h-full' : ''">
+    <nav-header v-if="showHeaderAndFooter" />
     <router-view />
-    <nav-footer v-if="!isLandingPage" />
+    <nav-footer v-if="showHeaderAndFooter" />
   </div>
   <lnm-umbrel-notifications />
   <modals-container />
@@ -21,13 +21,13 @@ export default {
   setup() {
     const routeur = useRouter()
 
-    const isLandingPage = computed(() => {
-      return routeur.currentRoute.value.path === '/'
+    const showHeaderAndFooter = computed(() => {
+      return routeur.currentRoute.value.path === '/app'
     })
 
     return {
       routeur,
-      isLandingPage,
+      showHeaderAndFooter,
     }
   },
 }

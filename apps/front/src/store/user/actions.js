@@ -1,6 +1,6 @@
 import api from '@/plugins/api.js'
 
-const UPDATE_INTERVAL = 15
+const UPDATE_INTERVAL = 30
 
 export default {
   updateProfileInterval({ dispatch }) {
@@ -75,7 +75,6 @@ export default {
 
   async loginToUmbrel({ dispatch }, password) {
     try {
-      console.log(password)
       await api.post({ path: '/api/login', body: { password } })
     } catch (error) {
       return dispatch('error', error, { root: true })

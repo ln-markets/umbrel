@@ -1,4 +1,5 @@
 const HttpError = require('@/helpers/errors.js')
+const log = require('@/logger/index.js')
 
 const handleLNMarketsRestError = (error) => {
   const { message, statusCode, code } = error
@@ -40,6 +41,7 @@ const parseHttpError = ({ status, code, message }) => {
 
 module.exports = (error, req, res, next) => {
   let response
+  log.error(error)
 
   if (error.name === 'LNMarketsRestError') {
     response = handleLNMarketsRestError(error)

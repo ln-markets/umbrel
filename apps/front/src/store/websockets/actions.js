@@ -16,6 +16,7 @@ const isJSONRPCMessage = (payload) => {
 
 export default {
   open({ commit }) {
+    console.log('Connected to websockets')
     commit('OPEN')
   },
 
