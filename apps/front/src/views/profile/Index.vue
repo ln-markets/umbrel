@@ -13,7 +13,6 @@
 <script>
 import { onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
 
 import MarketData from './MarketData.vue'
 import Account from './Account.vue'
@@ -33,7 +32,6 @@ export default {
 
   setup() {
     const store = useStore()
-    const router = useRouter()
 
     const getUser = () => store.dispatch('user/get')
     const getFutures = () => store.dispatch('futures/get')
@@ -43,14 +41,9 @@ export default {
 
     onBeforeMount(async () => {
       showDisclaimer()
-
-      try {
-        await getUser()
-        await getFutures()
-        updateProfileInterval()
-      } catch (error) {
-        router.replace({ path: '/' })
-      }
+      await getUser()
+      await getFutures()
+      updateProfileInterval()
     })
     return {
       getUser,

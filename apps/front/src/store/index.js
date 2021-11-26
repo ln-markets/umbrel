@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import { $vfm } from 'vue-final-modal'
 import websocket from '@/plugins/websocket.js'
+import router from '@/router/index.js'
 
 import user from './user/index.js'
 import futures from './futures/index.js'
@@ -37,13 +38,19 @@ export default createStore({
     },
 
     error({ rootGetters }, error) {
-      const { message, code } = error
+      const { message, code, status } = error
+
+      if (status === 401) {
+        router.replace({ path: '/' })
+      }
+
       this.$vm.$notify({
         type: 'error',
         message: `${message || code || error}`,
       })
 
       console.error(error)
+
       return Promise.reject(error)
     },
   },
