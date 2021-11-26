@@ -2,5 +2,5 @@
 
 set -e
 
-docker-compose build
+docker-compose build api front
 docker-compose up -d api front
