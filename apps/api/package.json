@@ -19,7 +19,7 @@
   "dependencies": {
     "@ln-markets/api": "^1.4.2",
     "bech32": "^2.0.0",
-    "bip32": "^2.0.6",
+    "bip32": "^3.0.1",
     "bip39": "^3.0.4",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -28,11 +28,12 @@
     "express-session": "^1.17.2",
     "express-winston": "^4.2.0",
     "helmet": "^4.6.0",
-    "ln-service": "^52.14.2",
+    "ln-service": "^53.0.1",
     "module-alias": "^2.2.2",
     "secp256k1": "^4.0.2",
+    "tiny-secp256k1": "^2.1.2",
     "winston": "^3.3.3",
-    "ws": "^8.2.3"
+    "ws": "^8.3.0"
   },
   "_moduleAliases": {
     "@": "src/"

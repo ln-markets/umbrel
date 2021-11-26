@@ -1,8 +1,11 @@
 const LND = require('@/classes/lnd.js')
 const bip39 = require('bip39')
-const bip32 = require('bip32')
 const { bech32 } = require('bech32')
 const secp256k1 = require('secp256k1')
+const BIP32Factory = require('bip32')
+const ecc = require('tiny-secp256k1')
+const bip32 = BIP32Factory.default(ecc)
+
 const { createHmac } = require('crypto')
 
 const hexStringToArray = (string) => {

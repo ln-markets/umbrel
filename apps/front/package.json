@@ -29,11 +29,11 @@
     "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.4",
-    "@vue/compiler-sfc": "^3.2.21",
+    "@vitejs/plugin-vue": "^1.10.1",
+    "@vue/compiler-sfc": "^3.2.23",
     "autoprefixer": "^10.4.0",
-    "postcss": "^8.3.11",
+    "postcss": "^8.4.1",
     "tailwindcss": "^2.2.19",
-    "vite": "^2.6.13"
+    "vite": "^2.6.14"
   }
 }
