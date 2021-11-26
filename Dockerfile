@@ -13,12 +13,13 @@ COPY apps/front/index.html /usr/tmp/apps/front/index.html
 COPY apps/front/vite.config.js /usr/tmp/apps/front/vite.config.js
 COPY apps/front/tailwind.config.js /usr/tmp/apps/front/tailwind.config.js
 COPY apps/front/postcss.config.js /usr/tmp/apps/front/postcss.config.js
-COPY apps/front/public /usr/tmp/apps/front/public
-COPY apps/front/src /usr/tmp/apps/front/src
 
 RUN pnpm config set store-dir .pnpm-store && \
   pnpm install --frozen-lockfile --ignore-scripts && \
   modclean --no-progress --run
+
+COPY apps/front/public /usr/tmp/apps/front/public
+COPY apps/front/src /usr/tmp/apps/front/src
 
 RUN pnpm -C apps/front build
 
