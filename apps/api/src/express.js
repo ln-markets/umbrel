@@ -52,7 +52,6 @@ module.exports = () => {
   app.use(asyncContext)
 
   app.use(require('@/middleware/session.js'))
-  app.use(require('@/middleware/log-request.js')(['password']))
 
   app.get('/status', (req, res) => {
     res.status(200).end()
@@ -68,10 +67,15 @@ module.exports = () => {
     )
   })
 
+  app.use(require('@/middleware/log-request.js')(['password']))
+
   app.use('/api', routes)
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../public')))
+    app.get('*', (req, res, next) => {
+      res.sendFile('index.html', { root: path.join(__dirname, '../public') })
+    })
   }
 
   app.use(require('@/middleware/errors.js'))
