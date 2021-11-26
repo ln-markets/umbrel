@@ -1,10 +1,16 @@
 const express = require('express')
+const cuid = require('cuid')
 const routes = require('@/routes/index.js')
 const path = require('path')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
-const winston = require('winston')
-const expressWinston = require('express-winston')
+
+const setRequestId = (req, res, next) => {
+  const requestId = cuid()
+  res.set('X-RequestId', requestId)
+  req.id = requestId
+  next()
+}
 
 module.exports = () => {
   const app = express()
@@ -18,47 +24,20 @@ module.exports = () => {
   app.use(helmet.permittedCrossDomainPolicies())
   app.use(helmet.referrerPolicy())
   app.use(helmet.xssFilter())
-
+  app.use(setRequestId)
   app.use(require('@/middleware/cors.js'))
 
   app.use(bodyParser.json({ extended: false }))
   app.use(bodyParser.text())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(require('@/middleware/session.js'))
+  app.use(require('@/middleware/log-request.js'))
+
   app.get('/status', (req, res) => {
     res.status(200).end()
   })
 
-  app.use(
-    expressWinston.logger({
-      transports: [new winston.transports.Console()],
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-      ),
-      meta: false,
-      msg: 'HTTP {{req.method}} {{req.url}}',
-      expressFormat: true,
-      colorize: true,
-    })
-  )
-
   app.use('/api', routes)
-
-  app.use(
-    expressWinston.errorLogger({
-      transports: [new winston.transports.Console()],
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-      ),
-      meta: false,
-      msg: 'HTTP {{req.method}} {{req.url}}',
-      expressFormat: true,
-      colorize: true,
-      showStack: true,
-    })
-  )
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../public')))

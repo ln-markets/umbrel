@@ -1,6 +1,8 @@
 const { LNMarketsWebsocket } = require('@ln-markets/api')
 const { Server } = require('ws')
 
+const log = require('@/logger/index.js')
+
 const OPEN = 1
 
 module.exports = async (server) => {
@@ -13,7 +15,7 @@ module.exports = async (server) => {
     })
 
     lnm.on('connected', (message) => {
-      console.log(`Connected to ${lnm.hostname} websockets`)
+      log.info(`Connected to ${lnm.hostname} websockets`)
     })
 
     lnm.on('message', (message) => {

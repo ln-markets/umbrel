@@ -2,7 +2,7 @@ const cors = require('cors')
 
 module.exports = cors({
   credentials: true,
-  exposedHeaders: ['Set-Cookie', 'Cookie'],
+  exposedHeaders: ['Set-Cookie', 'Cookie', 'X-RequestId'],
   origin: (origin, callback) => {
     if (
       !origin ||

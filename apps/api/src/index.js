@@ -1,13 +1,15 @@
 const path = require('path')
 require('module-alias')(path.join(__dirname, '..'))
 const http = require('http')
+
+const log = require('@/logger/index.js')
 const LND = require('@/classes/lnd.js')
 const WebsocketServer = require('./websockets.js')
 
 const createExpressApp = require('./express.js')
 
 process.on('unchaughtException', (error) => {
-  console.error(error)
+  log.error(error)
 })
 
 const main = async () => {
@@ -18,13 +20,13 @@ const main = async () => {
     WebsocketServer(server)
 
     server.on('error', (error) => {
-      console.error(error)
+      log.error(error)
     })
 
     server.on('listening', () => {
       const { address, port } = server.address()
 
-      console.log(`Server listening on ${address}:${port}`)
+      log.info(`Server listening on ${address}:${port}`)
     })
 
     const port = process.env.API_PORT || 4242
@@ -32,7 +34,7 @@ const main = async () => {
 
     server.listen(port, host)
   } catch (error) {
-    console.error(error)
+    log.crit(error)
     // eslint-disable-next-line no-process-exit
     process.exit(-1)
   }
