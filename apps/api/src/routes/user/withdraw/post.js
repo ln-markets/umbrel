@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
     const { amount } = req.body
 
     const { request: invoice } = await LND.createInvoice({
-      description: 'LnMarkets Withdraw',
+      description: 'LN Markets Withdraw',
       tokens: amount,
     })
 
