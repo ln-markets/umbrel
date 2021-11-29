@@ -62,7 +62,7 @@ export default {
     return {
       maxDeposit: computed(() => store.getters['user/maxDeposit']),
       amount: ref(1000),
-      deposit: (amount) => store.dispatch('user/deposit', amount),
+      deposit: (amount) => store.dispatch('user/deposit', parseInt(amount)),
     }
   },
 

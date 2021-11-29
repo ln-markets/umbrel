@@ -62,7 +62,7 @@ export default {
     return {
       balance: computed(() => store.state.user.balance),
       amount: ref(1000),
-      withdraw: (amount) => store.dispatch('user/withdraw', amount),
+      withdraw: (amount) => store.dispatch('user/withdraw', parseInt(amount)),
     }
   },
   methods: {
