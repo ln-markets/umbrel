@@ -1,16 +1,7 @@
 <template>
   <div class="flex flex-row justify-between items-center p-4 w-full">
     <div class="flex flex-col text-xs">
-      <div>
-        <a
-          class="text-primary hover:text-link"
-          href="https://lnmarkets.com"
-          rel="noopener"
-          target="_blank"
-        >
-          LN Markets
-        </a>
-      </div>
+      <div>LN Markets App v1.2.0</div>
     </div>
     <div class="flex flex-row justify-between items-center w-48">
       <a
