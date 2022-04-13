@@ -23,7 +23,10 @@ const arrayToHexString = (array) => {
   )
 }
 
-export const createLnurlAuthPubkeyAndSignature = async ({ lnurl }) => {
+export const createLnurlAuthPubkeyAndSignature = async ({
+  lnurl,
+  withJWT = false,
+}) => {
   try {
     if (!lnurl) {
       throw new Error('lnurlNotFound')
@@ -90,7 +93,7 @@ export const createLnurlAuthPubkeyAndSignature = async ({ lnurl }) => {
       hmac,
       sig: hexStringSignature,
       key: publicKey,
-      jwt: true,
+      jwt: withJWT,
     }
   } catch (error) {
     return Promise.reject(error)

@@ -1,4 +1,4 @@
-import Buffer from 'node:buffer'
+import { Buffer } from 'node:buffer'
 import fs from 'node:fs'
 import net from 'node:net'
 import process from 'node:process'
