@@ -1,6 +1,6 @@
-const HttpError = require('@/helpers/errors.js')
+import HttpError from '#src/helpers/errors.js'
 
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
   if (!req.session || !req.session.auth) {
     throw new HttpError(
       401,

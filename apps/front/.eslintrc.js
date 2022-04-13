@@ -45,4 +45,32 @@ module.exports = {
     'prefer-const': 'error',
     'prefer-arrow-callback': 'error',
   },
+  settings: {
+    'import/core-modules': [
+      'node:process',
+      'node:async_hooks',
+      'node:console',
+      'node:os',
+      'node:net',
+      'node:crypto',
+      'node:buffer',
+      'node:timers',
+      'node:querystring',
+      'node:url',
+      'node:http',
+      'node:path',
+      'node:fs',
+      'node:fs/promises',
+      'node:https',
+      'node:v8',
+      'node:worker_threads',
+      'zx/globals',
+    ],
+    'import/resolver': {
+      alias: {
+        map: [['#src', './src']],
+        extensions: ['.js', '.json'],
+      },
+    },
+  },
 }

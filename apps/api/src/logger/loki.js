@@ -1,7 +1,9 @@
-const { format } = require('winston')
+import winston from 'winston'
+
+const { format } = winston
 const { combine, timestamp, printf, colorize } = format
 
-module.exports = () => {
+export default () => {
   const loki = printf((info) => {
     const { timestamp, level, message, reqid, uid, ip } = info
 
@@ -33,9 +35,7 @@ module.exports = () => {
     }
   })
 
-  const consoleOptions = {
+  return {
     format: combine(colorize(), timestamp(), loki),
   }
-
-  return consoleOptions
 }

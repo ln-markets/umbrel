@@ -1,20 +1,20 @@
-const { LNMarketsWebsocket } = require('@ln-markets/api')
-const { Server } = require('ws')
+import { LNMarketsWebsocket } from '@ln-markets/api'
+import Websocket from 'ws'
 
-const log = require('@/logger/index.js')
+import log from '#src/logger/index.js'
 
 const OPEN = 1
 
-module.exports = async (server) => {
+export default async (server) => {
   try {
     const lnm = new LNMarketsWebsocket({ network: process.env.BITCOIN_NETWORK })
-    const ws = new Server({
+    const ws = new Websocket.Server({
       server,
       maxPayload: 1024,
       clientTracking: true,
     })
 
-    lnm.on('connected', (message) => {
+    lnm.on('connected', () => {
       log.info(`Connected to ${lnm.hostname} websockets`)
     })
 

@@ -1,6 +1,6 @@
-const session = require('express-session')
+import session from 'express-session'
 
-module.exports = session({
+export default session({
   secret: process.env.APP_PASSWORD,
   resave: false,
   saveUninitialized: true,

@@ -1,6 +1,7 @@
-const winston = require('winston')
-const loki = require('./loki.js')
-const format = require('./format.js')
+import winston from 'winston'
+
+import format from './format.js'
+import loki from './loki.js'
 
 const { createLogger, transports } = winston
 
@@ -37,4 +38,4 @@ const loggerOptions = {
   transports: [new transports.Console(loki())],
 }
 
-module.exports = createLogger(loggerOptions)
+export default createLogger(loggerOptions)

@@ -1,6 +1,6 @@
-const LNMarketsAPI = require('@/classes/lnmarkets-api.js')
+import LNMarketsAPI from '#src/classes/lnmarkets-api.js'
 
-module.exports = async (req, res, next) => {
+export default async (req, res, next) => {
   try {
     const {
       uid,

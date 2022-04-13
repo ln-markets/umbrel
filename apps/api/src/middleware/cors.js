@@ -1,6 +1,6 @@
-const cors = require('cors')
+import cors from 'cors'
 
-module.exports = cors({
+export default cors({
   credentials: true,
   exposedHeaders: ['Set-Cookie', 'Cookie', 'X-RequestId'],
   origin: (origin, callback) => {

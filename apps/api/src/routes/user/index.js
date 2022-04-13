@@ -1,10 +1,15 @@
-const express = require('express')
-const isAuth = require('@/middleware/auth.js')
+import express from 'express'
+
+import isAuth from '#src/middleware/auth.js'
+
+import deposit from './deposit/post.js'
+import user from './get.js'
+import withdraw from './withdraw/post.js'
 
 const router = express.Router()
 
-router.get('/', [isAuth], require('./get.js'))
-router.post('/deposit', [isAuth], require('./deposit/post.js'))
-router.post('/withdraw', [isAuth], require('./withdraw/post.js'))
+router.get('/', [isAuth], user)
+router.post('/deposit', [isAuth], deposit)
+router.post('/withdraw', [isAuth], withdraw)
 
-module.exports = router
+export default router

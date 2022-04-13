@@ -1,5 +1,8 @@
-const { format } = require('winston')
-const context = require('@/helpers/context.js')
+import winston from 'winston'
+
+import context from '#src/helpers/context.js'
+
+const { format } = winston
 
 const getContext = format((info) => {
   const store = context.getStore()
@@ -32,4 +35,4 @@ const isError = format((info) => {
   return info
 })
 
-module.exports = format.combine(getContext(), isHttpError(), isError())
+export default format.combine(getContext(), isHttpError(), isError())

@@ -1,5 +1,5 @@
-const HttpError = require('@/helpers/errors.js')
-const log = require('@/logger/index.js')
+import HttpError from '#src/helpers/errors.js'
+import log from '#src/logger/index.js'
 
 const handleLNMarketsRestError = (error) => {
   const { message, statusCode, code } = error
@@ -39,7 +39,8 @@ const parseHttpError = ({ status, code, message }) => {
   }
 }
 
-module.exports = (error, req, res, next) => {
+// eslint-disable-next-line no-unused-vars
+export default (error, req, res, next) => {
   let response
   log.error(error)
 
