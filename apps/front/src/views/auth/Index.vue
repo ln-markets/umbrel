@@ -59,7 +59,6 @@ export default {
     const password = ref('')
 
     const updateIcon = () => {
-      console.log(passwordType.value)
       if (passwordType.value === 'text') {
         passwordType.value = 'password'
       } else {
