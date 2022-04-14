@@ -6,6 +6,7 @@ import router from '@/router/index.js'
 
 import user from './user/index.js'
 import futures from './futures/index.js'
+import options from './options/index.js'
 import websockets from './websockets/index.js'
 
 import ModalDisclaimer from '@/modals/Disclaimer.vue'
@@ -63,5 +64,6 @@ export default createStore({
     user,
     futures,
     websockets,
+    options,
   },
 })

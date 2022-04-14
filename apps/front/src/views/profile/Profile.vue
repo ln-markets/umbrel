@@ -45,7 +45,7 @@ export default {
       total_withdraw_success_count: computed(
         () => store.state.user.total_withdraw_success_count
       ),
-      total_positions: computed(() => store.getters['user/positionCount']),
+      total_positions: computed(() => store.getters['user/positionCount'] + 0), //WIP
     }
   },
 }

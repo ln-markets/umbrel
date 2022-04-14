@@ -4,7 +4,7 @@
     <MarketData />
     <div class="infos-container">
       <Account />
-      <Positions />
+      <Risk />
       <Actions />
     </div>
   </div>
@@ -17,7 +17,7 @@ import { useStore } from 'vuex'
 import MarketData from './MarketData.vue'
 import Account from './Account.vue'
 import Profile from './Profile.vue'
-import Positions from './Positions.vue'
+import Risk from './Risk.vue'
 import Actions from './Actions.vue'
 
 export default {
@@ -26,7 +26,7 @@ export default {
     MarketData,
     Account,
     Profile,
-    Positions,
+    Risk,
     Actions,
   },
 
@@ -87,7 +87,7 @@ hr {
 }
 
 .category-row {
-  @apply flex flex-row justify-between text-xs px-2;
+  @apply text-center flex flex-row justify-between text-xs px-2;
   @apply sm:px-8 md:text-sm 2xl:text-base;
 }
 

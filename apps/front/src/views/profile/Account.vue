@@ -8,6 +8,18 @@
         ><b>{{ balance.toLocaleString('en') }}</b> sats</span
       >
     </div>
+    <div class="category-row">
+      <span>Margin available:</span>
+      <span
+        ><b>{{ margin_available.toLocaleString('en') }}</b> sats</span
+      >
+    </div>
+    <div class="category-row">
+      <span>Margin used:</span>
+      <span
+        ><b>{{ margin_used.toLocaleString('en') }}</b> sats</span
+      >
+    </div>
     <hr />
     <div class="category-row">
       <span>UID:</span>
@@ -27,7 +39,15 @@ export default {
     const store = useStore()
     return {
       uid: computed(() => store.state.user.uid),
-      balance: computed(() => store.state.user.balance),
+      margin_available: computed(() => store.state.user.balance),
+      balance: computed(
+        () =>
+          store.state.user.balance +
+          store.getters['user/usedMargin'] +
+          store.getters['futures/computePL'] +
+          store.getters['options/computePL']
+      ),
+      margin_used: computed(() => store.getters['user/usedMargin']), //WIP
     }
   },
 }
