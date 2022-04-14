@@ -1,5 +1,6 @@
 import api from '@/plugins/api.js'
 import market from './modules/market.js'
+import { calcFuturesPL } from '@/plugins/utils.js'
 
 const defaultState = () => {
   return {
@@ -29,9 +30,17 @@ export default {
     },
   },
   getters: {
-    computePL: (state) => {
-      return state.positions.reduce((a, b) => ({ pl: a.pl + b.pl }), { pl: 0 })
-        .pl
+    computePL: (state, getters, rootState) => {
+      const { bid, offer } = rootState.futures.market
+
+      let pl = 0
+      for (const position of state.positions) {
+        const lastPrice = position.side === 'b' ? bid : offer
+
+        pl += calcFuturesPL(position, lastPrice)
+      }
+
+      return pl
     },
   },
   modules: {
