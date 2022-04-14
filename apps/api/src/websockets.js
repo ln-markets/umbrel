@@ -28,7 +28,11 @@ export default async (server) => {
 
     await lnm.connect()
     await lnm.subscribe({
-      params: ['futures/market/index', 'futures/market/bid-offer'],
+      params: [
+        'futures/market/index',
+        'futures/market/bid-offer',
+        'options/market/volatility',
+      ],
     })
   } catch (error) {
     return Promise.reject(error)
