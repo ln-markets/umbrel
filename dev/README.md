@@ -20,6 +20,8 @@ You must launch LN Markets local env beforehand.
  $> pnpm local:start
 ```
 
+> Be sure to edit `dev/local/docker-compose.yml` to put your own dev domain in `LNMARKETS_API_HOSTNAME` for both `api` and `app` services.
+
 ## Install testnet env
 
 This environment is linked to the **testnet** version of LN Markets. **Meant for development use only**.
@@ -39,7 +41,6 @@ This command will output you a wallet address that you must use to get tBTC in o
 | https://coinfaucet.eu/en/btc-testnet/ |
 |  https://testnet-faucet.mempool.co/   |
 |    https://bitcoinfaucet.uo1.net/     |
-|                                       |
 
 You can check how much your wallet contains.
 
@@ -74,4 +75,3 @@ These following services ar now accessible on any web browser no matter which en
 | :-----: | :-----------------------: |
 |   API   | http://localhost:8001/api |
 |  Front  |   http://localhost:3000   |
-|         |                           |
