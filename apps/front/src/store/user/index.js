@@ -1,6 +1,6 @@
 import actions from './actions.js'
 
-const MAX_DEPOSIT_AMOUNT = 1000000
+const MAX_DEPOSIT_AMOUNT = 2000000
 
 const defaultState = () => {
   return {
@@ -10,10 +10,8 @@ const defaultState = () => {
     linkingpublickey: '',
     total_deposit_success_count: 0,
     total_withdraw_success_count: 0,
-    total_open_positions: 0,
-    total_running_positions: 0,
-    total_closed_positions: 0,
-    total_canceled_positions: 0,
+    total_running_margin: 0,
+    total_running_quantity: 0,
   }
 }
 
@@ -49,6 +47,14 @@ export default {
         state.total_closed_positions +
         state.total_canceled_positions
       )
+    },
+
+    totalQuantity: (state) => {
+      return state.total_running_quantity + state.total_open_quantity
+    },
+
+    usedMargin: (state) => {
+      return state.total_running_margin + state.total_open_margin
     },
   },
 }
