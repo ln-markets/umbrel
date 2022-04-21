@@ -1,6 +1,9 @@
 import api from '@/plugins/api.js'
 import market from './modules/market.js'
-
+import {
+  computeVanillaOptionMarketToMarket,
+  computeVanillaOptionDelta,
+} from '@ln-markets/maths'
 const defaultState = () => {
   return {
     options: [],
@@ -29,9 +32,32 @@ export default {
     },
   },
   getters: {
-    computePL: (state) => {
-      return state.options.reduce((a, b) => ({ pl: a.pl + b.pl }), { pl: 0 }).pl
-    }, //WIP
+    computePL: (state, getters, rootState) => {
+      let pl = 0
+      for (const position of state.options) {
+        pl += computeVanillaOptionMarketToMarket(
+          position,
+          rootState.futures.market
+        )
+      }
+
+      return pl
+    },
+
+    computeDelta: (state, getters, rootState) => {
+      let delta = 0
+      for (const position of state.options) {
+        delta += computeVanillaOptionDelta(position, rootState.futures.market)
+      }
+
+      return delta
+    },
+
+    usedMargin: (state) => {
+      return state.options.reduce((a, b) => ({ margin: a.margin + b.margin }), {
+        margin: 0,
+      }).margin
+    },
   },
   modules: {
     market,

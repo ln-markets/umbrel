@@ -100,9 +100,15 @@ export default {
       ),
       pl_futures: computed(() => store.getters['futures/computePL']),
       pl_options: computed(() => store.getters['options/computePL']),
-      quantity_global: computed(() => store.getters['user/totalQuantity']),
-      quantity_futures: computed(() => store.getters['user/totalQuantity']),
-      quantity_options: 0, //WIP
+      quantity_global: computed(() => store.getters['user/globalQuantity']),
+      quantity_futures: computed(
+        () =>
+          store.state.user.stats.futures.opened.quantity +
+          store.state.user.stats.futures.running.quantity
+      ),
+      quantity_options: computed(() =>
+        Math.round(store.getters['options/computeDelta'])
+      ),
     }
   },
 

@@ -1,6 +1,6 @@
 import api from '@/plugins/api.js'
 import market from './modules/market.js'
-import { calcFuturesPL } from '@/plugins/utils.js'
+import { computeFuturesPositionPl } from '@ln-markets/maths'
 
 const defaultState = () => {
   return {
@@ -31,13 +31,9 @@ export default {
   },
   getters: {
     computePL: (state, getters, rootState) => {
-      const { bid, offer } = rootState.futures.market
-
       let pl = 0
       for (const position of state.positions) {
-        const lastPrice = position.side === 'b' ? bid : offer
-
-        pl += calcFuturesPL(position, lastPrice)
+        pl += computeFuturesPositionPl(position, rootState.futures.market)
       }
 
       return pl

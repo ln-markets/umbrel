@@ -21,7 +21,8 @@
     "#src/*": "./src/*"
   },
   "dependencies": {
-    "@ln-markets/api": "^1.6.1",
+    "@ln-markets/api": "^1.7.0",
+    "@ln-markets/maths": "^1.0.1",
     "bech32": "^2.0.0",
     "bip32": "^3.0.1",
     "bip39": "^3.0.4",

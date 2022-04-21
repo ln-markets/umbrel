@@ -11,7 +11,7 @@
     <div class="category-row">
       <span>Margin available:</span>
       <span
-        ><b>{{ margin_available.toLocaleString('en') }}</b> sats</span
+        ><b>{{ available_balance.toLocaleString('en') }}</b> sats</span
       >
     </div>
     <div class="category-row">
@@ -37,17 +37,22 @@ export default {
 
   setup() {
     const store = useStore()
+    const margin_used = computed(() => store.getters['user/usedMargin']) // WIP
+    const available_balance = computed(
+      () => store.state.user.account.available_balance
+    )
+
     return {
-      uid: computed(() => store.state.user.uid),
-      margin_available: computed(() => store.state.user.balance),
+      available_balance,
+      margin_used,
+      uid: computed(() => store.state.user.account.uid),
       balance: computed(
         () =>
-          store.state.user.balance +
-          store.getters['user/usedMargin'] +
+          available_balance.value +
+          margin_used.value +
           store.getters['futures/computePL'] +
           store.getters['options/computePL']
       ),
-      margin_used: computed(() => store.getters['user/usedMargin']), //WIP
     }
   },
 }

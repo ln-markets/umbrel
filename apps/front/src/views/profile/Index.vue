@@ -35,6 +35,7 @@ export default {
 
     const getUser = () => store.dispatch('user/get')
     const getFutures = () => store.dispatch('futures/get')
+    const getOptions = () => store.dispatch('options/get')
     const showDisclaimer = () => store.dispatch('showDisclaimer')
     const updateProfileInterval = () =>
       store.dispatch('user/updateProfileInterval')
@@ -43,11 +44,13 @@ export default {
       showDisclaimer()
       await getUser()
       await getFutures()
+      await getOptions()
       updateProfileInterval()
     })
     return {
       getUser,
       getFutures,
+      getOptions,
     }
   },
 }
