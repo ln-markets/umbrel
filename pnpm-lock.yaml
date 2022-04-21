@@ -4,28 +4,28 @@ importers:
 
   .:
     specifiers:
-      '@commitlint/cli': ^15.0.0
-      '@commitlint/config-conventional': ^15.0.0
-      eslint: ^8.13.0
-      eslint-config-prettier: ^8.5.0
-      eslint-config-standard: ^16.0.3
-      eslint-formatter-gitlab: ^3.0.0
-      eslint-import-resolver-alias: ^1.1.2
-      eslint-plugin-eslint-comments: ^3.2.0
-      eslint-plugin-import: ^2.26.0
-      eslint-plugin-jsdoc: ^39.2.7
-      eslint-plugin-no-autofix: ^1.2.3
-      eslint-plugin-node: ^11.1.0
-      eslint-plugin-prefer-arrow: ^1.2.3
-      eslint-plugin-prettier: ^4.0.0
-      eslint-plugin-promise: ^5.2.0
-      eslint-plugin-sonarjs: ^0.13.0
-      eslint-plugin-tailwindcss: ^1.17.2
-      eslint-plugin-unicorn: ^42.0.0
-      eslint-plugin-vue: ^8.6.0
-      husky: ^7.0.4
-      lint-staged: ^12.4.0
-      nodemon: ^2.0.15
+      '@commitlint/cli': 15.0.0
+      '@commitlint/config-conventional': 15.0.0
+      eslint: 8.13.0
+      eslint-config-prettier: 8.5.0
+      eslint-config-standard: 16.0.3
+      eslint-formatter-gitlab: 3.0.0
+      eslint-import-resolver-alias: 1.1.2
+      eslint-plugin-eslint-comments: 3.2.0
+      eslint-plugin-import: 2.26.0
+      eslint-plugin-jsdoc: 39.2.7
+      eslint-plugin-no-autofix: 1.2.3
+      eslint-plugin-node: 11.1.0
+      eslint-plugin-prefer-arrow: 1.2.3
+      eslint-plugin-prettier: 4.0.0
+      eslint-plugin-promise: 5.2.0
+      eslint-plugin-sonarjs: 0.13.0
+      eslint-plugin-tailwindcss: 1.17.2
+      eslint-plugin-unicorn: 42.0.0
+      eslint-plugin-vue: 8.6.0
+      husky: 7.0.4
+      lint-staged: 12.4.0
+      nodemon: 2.0.15
       prettier: 2.2.1
     devDependencies:
       '@commitlint/cli': 15.0.0
@@ -54,28 +54,26 @@ importers:
 
   apps/api:
     specifiers:
-      '@ln-markets/api': ^1.7.0
-      '@ln-markets/maths': ^1.0.1
-      bech32: ^2.0.0
-      bip32: ^3.0.1
-      bip39: ^3.0.4
-      body-parser: ^1.20.0
-      cors: ^2.8.5
-      cuid: ^2.1.8
-      express: ^4.17.3
-      express-session: ^1.17.2
-      express-winston: ^4.2.0
-      helmet: ^4.6.0
+      '@ln-markets/api': 1.7.0
+      bech32: 2.0.0
+      bip32: 3.0.1
+      bip39: 3.0.4
+      body-parser: 1.20.0
+      cors: 2.8.5
+      cuid: 2.1.8
+      express: 4.17.3
+      express-session: 1.17.2
+      express-winston: 4.2.0
+      helmet: 4.6.0
       ln-service: 53.0.1
-      module-alias: ^2.2.2
-      node-fetch: ^3.2.3
-      secp256k1: ^4.0.3
-      tiny-secp256k1: ^2.2.1
-      winston: ^3.7.2
-      ws: ^8.5.0
+      module-alias: 2.2.2
+      node-fetch: 3.2.3
+      secp256k1: 4.0.3
+      tiny-secp256k1: 2.2.1
+      winston: 3.7.2
+      ws: 8.5.0
     dependencies:
       '@ln-markets/api': 1.7.0
-      '@ln-markets/maths': 1.0.1
       bech32: 2.0.0
       bip32: 3.0.1
       bip39: 3.0.4
@@ -96,24 +94,24 @@ importers:
 
   apps/front:
     specifiers:
-      '@fortawesome/fontawesome-svg-core': ^1.2.36
-      '@fortawesome/free-brands-svg-icons': ^5.15.4
-      '@fortawesome/free-regular-svg-icons': ^5.15.4
-      '@fortawesome/free-solid-svg-icons': ^5.15.4
-      '@fortawesome/vue-fontawesome': ^3.0.0-5
-      '@ln-markets/maths': ^1.0.2
-      '@vitejs/plugin-vue': ^1.10.2
-      '@vue/compiler-sfc': ^3.2.33
-      autoprefixer: ^10.4.4
-      mitt: ^3.0.0
-      postcss: ^8.4.12
-      tailwindcss: ^2.2.19
-      vite: ^2.9.5
-      vue: ^3.2.33
-      vue-final-modal: ^3.4.3
-      vue-router: ^4.0.14
-      vuex: ^4.0.2
-      vuex-persistedstate: ^4.1.0
+      '@fortawesome/fontawesome-svg-core': 1.2.36
+      '@fortawesome/free-brands-svg-icons': 5.15.4
+      '@fortawesome/free-regular-svg-icons': 5.15.4
+      '@fortawesome/free-solid-svg-icons': 5.15.4
+      '@fortawesome/vue-fontawesome': 3.0.0-5
+      '@ln-markets/maths': 1.0.2
+      '@vitejs/plugin-vue': 1.10.2
+      '@vue/compiler-sfc': 3.2.33
+      autoprefixer: 10.4.4
+      mitt: 3.0.0
+      postcss: 8.4.12
+      tailwindcss: 2.2.19
+      vite: 2.9.5
+      vue: 3.2.33
+      vue-final-modal: 3.4.3
+      vue-router: 4.0.14
+      vuex: 4.0.2
+      vuex-persistedstate: 4.1.0
     dependencies:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-brands-svg-icons': 5.15.4
@@ -450,11 +448,6 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-    dev: false
-
-  /@ln-markets/maths/1.0.1:
-    resolution: {integrity: sha512-WdVjcfUr2AhKf3qV7urD6NK5NDrOQXm7ax15hr0IHS/b5sFlsrTN1fZhdFLcumZlBG+XvrIJ96YNj/0Q4JaYvQ==}
-    engines: {node: '>=14', pnpm: '>=6'}
     dev: false
 
   /@ln-markets/maths/1.0.2:
