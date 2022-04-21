@@ -1,7 +1,7 @@
 import api from '@/plugins/api.js'
 import market from './modules/market.js'
 import {
-  computeVanillaOptionMarketToMarket,
+  computeVanillaOptionPl,
   computeVanillaOptionDelta,
 } from '@ln-markets/maths'
 const defaultState = () => {
@@ -35,10 +35,7 @@ export default {
     computePL: (state, getters, rootState) => {
       let pl = 0
       for (const position of state.options) {
-        pl += computeVanillaOptionMarketToMarket(
-          position,
-          rootState.futures.market
-        )
+        pl += computeVanillaOptionPl(position, rootState.futures.market)
       }
 
       return pl

@@ -89,7 +89,7 @@ export default {
       return (
         state.stats.futures.opened.quantity +
         state.stats.futures.running.quantity +
-        Math.round(rootGetters['options/computeDelta'])
+        rootGetters['options/computeDelta']
       )
     },
 

@@ -106,9 +106,7 @@ export default {
           store.state.user.stats.futures.opened.quantity +
           store.state.user.stats.futures.running.quantity
       ),
-      quantity_options: computed(() =>
-        Math.round(store.getters['options/computeDelta'])
-      ),
+      quantity_options: computed(() => store.getters['options/computeDelta']),
     }
   },
 
