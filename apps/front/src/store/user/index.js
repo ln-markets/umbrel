@@ -1,19 +1,52 @@
 import actions from './actions.js'
 
-const MAX_DEPOSIT_AMOUNT = 1000000
+const MAX_DEPOSIT_AMOUNT = 2000000
+
+// Check in api/src/routes/user/get.js in order to
+// understand the structure bellow. Some properties
+// got renamed for clarity.
 
 const defaultState = () => {
   return {
-    uid: '',
-    balance: 0,
-    username: '',
-    linkingpublickey: '',
-    total_deposit_success_count: 0,
-    total_withdraw_success_count: 0,
-    total_open_positions: 0,
-    total_running_positions: 0,
-    total_closed_positions: 0,
-    total_canceled_positions: 0,
+    account: {
+      uid: '',
+      available_balance: 0,
+      username: '',
+      linkingpublickey: '',
+    },
+    metrics: {
+      transactions: {
+        deposits: 0,
+        withdrawals: 0,
+      },
+      futures: {
+        opened: {
+          quantity: 0,
+          positions: 0,
+          margin: 0,
+        },
+        running: {
+          quantity: 0,
+          positions: 0,
+          margin: 0,
+        },
+        canceled: {
+          positions: 0,
+        },
+        closed: {
+          positions: 0,
+        },
+      },
+      options: {
+        running: {
+          quantity: 0,
+          positions: 0,
+        },
+        closed: {
+          positions: 0,
+        },
+      },
+    },
   }
 }
 
@@ -28,26 +61,43 @@ export default {
       }
     },
     WITHDRAW_SUCCESS(state, amount) {
-      state.balance = state.balance - parseInt(amount)
-      state.total_withdraw_success_count =
-        state.total_withdraw_success_count + 1
+      state.account.available_balance -= parseInt(amount)
+      state.metrics.transactions.withdrawals += 1
     },
     DEPOSIT_SUCCESS(state, amount) {
-      state.balance = state.balance + parseInt(amount)
-      state.total_deposit_success_count = state.total_deposit_success_count + 1
+      state.account.available_balance += parseInt(amount)
+      state.metrics.transactions.deposits += 1
     },
   },
   getters: {
     maxDeposit: (state) => {
-      return MAX_DEPOSIT_AMOUNT - state.balance
+      return MAX_DEPOSIT_AMOUNT - state.account.available_balance
     },
 
-    positionCount: (state) => {
+    positionsCount: (state) => {
       return (
-        state.total_open_positions +
-        state.total_running_positions +
-        state.total_closed_positions +
-        state.total_canceled_positions
+        state.metrics.futures.running.positions +
+        state.metrics.futures.opened.positions +
+        state.metrics.futures.closed.positions +
+        state.metrics.futures.canceled.positions +
+        state.metrics.options.running.positions +
+        state.metrics.options.closed.positions
+      )
+    },
+
+    globalQuantity: (state, getters, rootState, rootGetters) => {
+      return (
+        state.metrics.futures.opened.quantity +
+        state.metrics.futures.running.quantity +
+        rootGetters['options/computeDelta']
+      )
+    },
+
+    usedMargin: (state, getters, rootState, rootGetters) => {
+      return (
+        state.metrics.futures.opened.margin +
+        state.metrics.futures.running.margin +
+        rootGetters['options/usedMargin']
       )
     },
   },

@@ -5,7 +5,7 @@
     <div class="h-full">
       <lnm-umbrel-button
         class="block my-4 mx-auto mt-6 w-1/2 sm:w-1/3"
-        :disabled="!balance || balance < 1000"
+        :disabled="!available_balance || available_balance < 1000"
         @click="showModalWithdraw"
       >
         Withdraw
@@ -41,7 +41,9 @@ export default {
   setup() {
     const store = useStore()
     return {
-      balance: computed(() => store.state.user.balance),
+      available_balance: computed(
+        () => store.state.user.account.available_balance
+      ),
       maxDeposit: computed(() => store.getters['user/maxDeposit']),
       loginToLNMarkets: () => store.dispatch('user/loginToLNMarkets'),
     }

@@ -1,3 +1,3 @@
-const { AsyncLocalStorage } = require('async_hooks')
+import { AsyncLocalStorage } from 'node:async_hooks'
 
-module.exports = new AsyncLocalStorage()
+export default new AsyncLocalStorage()

@@ -1,29 +1,18 @@
-const { LNMarketsRest } = require('@ln-markets/api')
-const { createLnurlAuthPubkeyAndSignature } = require('@/helpers/lnurl.js')
+import { LNMarketsRest } from '@ln-markets/api'
+import fetch from 'node-fetch'
 
-const isTokenExpired = (token) => {
-  const convertBase64 = (input) => {
-    input = input.replace(/-/g, '+').replace(/_/g, '/')
+import { createLnurlAuthPubkeyAndSignature } from '#src/helpers/lnurl.js'
 
-    const pad = input.length % 4
+const isCookieExpired = (cookie) => {
+  const expiry = Date.parse(
+    cookie
+      .split('; ')
+      .find((property) => property.startsWith('Expires='))
+      .substring(8) // Lenght of Expires=, to only get the date.
+  )
+  const now = Date.now()
 
-    if (pad) {
-      if (pad === 1) {
-        throw new Error('InvalidLengthError')
-      }
-      input += new Array(5 - pad).join('=')
-    }
-
-    return input
-  }
-
-  const convertedString = convertBase64(token.split('.')[1])
-  const payload = Buffer.from(convertedString, 'base64').toString()
-
-  const { exp } = JSON.parse(payload)
-  const now = Math.floor(Date.now() / 1000)
-
-  return now >= exp
+  return now > expiry
 }
 
 const network = process.env.BITCOIN_NETWORK
@@ -34,20 +23,23 @@ const customHeaders = {
 
 class LNMarketsAPI extends LNMarketsRest {
   constructor() {
-    super({ network, customHeaders })
+    super({ network, customHeaders, skipApiKey: true })
 
-    this.doNotCheckToken = false
+    this.doNotCheckCookie = false
   }
 
   async beforeRequestApi(options) {
     try {
-      if (!this.doNotCheckToken) {
-        if (!this.token || isTokenExpired(this.token)) {
-          // Mutex du pauvre
-          this.doNotCheckToken = true
-          this.token = await this.createToken()
+      if (
+        !this.doNotCheckCookie &&
+        (!this.cookie || isCookieExpired(this.cookie))
+      ) {
+        await this.authenticate()
+      }
 
-          this.doNotCheckToken = false
+      if (options.credentials) {
+        options.headers = {
+          Cookie: this.cookie,
         }
       }
 
@@ -57,16 +49,50 @@ class LNMarketsAPI extends LNMarketsRest {
     }
   }
 
-  async createToken() {
+  async authenticate(opt = {}) {
     try {
-      const { lnurl } = await this.getLnurlAuth()
-      const params = await createLnurlAuthPubkeyAndSignature({ lnurl })
-      const { token } = await this.lnurlAuth(params)
-      return token
+      const { withJWT = false } = opt
+
+      this.doNotCheckCookie = true
+
+      const authResponse = await fetch(
+        'https://api.kibotrel.lnmarkets.dev/v1/lnurl/auth',
+        {
+          method: 'post',
+          body: JSON.stringify({}),
+          headers: { 'Content-Type': 'application/json' },
+          credentials: true,
+        }
+      )
+
+      const cookie = authResponse.headers.get('set-cookie')
+      const { lnurl } = await authResponse.json()
+
+      const params = new URLSearchParams(
+        await createLnurlAuthPubkeyAndSignature({ lnurl, withJWT })
+      )
+
+      const response = await fetch(
+        `https://${this.hostname}/${
+          this.version
+        }/lnurl/auth?${params.toString()}`,
+        {
+          credentials: true,
+          headers: { Cookie: cookie },
+        }
+      )
+
+      if (!withJWT) {
+        this.cookie = cookie
+      }
+
+      this.doNotCheckCookie = false
+
+      return response.json()
     } catch (error) {
       return Promise.reject(error)
     }
   }
 }
 
-module.exports = new LNMarketsAPI()
+export default new LNMarketsAPI()

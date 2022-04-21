@@ -10,11 +10,11 @@ x-logging: &default-logging
 networks:
   lnmarkets_backend:
     external: true
-  reverse_proxy:
+  lnmarkets_reverse_proxy:
     external: true
 
 volumes:
-  lnmarkets_infra_lnd_user:
+  lnmarkets_lnd_user:
     external: true
 
 services:
@@ -24,22 +24,20 @@ services:
     build:
       context: ../..
       dockerfile: ./apps/api/docker/Dockerfile.dev
-    dns: 172.81.1.253
     ports:
       - 8001:4242
     environment:
-      - NODE_TLS_REJECT_UNAUTHORIZED=0
       - NODE_ENV=development
       - LND_IP=lnmarkets_lnd_user
-      - LNMARKETS_API_HOSTNAME=api.lnmarkets.test
+      - LNMARKETS_API_HOSTNAME=api.kibotrel.lnmarkets.dev
       - BITCOIN_NETWORK=regtest
       - APP_PASSWORD=lnmarkets
     volumes:
       - ${PWD}/../../apps/api/src:/usr/src/apps/api/src:cached
-      - lnmarkets_infra_lnd_user:/lnd/:ro
+      - lnmarkets_lnd_user:/lnd/:ro
     networks:
       - lnmarkets_backend
-      - reverse_proxy
+      - lnmarkets_reverse_proxy
     logging: *default-logging
 
   front:
@@ -69,19 +67,17 @@ services:
     build:
       context: ../..
       dockerfile: ./Dockerfile
-    dns: 172.81.1.253
     user: root
     ports:
       - 4242:4242
     environment:
-      - NODE_TLS_REJECT_UNAUTHORIZED=0
       - LND_IP=lnmarkets_lnd_user
-      - LNMARKETS_API_HOSTNAME=api.lnmarkets.test
+      - LNMARKETS_API_HOSTNAME=api.kibotrel.lnmarkets.dev
       - BITCOIN_NETWORK=regtest
       - APP_PASSWORD=lnmarkets
     volumes:
-      - lnmarkets_infra_lnd_user:/lnd/:ro
+      - lnmarkets_lnd_user:/lnd/:ro
     networks:
       - lnmarkets_backend
-      - reverse_proxy
+      - lnmarkets_reverse_proxy
     logging: *default-logging

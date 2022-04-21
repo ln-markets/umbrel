@@ -1,4 +1,4 @@
-module.exports = class HttpError extends Error {
+export default class HttpError extends Error {
   constructor(status, code, message, details) {
     if (!status) throw new Error('An HTTP Error need a status')
     if (!code) throw new Error('An HTTP Error need a code')

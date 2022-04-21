@@ -6,21 +6,15 @@
     <div class="profile-stats">
       <ul>
         <li>
-          <span class="font-bold">{{
-            total_positions.toLocaleString('en')
-          }}</span>
+          <span class="font-bold">{{ positions.toLocaleString('en') }}</span>
           Positions
         </li>
         <li>
-          <span class="font-bold">{{
-            total_deposit_success_count.toLocaleString('en')
-          }}</span>
+          <span class="font-bold">{{ deposits.toLocaleString('en') }}</span>
           Deposits
         </li>
         <li>
-          <span class="font-bold">{{
-            total_withdraw_success_count.toLocaleString('en')
-          }}</span>
+          <span class="font-bold">{{ withdrawals.toLocaleString('en') }}</span>
           Withdrawals
         </li>
       </ul>
@@ -38,14 +32,12 @@ export default {
   setup() {
     const store = useStore()
     return {
-      username: computed(() => store.state.user.username),
-      total_deposit_success_count: computed(
-        () => store.state.user.total_deposit_success_count
+      username: computed(() => store.state.user.account.username),
+      deposits: computed(() => store.state.user.metrics.transactions.deposits),
+      withdrawals: computed(
+        () => store.state.user.metrics.transactions.withdrawals
       ),
-      total_withdraw_success_count: computed(
-        () => store.state.user.total_withdraw_success_count
-      ),
-      total_positions: computed(() => store.getters['user/positionCount']),
+      positions: computed(() => store.getters['user/positionsCount']),
     }
   },
 }

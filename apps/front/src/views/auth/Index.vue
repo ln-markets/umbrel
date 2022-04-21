@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full">
     <div class="m-auto">
-      <img class="mx-auto mb-8 sm:mb-16" :src="image" />
+      <img class="mx-auto mb-8 sm:mb-16 rounded-xl" :src="image" />
       <h1 class="text-xl sm:text-6xl font-bold text-center">
         Welcome to LN Markets
       </h1>
@@ -59,7 +59,6 @@ export default {
     const password = ref('')
 
     const updateIcon = () => {
-      console.log(passwordType.value)
       if (passwordType.value === 'text') {
         passwordType.value = 'password'
       } else {

@@ -1,11 +1,18 @@
-const express = require('express')
-const cuid = require('cuid')
-const routes = require('@/routes/index.js')
-const path = require('path')
-const bodyParser = require('body-parser')
-const helmet = require('helmet')
-const context = require('@/helpers/context.js')
-const HttpError = require('@/helpers/errors.js')
+import path from 'node:path'
+import process from 'node:process'
+
+import bodyParser from 'body-parser'
+import cuid from 'cuid'
+import express from 'express'
+import helmet from 'helmet'
+
+import context from '#src/helpers/context.js'
+import HttpError from '#src/helpers/errors.js'
+import cors from '#src/middleware/cors.js'
+import errors from '#src/middleware/errors.js'
+import logRequest from '#src/middleware/log-request.js'
+import session from '#src/middleware/session.js'
+import routes from '#src/routes/index.js'
 
 const setRequestId = (req, res, next) => {
   const requestId = cuid()
@@ -29,7 +36,7 @@ const asyncContext = (req, res, next) => {
   }
 }
 
-module.exports = () => {
+export default () => {
   const app = express()
 
   app.use(helmet.dnsPrefetchControl())
@@ -46,12 +53,12 @@ module.exports = () => {
   app.use(bodyParser.text())
   app.use(bodyParser.urlencoded({ extended: false }))
 
-  app.use(require('@/middleware/cors.js'))
+  app.use(cors)
 
   app.use(setRequestId)
   app.use(asyncContext)
 
-  app.use(require('@/middleware/session.js'))
+  app.use(session)
 
   app.get('/status', (req, res) => {
     res.status(200).end()
@@ -67,18 +74,19 @@ module.exports = () => {
     )
   })
 
-  app.use(require('@/middleware/log-request.js')(['password']))
+  app.use(logRequest(['password']))
 
   app.use('/api', routes)
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../public')))
+    // eslint-disable-next-line no-unused-vars
     app.get('*', (req, res, next) => {
       res.sendFile('index.html', { root: path.join(__dirname, '../public') })
     })
   }
 
-  app.use(require('@/middleware/errors.js'))
+  app.use(errors)
 
   return app
 }

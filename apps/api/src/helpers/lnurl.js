@@ -1,10 +1,12 @@
-const LND = require('@/classes/lnd.js')
-const bip39 = require('bip39')
-const { bech32 } = require('bech32')
-const secp256k1 = require('secp256k1')
-const BIP32Factory = require('bip32')
-const ecc = require('tiny-secp256k1')
-const { createHmac } = require('crypto')
+import { createHmac } from 'crypto'
+
+import { bech32 } from 'bech32'
+import BIP32Factory from 'bip32'
+import bip39 from 'bip39'
+import secp256k1 from 'secp256k1'
+import * as ecc from 'tiny-secp256k1'
+
+import LND from '#src/classes/lnd.js'
 
 const bip32 = BIP32Factory.default(ecc)
 
@@ -21,7 +23,10 @@ const arrayToHexString = (array) => {
   )
 }
 
-const createLnurlAuthPubkeyAndSignature = async ({ lnurl }) => {
+export const createLnurlAuthPubkeyAndSignature = async ({
+  lnurl,
+  withJWT = false,
+}) => {
   try {
     if (!lnurl) {
       throw new Error('lnurlNotFound')
@@ -70,8 +75,9 @@ const createLnurlAuthPubkeyAndSignature = async ({ lnurl }) => {
       throw new Error('ErrorGeneratingKey')
     }
 
-    // Generates url parameters to get a JWT to communicate with lnmarkets api
-    // by signing a message with the given lnurl.
+    // Generates url parameters to get a cookie to communicate
+    // with lnmarkets api and JWT for the "Trade" button redirection by
+    // signing a message with the given lnurl.
 
     const sign = secp256k1.ecdsaSign(
       hexStringToArray(k1),
@@ -87,11 +93,9 @@ const createLnurlAuthPubkeyAndSignature = async ({ lnurl }) => {
       hmac,
       sig: hexStringSignature,
       key: publicKey,
-      jwt: true,
+      jwt: withJWT,
     }
   } catch (error) {
     return Promise.reject(error)
   }
 }
-
-module.exports = { createLnurlAuthPubkeyAndSignature }

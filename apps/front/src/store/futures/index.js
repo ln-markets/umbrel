@@ -1,5 +1,6 @@
 import api from '@/plugins/api.js'
 import market from './modules/market.js'
+import { computeFuturesPositionPl } from '@ln-markets/maths'
 
 const defaultState = () => {
   return {
@@ -29,9 +30,13 @@ export default {
     },
   },
   getters: {
-    computePL: (state) => {
-      return state.positions.reduce((a, b) => ({ pl: a.pl + b.pl }), { pl: 0 })
-        .pl
+    computePL: (state, getters, rootState) => {
+      let pl = 0
+      for (const position of state.positions) {
+        pl += computeFuturesPositionPl(position, rootState.futures.market)
+      }
+
+      return pl
     },
   },
   modules: {

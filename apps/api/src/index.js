@@ -1,12 +1,10 @@
-const path = require('path')
-require('module-alias')(path.join(__dirname, '..'))
-const http = require('http')
+import http from 'node:http'
 
-const log = require('@/logger/index.js')
-const LND = require('@/classes/lnd.js')
-const WebsocketServer = require('./websockets.js')
+import LND from '#src/classes/lnd.js'
+import log from '#src/logger/index.js'
 
-const createExpressApp = require('./express.js')
+import createExpressApp from './express.js'
+import WebsocketServer from './websockets.js'
 
 process.on('unchaughtException', (error) => {
   log.error(error)
@@ -17,6 +15,7 @@ const main = async () => {
     await LND.connect()
     const app = createExpressApp()
     const server = http.createServer(app)
+
     WebsocketServer(server)
 
     server.on('error', (error) => {

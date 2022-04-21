@@ -12,6 +12,10 @@
       <span
         >Offer: <b>{{ withCommasAndFixed(offer) }}</b></span
       >
+      <span
+        >Volatility: <b>{{ withCommasAndFixed(volatility * 100) }}</b
+        >%</span
+      >
     </div>
   </div>
 </template>
@@ -29,6 +33,7 @@ export default {
       index: computed(() => store.getters['futures/market/fixedIndex']),
       bid: computed(() => store.state.futures.market.bid),
       offer: computed(() => store.state.futures.market.offer),
+      volatility: computed(() => store.state.options.market.volatility),
     }
   },
   methods: {

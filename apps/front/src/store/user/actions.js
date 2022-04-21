@@ -7,6 +7,7 @@ export default {
     setInterval(async () => {
       await dispatch('get')
       await dispatch('futures/get', undefined, { root: true })
+      await dispatch('options/get', undefined, { root: true })
     }, UPDATE_INTERVAL * 1000)
   },
 

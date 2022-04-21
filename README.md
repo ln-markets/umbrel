@@ -18,7 +18,7 @@
 
 As a regular user you must use the official integrated application through [Umbrel](https://github.com/getumbrel/umbrel). This way you could switch between mainnet and testnet network.
 
-![Umbrel](https://user-images.githubusercontent.com/45034541/140373859-66b7fa6d-5eeb-4fc5-8608-d139e8677267.png)
+![Umbrel](https://user-images.githubusercontent.com/45034541/163248849-69ba8bde-4654-4145-838f-9cdb4d04a4d5.png)
 
 You can find the information about how to build an app for Umbrel [here](https://github.com/getumbrel/umbrel/tree/b768bcf9e90e51cb6cc13ddb8a8a2a905ac2017b/apps)
 

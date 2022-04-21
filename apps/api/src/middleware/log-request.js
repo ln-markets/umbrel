@@ -1,6 +1,6 @@
-const log = require('@/logger/index.js')
+import log from '#src/logger/index.js'
 
-module.exports = (doNotLogParams) => {
+export default (doNotLogParams) => {
   return (req, res, next) => {
     const { path, method } = req
 
@@ -9,10 +9,11 @@ module.exports = (doNotLogParams) => {
 
     if (Object.keys(clone).length > 0) {
       for (const key in clone) {
-        if (process.env.NODE_ENV !== 'development') {
-          if (doNotLogParams.indexOf(key) > -1) {
-            delete clone[key]
-          }
+        if (
+          process.env.NODE_ENV !== 'development' &&
+          doNotLogParams.indexOf(key) > -1
+        ) {
+          delete clone[key]
         }
       }
 

@@ -1,14 +1,16 @@
-const fs = require('fs')
-const net = require('net')
+import { Buffer } from 'node:buffer'
+import fs from 'node:fs'
+import net from 'node:net'
+import process from 'node:process'
 
-const {
+import {
   authenticatedLndGrpc,
   getWalletInfo,
   diffieHellmanComputeSecret,
   decodePaymentRequest,
   pay,
   createInvoice,
-} = require('ln-service')
+} from 'ln-service'
 
 const isPortOpen = async (opt = {}) => {
   const { host, port } = opt
@@ -105,4 +107,4 @@ class LND {
   }
 }
 
-module.exports = new LND()
+export default new LND()
