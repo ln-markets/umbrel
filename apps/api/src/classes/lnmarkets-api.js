@@ -56,7 +56,7 @@ class LNMarketsAPI extends LNMarketsRest {
       this.doNotCheckCookie = true
 
       const authResponse = await fetch(
-        'https://api.kibotrel.lnmarkets.dev/v1/lnurl/auth',
+        `https://${this.hostname}/${this.version}/lnurl/auth`,
         {
           method: 'post',
           body: JSON.stringify({}),
