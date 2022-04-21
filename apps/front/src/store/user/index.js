@@ -14,7 +14,7 @@ const defaultState = () => {
       username: '',
       linkingpublickey: '',
     },
-    stats: {
+    metrics: {
       transactions: {
         deposits: 0,
         withdrawals: 0,
@@ -62,11 +62,11 @@ export default {
     },
     WITHDRAW_SUCCESS(state, amount) {
       state.account.available_balance -= parseInt(amount)
-      state.stats.transactions.withdrawals += 1
+      state.metrics.transactions.withdrawals += 1
     },
     DEPOSIT_SUCCESS(state, amount) {
       state.account.available_balance += parseInt(amount)
-      state.stats.transactions.deposits += 1
+      state.metrics.transactions.deposits += 1
     },
   },
   getters: {
@@ -76,27 +76,27 @@ export default {
 
     positionsCount: (state) => {
       return (
-        state.stats.futures.running.positions +
-        state.stats.futures.opened.positions +
-        state.stats.futures.closed.positions +
-        state.stats.futures.canceled.positions +
-        state.stats.options.running.positions +
-        state.stats.options.closed.positions
+        state.metrics.futures.running.positions +
+        state.metrics.futures.opened.positions +
+        state.metrics.futures.closed.positions +
+        state.metrics.futures.canceled.positions +
+        state.metrics.options.running.positions +
+        state.metrics.options.closed.positions
       )
     },
 
     globalQuantity: (state, getters, rootState, rootGetters) => {
       return (
-        state.stats.futures.opened.quantity +
-        state.stats.futures.running.quantity +
+        state.metrics.futures.opened.quantity +
+        state.metrics.futures.running.quantity +
         rootGetters['options/computeDelta']
       )
     },
 
     usedMargin: (state, getters, rootState, rootGetters) => {
       return (
-        state.stats.futures.opened.margin +
-        state.stats.futures.running.margin +
+        state.metrics.futures.opened.margin +
+        state.metrics.futures.running.margin +
         rootGetters['options/usedMargin']
       )
     },

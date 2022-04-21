@@ -103,8 +103,8 @@ export default {
       quantity_global: computed(() => store.getters['user/globalQuantity']),
       quantity_futures: computed(
         () =>
-          store.state.user.stats.futures.opened.quantity +
-          store.state.user.stats.futures.running.quantity
+          store.state.user.metrics.futures.opened.quantity +
+          store.state.user.metrics.futures.running.quantity
       ),
       quantity_options: computed(() => store.getters['options/computeDelta']),
     }

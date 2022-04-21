@@ -33,9 +33,9 @@ export default {
     const store = useStore()
     return {
       username: computed(() => store.state.user.account.username),
-      deposits: computed(() => store.state.user.stats.transactions.deposits),
+      deposits: computed(() => store.state.user.metrics.transactions.deposits),
       withdrawals: computed(
-        () => store.state.user.stats.transactions.withdrawals
+        () => store.state.user.metrics.transactions.withdrawals
       ),
       positions: computed(() => store.getters['user/positionsCount']),
     }

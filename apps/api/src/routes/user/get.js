@@ -31,7 +31,7 @@ export default async (req, res, next) => {
         username,
         linkingpublickey,
       },
-      stats: {
+      metrics: {
         transactions: {
           deposits: total_deposit_success_count,
           withdrawals: total_withdraw_success_count,
