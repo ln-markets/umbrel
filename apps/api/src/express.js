@@ -1,5 +1,6 @@
 import path from 'node:path'
 import process from 'node:process'
+import { URL } from 'node:url'
 
 import bodyParser from 'body-parser'
 import cuid from 'cuid'
@@ -13,6 +14,8 @@ import errors from '#src/middleware/errors.js'
 import logRequest from '#src/middleware/log-request.js'
 import session from '#src/middleware/session.js'
 import routes from '#src/routes/index.js'
+
+const __dirname = new URL('.', import.meta.url).pathname
 
 const setRequestId = (req, res, next) => {
   const requestId = cuid()
