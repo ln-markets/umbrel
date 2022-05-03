@@ -1,16 +1,16 @@
 <template>
   <div class="flex h-full">
     <div class="m-auto">
-      <img class="mx-auto mb-8 sm:mb-16 rounded-xl" :src="image" />
-      <h1 class="text-xl sm:text-6xl font-bold text-center">
+      <img class="mx-auto mb-8 rounded-xl sm:mb-16" :src="image" />
+      <h1 class="text-xl font-bold text-center sm:text-6xl">
         Welcome to LN Markets
       </h1>
       <p
-        class="mt-2 sm:mt-4 mb-4 sm:mb-8 text-sm sm:text-base text-center text-gray-400"
+        class="mt-2 mb-4 text-sm text-center text-gray-400 sm:mt-4 sm:mb-8 sm:text-base"
       >
         Enter the app password to access your dashboard
       </p>
-      <div class="m-4 mx-auto mt-8 sm:mt-2 w-64 sm:w-96">
+      <div class="m-4 mx-auto mt-8 w-64 sm:mt-2 sm:w-96">
         <div class="relative w-full">
           <input
             class="py-2 pr-8 pl-2"
@@ -25,7 +25,7 @@
 
           <span class="flex absolute inset-y-0 right-0 items-center pl-2 mr-2">
             <div
-              class="p-1 cursor-pointer focus:outline-none focus:shadow-outline"
+              class="p-1 focus:outline-none cursor-pointer focus:shadow-outline"
               @click="updateIcon"
             >
               <FontAwesomeIcon :icon="['far', icon]" />
@@ -34,7 +34,7 @@
         </div>
       </div>
       <lnm-umbrel-button
-        class="block mx-auto sm:mt-8 w-48"
+        class="block mx-auto w-48 sm:mt-8"
         :color="'green'"
         @click="login"
       >

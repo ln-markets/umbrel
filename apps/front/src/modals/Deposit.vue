@@ -2,7 +2,7 @@
   <lnm-umbrel-modal>
     <template #title>Deposit to LN Markets</template>
     <template #content>
-      <p class="mb-4 text-sm sm:text-base text-center">
+      <p class="mb-4 text-sm text-center sm:text-base">
         Select the amount to deposit using one of the options bellow.
       </p>
       <div class="flex justify-center">
@@ -21,7 +21,7 @@
         </lnm-umbrel-button>
         <input
           v-model="amount"
-          class="pr-2 w-1/2 sm:w-auto text-sm text-right rounded border-2 border-gray-300"
+          class="pr-2 w-1/2 text-sm text-right rounded border-2 border-gray-300 sm:w-auto"
           inputmode="decimal"
           placeholder="Amount"
           @keypress="isInteger($event)"

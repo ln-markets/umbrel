@@ -6,10 +6,8 @@ export default async (req, res, next) => {
   try {
     const { amount } = req.body
 
-    const {
-      depositId: id,
-      paymentRequest: request,
-    } = await LNMarketsAPI.deposit({ amount })
+    const { depositId: id, paymentRequest: request } =
+      await LNMarketsAPI.deposit({ amount })
 
     const { tokens } = await LND.decodePaymentRequest({ request })
 

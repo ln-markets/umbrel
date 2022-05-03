@@ -5,7 +5,7 @@
     content-class="flex overflow-x-auto flex-col w-5/6 lg:w-2/3 2xl:w-1/3 bg-white rounded-md shadow-2xl"
   >
     <div
-      class="p-4 text-2xl sm:text-3xl font-bold text-center bg-gray-100 border-b-2"
+      class="p-4 text-2xl font-bold text-center bg-gray-100 border-b-2 sm:text-3xl"
     >
       <slot name="title"></slot>
     </div>

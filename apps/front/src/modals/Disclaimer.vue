@@ -2,7 +2,7 @@
   <lnm-umbrel-modal>
     <template #title>Welcome to the Umbrel LN Markets app !</template>
     <template #content>
-      <p class="py-1 text-sm sm:text-base text-center">
+      <p class="py-1 text-sm text-center sm:text-base">
         Start managing your LN Markets account directly from this pannel!
       </p>
       <p class="text-xs text-center">
