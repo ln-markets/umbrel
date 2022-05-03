@@ -1,53 +1,43 @@
-FROM node:16.13.0-alpine3.14 as builder
+FROM node:16.15.0-alpine3.14 AS builder
 
-WORKDIR /usr/tmp
+WORKDIR /usr/lnmarkets
 
-RUN npm install -g pnpm@7 modclean
+RUN npm install -g pnpm@7
 
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 
-COPY apps/api/package.json /usr/tmp/apps/api/package.json
-
-COPY apps/front/package.json /usr/tmp/apps/front/package.json
-COPY apps/front/index.html /usr/tmp/apps/front/index.html
-COPY apps/front/vite.config.js /usr/tmp/apps/front/vite.config.js
-COPY apps/front/tailwind.config.js /usr/tmp/apps/front/tailwind.config.js
-COPY apps/front/postcss.config.js /usr/tmp/apps/front/postcss.config.js
+COPY apps/api/package.json /usr/lnmarkets/apps/api/package.json
+COPY apps/front/package.json /usr/lnmarkets/apps/front/package.json
 
 RUN pnpm config set store-dir .pnpm-store && \
-  pnpm install --frozen-lockfile --ignore-scripts && \
-  modclean --no-progress --run
+  pnpm install --frozen-lockfile --ignore-scripts
 
-COPY apps/front/public /usr/tmp/apps/front/public
-COPY apps/front/src /usr/tmp/apps/front/src
+COPY apps/front /usr/lnmarkets/apps/front
 
 RUN pnpm -C apps/front build
 
-# Remove dev packages
-RUN pnpm prune --prod || true
-
-FROM node:16.13.0-alpine3.14
+FROM node:16.15.0-alpine3.14
 
 ENV NODE_ENV="production"
 
-WORKDIR /usr/src
+WORKDIR /usr/lnmarkets
 
 RUN apk add --no-cache dumb-init
 
-COPY --chown=node:node --from=builder /usr/tmp/apps/front/dist /usr/src/apps/api/public
-COPY --chown=node:node --from=builder /usr/tmp/node_modules /usr/src/node_modules
-COPY --chown=node:node --from=builder /usr/tmp/apps/api/node_modules /usr/src/apps/api/node_modules
-COPY --chown=node:node ./apps/api/docker/healthcheck.js /usr/src/apps/api/healthcheck.js
-COPY --chown=node:node ./apps/api/src /usr/src/apps/api/src
-COPY --chown=node:node ./apps/api/package.json /usr/src/apps/api/package.json
+COPY --chown=node:node --from=builder /usr/lnmarkets/apps/front/dist /usr/lnmarkets/apps/api/public
+COPY --chown=node:node --from=builder /usr/lnmarkets/node_modules /usr/lnmarkets/node_modules
+COPY --chown=node:node --from=builder /usr/lnmarkets/apps/api/node_modules /usr/lnmarkets/apps/api/node_modules
+COPY --chown=node:node apps/api/src /usr/lnmarkets/apps/api/src
+COPY --chown=node:node apps/api/docker/healthcheck.js /usr/lnmarkets/apps/api/healthcheck.js
+COPY --chown=node:node apps/api/package.json /usr/lnmarkets/apps/api/package.json
 
 USER node
 
 EXPOSE 4242
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \  
-  CMD node /usr/src/apps/api/healthcheck.js
+  CMD node /usr/lnmarkets/apps/api/healthcheck.js
 
-WORKDIR /usr/src/apps/api
+WORKDIR /usr/lnmarkets/apps/api
 
 CMD ["dumb-init", "node", "src/index.js"]

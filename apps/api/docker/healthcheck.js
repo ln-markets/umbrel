@@ -1,6 +1,5 @@
-/* eslint-disable no-process-exit */
-
-const http = require('http')
+import http from 'http'
+import console from 'node:console'
 
 const options = {
   host: 'localhost',
@@ -19,7 +18,7 @@ const request = http.request(options, (res) => {
   }
 })
 
-request.on('error', function (error) {
+request.on('error', (error) => {
   console.error(error)
   console.log('ERROR')
   process.exit(1)
