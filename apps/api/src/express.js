@@ -2,7 +2,6 @@ import path from 'node:path'
 import process from 'node:process'
 import { URL } from 'node:url'
 
-import bodyParser from 'body-parser'
 import cuid from 'cuid'
 import express from 'express'
 import helmet from 'helmet'
@@ -52,9 +51,9 @@ export default () => {
   app.use(helmet.referrerPolicy())
   app.use(helmet.xssFilter())
 
-  app.use(bodyParser.json({ extended: false }))
-  app.use(bodyParser.text())
-  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(express.json())
+  app.use(express.text())
+  app.use(express.urlencoded({ extended: false }))
 
   app.use(cors)
 
