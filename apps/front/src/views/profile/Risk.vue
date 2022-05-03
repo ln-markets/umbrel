@@ -9,7 +9,7 @@
         <div class="category-row-risk">
           <span>Quantity:</span>
           <span class="block"
-            >$<b>{{ quantity_global.toLocaleString('en') }}</b></span
+            ><b>{{ quantity_global.toLocaleString('en') }}</b></span
           >
         </div>
         <div class="category-row-risk">
@@ -34,7 +34,7 @@
         <div class="category-row-risk">
           <span>Quantity:</span>
           <span class="block"
-            >$<b>{{ quantity_futures.toLocaleString('en') }}</b></span
+            ><b>{{ quantity_futures.toLocaleString('en') }}</b></span
           >
         </div>
         <div class="mb-1 category-row-risk">
@@ -59,7 +59,7 @@
         <div class="category-row-risk">
           <span>Delta:</span>
           <span class="block"
-            >$<b>{{ quantity_options.toLocaleString('en') }}</b></span
+            ><b>{{ quantity_options.toLocaleString('en') }}</b></span
           >
         </div>
         <div class="mb-1 category-row-risk">
