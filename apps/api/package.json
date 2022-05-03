@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "API for LN Markets app on Umbrel",
   "main": "index.js",
   "author": "Kilian Botrel",

@@ -50,7 +50,7 @@ export default {
         body: { amount },
       })
 
-      commit('WITHDRAW_SUCCESS', amount)
+      await dispatch('get')
 
       this.$vm.$notify({
         type: 'success',
