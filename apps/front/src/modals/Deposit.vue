@@ -3,7 +3,7 @@
     <template #title>Deposit to LN Markets</template>
     <template #content>
       <p class="mb-4 text-sm text-center sm:text-base">
-        Select the amount to deposit using one of the options bellow.
+        Select the amount to deposit using one of the options below.
       </p>
       <div class="flex justify-center">
         <lnm-umbrel-slider

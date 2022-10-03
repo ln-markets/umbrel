@@ -3,7 +3,7 @@
     <template #title>Withdraw from LN Markets</template>
     <template #content>
       <p class="mb-4 text-sm text-center sm:text-base">
-        Select the amount to withdraw using one of the options bellow.
+        Select the amount to withdraw using one of the options below.
       </p>
       <div class="flex justify-center">
         <lnm-umbrel-slider
@@ -60,7 +60,7 @@ export default {
     const store = useStore()
 
     return {
-      balance: computed(() => store.state.user.balance),
+      balance: computed(() => store.state.user.account.available_balance),
       amount: ref(1000),
       withdraw: (amount) => store.dispatch('user/withdraw', parseInt(amount)),
     }
