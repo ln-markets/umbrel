@@ -22,28 +22,25 @@ const defaultState = () => {
       futures: {
         opened: {
           quantity: 0,
-          positions: 0,
           margin: 0,
         },
         running: {
           quantity: 0,
-          positions: 0,
           margin: 0,
         },
-        canceled: {
-          positions: 0,
-        },
         closed: {
-          positions: 0,
+          quantity: 0,
+          margin: 0,
+          pl: 0,
         },
       },
       options: {
         running: {
           quantity: 0,
-          positions: 0,
         },
         closed: {
-          positions: 0,
+          pl: 0,
+          quantity: 0,
         },
       },
     },
@@ -62,27 +59,16 @@ export default {
     },
     WITHDRAW_SUCCESS(state, amount) {
       state.account.available_balance -= parseInt(amount)
-      state.metrics.transactions.withdrawals += 1
+      state.metrics.transactions.withdrawals += parseInt(amount)
     },
     DEPOSIT_SUCCESS(state, amount) {
       state.account.available_balance += parseInt(amount)
-      state.metrics.transactions.deposits += 1
+      state.metrics.transactions.deposits += parseInt(amount)
     },
   },
   getters: {
     maxDeposit: (state) => {
       return MAX_DEPOSIT_AMOUNT - state.account.available_balance
-    },
-
-    positionsCount: (state) => {
-      return (
-        state.metrics.futures.running.positions +
-        state.metrics.futures.opened.positions +
-        state.metrics.futures.closed.positions +
-        state.metrics.futures.canceled.positions +
-        state.metrics.options.running.positions +
-        state.metrics.options.closed.positions
-      )
     },
 
     globalQuantity: (state, getters, rootState, rootGetters) => {

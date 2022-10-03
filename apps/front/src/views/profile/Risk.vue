@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style scoped>
 .risk-container {
   @apply grid grid-cols-3 text-xs;
   @apply sm:text-sm 2xl:text-base;

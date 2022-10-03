@@ -56,7 +56,7 @@ export default {
 }
 </script>
 
-<style lang="postcss">
+<style>
 ul {
   @apply justify-around;
 }

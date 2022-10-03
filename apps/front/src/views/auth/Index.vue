@@ -70,7 +70,7 @@ export default {
       updateIcon,
       passwordType,
       password,
-      routeur: useRouter(),
+      router: useRouter(),
       loginToUmbrelApp: () =>
         store.dispatch('user/loginToUmbrel', password.value),
       icon: computed(() =>
@@ -84,14 +84,14 @@ export default {
     async login() {
       try {
         await this.loginToUmbrelApp()
-        this.routeur.push({ path: '/app' })
+        this.router.push({ path: '/app' })
       } catch (_) {}
     },
   },
 }
 </script>
 
-<style lang="postcss" scoped>
+<style scoped>
 input {
   @apply block rounded-md w-full text-sm text-black p-4 shadow-lg;
 }

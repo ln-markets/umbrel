@@ -3,19 +3,46 @@
     <div class="profile-details">
       <span class="font-bold">{{ username }}</span>
     </div>
+    <hr />
     <div class="profile-stats">
+      <p class="text-lg font-bold text-center">Futures</p>
       <ul>
         <li>
-          <span class="font-bold">{{ positions.toLocaleString('en') }}</span>
-          Positions
+          All time PL:
+          <span class="font-bold">{{ futuresPL.toLocaleString('en') }}</span>
+          sats
         </li>
         <li>
-          <span class="font-bold">{{ deposits.toLocaleString('en') }}</span>
-          Deposits
+          Traded quantity:
+          <span class="font-bold">{{
+            futuresQuantity.toLocaleString('en')
+          }}</span>
+          $
         </li>
         <li>
-          <span class="font-bold">{{ withdrawals.toLocaleString('en') }}</span>
-          Withdrawals
+          Traded margin:
+          <span class="font-bold">{{
+            futuresMargin.toLocaleString('en')
+          }}</span>
+          sats
+        </li>
+      </ul>
+    </div>
+    <hr />
+    <div class="profile-stats">
+      <p class="text-lg font-bold text-center">Options</p>
+      <ul>
+        <li>
+          All time PL:
+          <span class="font-bold">{{ optionsPL.toLocaleString('en') }}</span>
+          sats
+        </li>
+        <li>
+          All time quantity:
+          <span class="font-bold">{{
+            optionsQuantity.toLocaleString('en')
+          }}</span>
+          $
         </li>
       </ul>
     </div>
@@ -33,11 +60,23 @@ export default {
     const store = useStore()
     return {
       username: computed(() => store.state.user.account.username),
-      deposits: computed(() => store.state.user.metrics.transactions.deposits),
-      withdrawals: computed(
-        () => store.state.user.metrics.transactions.withdrawals
+      futuresQuantity: computed(
+        () =>
+          store.state.user.metrics.futures.running.quantity +
+          store.state.user.metrics.futures.closed.quantity
       ),
-      positions: computed(() => store.getters['user/positionsCount']),
+      futuresMargin: computed(
+        () =>
+          store.state.user.metrics.futures.running.margin +
+          store.state.user.metrics.futures.closed.margin
+      ),
+      futuresPL: computed(() => store.state.user.metrics.futures.closed.pl),
+      optionsPL: computed(() => store.state.user.metrics.options.closed.pl),
+      optionsQuantity: computed(
+        () =>
+          store.state.user.metrics.options.running.quantity +
+          store.state.user.metrics.options.closed.quantity
+      ),
     }
   },
 }

@@ -19,21 +19,21 @@ import { computed } from 'vue'
 export default {
   components: { NavFooter, NavHeader, ModalsContainer },
   setup() {
-    const routeur = useRouter()
+    const router = useRouter()
 
     const showHeaderAndFooter = computed(() => {
-      return routeur.currentRoute.value.path === '/app'
+      return router.currentRoute.value.path === '/app'
     })
 
     return {
-      routeur,
+      router,
       showHeaderAndFooter,
     }
   },
 }
 </script>
 
-<style lang="postcss" scoped>
+<style scoped>
 .app-container {
   @apply flex flex-col p-0 m-0 overflow-auto bg-gray-100 text-gray-800;
 }
