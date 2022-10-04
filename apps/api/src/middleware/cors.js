@@ -2,7 +2,12 @@ import cors from 'cors'
 
 export default cors({
   credentials: true,
-  exposedHeaders: ['Set-Cookie', 'Cookie', 'X-RequestId'],
+  exposedHeaders: [
+    'Set-Cookie',
+    'Cookie',
+    'X-RequestId',
+    'Access-Control-Allow-Origin',
+  ],
   origin: (origin, callback) => {
     if (
       !origin ||

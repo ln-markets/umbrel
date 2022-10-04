@@ -5,7 +5,7 @@ export default (req, res, next) => {
     throw new HttpError(
       401,
       'unauthorized',
-      'You do not have permission to reach this ressource.'
+      'You do not have permission to reach this resource.'
     )
   }
   next()
