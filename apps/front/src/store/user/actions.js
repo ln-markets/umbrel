@@ -39,6 +39,8 @@ export default {
 
       return { secret, id, payment }
     } catch (error) {
+      this.$vm.$vfm.hide('ModalDeposit')
+
       return dispatch('error', error, { root: true })
     }
   },
@@ -61,6 +63,8 @@ export default {
 
       return { secret, id, payment, fee }
     } catch (error) {
+      this.$vm.$vfm.hide('ModalWithdraw')
+
       return dispatch('error', error, { root: true })
     }
   },
