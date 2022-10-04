@@ -8,6 +8,7 @@ import helmet from 'helmet'
 
 import context from '#src/helpers/context.js'
 import HttpError from '#src/helpers/errors.js'
+import cors from '#src/middleware/cors.js'
 import errors from '#src/middleware/errors.js'
 import logRequest from '#src/middleware/log-request.js'
 import session from '#src/middleware/session.js'
@@ -53,6 +54,8 @@ export default () => {
   app.use(express.json())
   app.use(express.text())
   app.use(express.urlencoded({ extended: false }))
+
+  app.use(cors)
 
   app.use(setRequestId)
   app.use(asyncContext)
