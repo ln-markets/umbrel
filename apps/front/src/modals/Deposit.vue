@@ -51,7 +51,7 @@
           Deposit
         </lnm-umbrel-button>
       </div>
-      <div v-else>Process deposit...</div>
+      <div v-else>Processing deposit...</div>
     </template>
   </lnm-umbrel-modal>
 </template>

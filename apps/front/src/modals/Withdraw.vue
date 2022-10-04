@@ -49,7 +49,7 @@
           Withdraw
         </lnm-umbrel-button>
       </div>
-      <div v-else>Process withdrawal...</div>
+      <div v-else>Processing withdrawal...</div>
     </template>
   </lnm-umbrel-modal>
 </template>
