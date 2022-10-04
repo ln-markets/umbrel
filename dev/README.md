@@ -75,3 +75,25 @@ These following services ar now accessible on any web browser no matter which en
 | :-----: | :-----------------------: |
 |   API   | http://localhost:8001/api |
 |  Front  |   http://localhost:3000   |
+
+## Testing the app under real conditions
+
+To check if new version do not mess up with Umbrel follow these steps:
+
+1. Create a fork of [Umbrel apps repository](https://github.com/getumbrel/umbrel-apps).
+2. Get [latest LN Markets app image](https://github.com/ln-markets/umbrel/pkgs/container/umbrel) shasum.
+3. In your forked repository edit `lnmarkets/docker-compose.yml` and change the image by something like:
+  ```yml
+    ...
+    lnmarkets:
+      image: ghcr.io/ln-markets/umbrel:latest@sha256:[CHECKSUM]
+    ...
+  ```
+4. Log into Umbrel using `ssh umbrel@umbrel.local`
+5. Run the following commands:
+  ```shell
+    $> ./scripts/app stop lnmarkets
+    $> ./scripts/repo set "URL OF YOUR FORKED REPOSITORY"
+    $> ./scripts/repo checkout "URL OF YOUR FORKED REPOSITORY"
+  ```
+6. Finally go to [Umbrel app-store](http://umbrel.local/app-store/), click on the Update button and select LN Markets, you should be good to go!
