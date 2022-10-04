@@ -49,20 +49,27 @@ module.exports = {
     'no-var': 'error',
     'prefer-const': 'error',
     'prefer-arrow-callback': 'error',
-  
+
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
-  
+
     'sonarjs/no-duplicate-string': 'off',
     'sonarjs/cognitive-complexity': 'off',
     'sonarjs/no-identical-functions': 'off',
-  
+
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     'import/order': [
       'error',
       {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,
@@ -80,7 +87,7 @@ module.exports = {
         ],
       },
     ],
-  
+
     'no-autofix/jsdoc/require-jsdoc': 'off',
 
     'prefer-arrow/prefer-arrow-functions': [
@@ -94,6 +101,7 @@ module.exports = {
   },
   settings: {
     'import/core-modules': [
+      'node:perf_hooks',
       'node:process',
       'node:async_hooks',
       'node:console',
@@ -115,9 +123,7 @@ module.exports = {
     ],
     'import/resolver': {
       alias: {
-        map: [
-          ['#src', './src'],
-        ],
+        map: [['#src', './src']],
         extensions: ['.js', '.json'],
       },
     },
