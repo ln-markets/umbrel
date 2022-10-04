@@ -73,12 +73,4 @@ export default {
       return dispatch('error', error, { root: true })
     }
   },
-
-  async loginToUmbrel({ dispatch }, password) {
-    try {
-      await api.post({ path: '/api/login', body: { password } })
-    } catch (error) {
-      return dispatch('error', error, { root: true })
-    }
-  },
 }

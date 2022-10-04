@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Profile from '@/views/profile/Index.vue'
-import Authentication from '@/views/auth/Index.vue'
 
 const options = {
   history: createWebHistory(),
   routes: [
     {
       path: '/',
-      name: 'authentication',
-      component: Authentication,
+      redirect: () => {
+        return { path: '/app' }
+      },
     },
     {
       path: '/app',
@@ -18,8 +18,9 @@ const options = {
     },
     {
       path: '/:pathMatch(.*)*',
-      name: '404',
-      component: Authentication,
+      redirect: () => {
+        return { path: '/app' }
+      },
     },
   ],
 }

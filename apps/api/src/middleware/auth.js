@@ -1,7 +1,7 @@
 import HttpError from '#src/helpers/errors.js'
 
 export default (req, res, next) => {
-  if (!req.session || !req.session.auth) {
+  if (!req.session) {
     throw new HttpError(
       401,
       'unauthorized',
