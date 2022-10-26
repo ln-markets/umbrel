@@ -1,6 +1,6 @@
 {
   "name": "ln-markets-umbrel",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "LN Markets Umbrel App",
   "repository": "git@github.com:lnmarkets/umbrel.git",
   "author": "BOTREL Kilian <kilian.botrel@ito.am>",
