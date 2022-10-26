@@ -10,14 +10,14 @@
           <lnm-umbrel-slider
             class="w-1/2"
             :min="1000"
-            :max="balance"
+            :max="maxWithdraw"
             :value="parseInt(amount)"
-            :step="(balance - 1000) / 1000"
+            :step="(maxWithdraw - 1000) / 1000"
             @update="amount = parseInt($event)"
           />
         </div>
         <div class="flex justify-center mt-4">
-          <lnm-umbrel-button class="mr-4" @click="amount = balance">
+          <lnm-umbrel-button class="mr-4" @click="amount = maxWithdraw">
             Max
           </lnm-umbrel-button>
           <input
@@ -41,7 +41,7 @@
           class="w-1/3 sm:w-1/4"
           color="green"
           :disabled="
-            !amount || parseInt(amount) > balance || parseInt(amount) < 1000
+            !amount || parseInt(amount) > maxWithdraw || parseInt(amount) < 1000
           "
           :click="withdraw"
           :click-params="amount"
@@ -68,6 +68,7 @@ export default {
     const waiting = ref(false)
     return {
       balance: computed(() => store.state.user.account.available_balance),
+      maxWithdraw: computed(() => store.getters['user/maxWithdraw']),
       amount: ref(1000),
       waiting,
       withdraw: (amount) => {
