@@ -23,25 +23,25 @@
     "lnd:create-channel": "docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' openchannel '03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431'"
   },
   "devDependencies": {
-    "@commitlint/cli": "16.2.4",
-    "@commitlint/config-conventional": "16.2.4",
-    "eslint": "8.14.0",
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
+    "eslint": "8.26.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsdoc": "39.2.9",
+    "eslint-plugin-jsdoc": "39.3.25",
     "eslint-plugin-no-autofix": "1.2.3",
     "eslint-plugin-prefer-arrow": "1.2.3",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-promise": "6.0.0",
-    "eslint-plugin-sonarjs": "0.13.0",
-    "eslint-plugin-tailwindcss": "3.5.0",
-    "eslint-plugin-unicorn": "42.0.0",
-    "eslint-plugin-vue": "8.7.1",
-    "husky": "7.0.4",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-sonarjs": "0.16.0",
+    "eslint-plugin-tailwindcss": "3.6.2",
+    "eslint-plugin-unicorn": "44.0.2",
+    "eslint-plugin-vue": "9.6.0",
+    "husky": "8.0.1",
     "lint-staged": "12.4.1",
-    "nodemon": "2.0.16",
-    "prettier": "2.6.2"
+    "nodemon": "2.0.20",
+    "prettier": "2.7.1"
   }
 }
