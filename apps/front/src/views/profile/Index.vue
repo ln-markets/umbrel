@@ -37,11 +37,13 @@ export default {
     const getFutures = () => store.dispatch('futures/get')
     const getOptions = () => store.dispatch('options/get')
     const showDisclaimer = () => store.dispatch('showDisclaimer')
+    const getConfiguration = () => store.dispatch('getConfiguration')
     const updateProfileInterval = () =>
       store.dispatch('user/updateProfileInterval')
 
     onBeforeMount(async () => {
       showDisclaimer()
+      await getConfiguration()
       await getUser()
       await getFutures()
       await getOptions()

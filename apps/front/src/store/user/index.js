@@ -1,7 +1,5 @@
 import actions from './actions.js'
 
-const MAX_WITHDRAW_AMOUNT = 5000000
-
 // Check in api/src/routes/user/get.js in order to
 // understand the structure bellow. Some properties
 // got renamed for clarity.
@@ -67,8 +65,11 @@ export default {
     },
   },
   getters: {
-    maxWithdraw: (state) => {
-      return Math.min(MAX_WITHDRAW_AMOUNT, state.account.available_balance)
+    maxWithdraw: (state, getters, rootState) => {
+      return Math.min(
+        rootState.max_withdraw_amount,
+        state.account.available_balance
+      )
     },
     globalQuantity: (state, getters, rootState, rootGetters) => {
       return (
