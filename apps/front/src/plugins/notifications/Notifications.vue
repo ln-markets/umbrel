@@ -7,17 +7,26 @@
         :class="[style(n.type), clickToClose ? 'cursor-pointer' : '']"
         @click="click(n.id)"
       >
-        <FontAwesomeIcon
-          :icon="['fas', 'times']"
-          class="close-button"
-          @click="remove(n.id)"
+        <XMarkIcon
+          class="semi-bold close-button w-5 h-5 text-white"
+          aria-hidden="true"
         />
         <div class="container">
           <div class="icon" :class="[iconBg(n.type)]">
-            <FontAwesomeIcon
-              :icon="['fas', icon(n.type)]"
-              size="lg"
-              style="position: relative; top: calc(50% - 10px)"
+            <ExclamationCircleIcon
+              v-if="n.type === 'error'"
+              class="w-6 h-6"
+              style="position: relative; top: calc(50% - 12px)"
+            />
+            <CheckCircleIcon
+              v-if="n.type === 'success'"
+              class="w-6 h-6"
+              style="position: relative; top: calc(50% - 12px)"
+            />
+            <QuestionMarkCircleIcon
+              v-if="!/^error|success$/.test(n.type)"
+              class="w-6 h-6"
+              style="position: relative; top: calc(50% - 12px)"
             />
           </div>
           <div class="content" v-html="n.message" />
@@ -29,6 +38,12 @@
 
 <script>
 import events from './events.js'
+import {
+  XMarkIcon,
+  ExclamationCircleIcon,
+  CheckCircleIcon,
+  QuestionMarkCircleIcon,
+} from '@heroicons/vue/24/outline'
 
 export default {
   name: 'LnmNotifications',
@@ -50,6 +65,12 @@ export default {
       default: true,
     },
   },
+  components: {
+    XMarkIcon,
+    ExclamationCircleIcon,
+    CheckCircleIcon,
+    QuestionMarkCircleIcon,
+  },
 
   data() {
     return {
@@ -66,17 +87,6 @@ export default {
           return 'bg-green-500'
         } else {
           return 'bg-blue-500'
-        }
-      }
-    },
-    icon() {
-      return (type) => {
-        if (type === 'error') {
-          return 'exclamation-circle'
-        } else if (type === 'success') {
-          return 'check-circle'
-        } else {
-          return 'question-circle'
         }
       }
     },
@@ -187,7 +197,7 @@ export default {
 }
 
 .content {
-  @apply flex-grow float-left p-3;
+  @apply flex-grow float-left p-4;
 }
 
 .close-button {

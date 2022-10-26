@@ -4,22 +4,9 @@
     <template #content>
       <div v-if="!waiting">
         <p class="mb-4 text-sm text-center sm:text-base">
-          Select the amount to deposit using one of the options below.
+          Input the amount to deposit below (no limits).
         </p>
-        <div class="flex justify-center">
-          <lnm-umbrel-slider
-            class="w-1/2"
-            :min="1000"
-            :max="maxDeposit"
-            :value="parseInt(amount)"
-            :step="(maxDeposit - 1000) / 1000"
-            @update="amount = parseInt($event)"
-          />
-        </div>
         <div class="flex justify-center mt-4">
-          <lnm-umbrel-button class="mr-4" @click="amount = maxDeposit">
-            Max
-          </lnm-umbrel-button>
           <input
             v-model="amount"
             class="pr-2 w-1/2 text-sm text-right rounded border-2 border-gray-300 sm:w-auto"
@@ -42,9 +29,7 @@
         <lnm-umbrel-button
           class="w-1/3 sm:w-1/4"
           color="green"
-          :disabled="
-            !amount || parseInt(amount) > maxDeposit || parseInt(amount) < 1000
-          "
+          :disabled="!amount || parseInt(amount) < 1000"
           :click="deposit"
           :click-params="amount"
         >
@@ -57,7 +42,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { isInteger } from '@/plugins/utils.js'
 import Loader from '@/components/Loader.vue'
@@ -69,7 +54,6 @@ export default {
     const store = useStore()
     const waiting = ref(false)
     return {
-      maxDeposit: computed(() => store.getters['user/maxDeposit']),
       amount: ref(1000),
       waiting,
       deposit: (amount) => {

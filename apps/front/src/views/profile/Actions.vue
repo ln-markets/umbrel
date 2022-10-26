@@ -12,7 +12,6 @@
       </lnm-umbrel-button>
       <lnm-umbrel-button
         class="block my-4 mx-auto w-1/2 sm:w-1/3"
-        :disabled="maxDeposit < 1000"
         @click="showModalDeposit"
       >
         Deposit
@@ -44,7 +43,6 @@ export default {
       available_balance: computed(
         () => store.state.user.account.available_balance
       ),
-      maxDeposit: computed(() => store.getters['user/maxDeposit']),
       loginToLNMarkets: () => store.dispatch('user/loginToLNMarkets'),
     }
   },
