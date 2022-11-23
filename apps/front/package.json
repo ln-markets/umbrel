@@ -16,21 +16,21 @@
     "format": "prettier --write 'src/**/*.js'"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.12",
+    "@heroicons/vue": "^2.0.13",
     "@ln-markets/maths": "1.0.2",
     "mitt": "3.0.0",
-    "vue": "3.2.41",
-    "vue-final-modal": "3.4.3",
+    "vue": "3.2.45",
+    "vue-final-modal": "3.4.11",
     "vue-router": "4.1.6",
     "vuex": "4.1.0",
     "vuex-persistedstate": "4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "3.2.0",
-    "@vue/compiler-sfc": "3.2.41",
-    "autoprefixer": "10.4.12",
-    "postcss": "8.4.18",
-    "tailwindcss": "3.2.1",
-    "vite": "3.2.0"
+    "@vue/compiler-sfc": "3.2.45",
+    "autoprefixer": "10.4.13",
+    "postcss": "8.4.19",
+    "tailwindcss": "3.2.4",
+    "vite": "3.2.4"
   }
 }
