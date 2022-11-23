@@ -1,4 +1,4 @@
-import { createHmac } from 'crypto'
+import { createHash, createHmac } from 'node:crypto'
 
 import { bech32 } from 'bech32'
 import BIP32Factory from 'bip32'
@@ -23,7 +23,10 @@ const arrayToHexString = (array) => {
   )
 }
 
-export const createLnurlAuthPubkeyAndSignature = async ({
+const LNURL_CANONICAL_PHRASE =
+  'DO NOT EVER SIGN THIS TEXT WITH YOUR PRIVATE KEYS! IT IS ONLY USED FOR DERIVATION OF LNURL-AUTH HASHING-KEY, DISCLOSING ITS SIGNATURE WILL COMPROMISE YOUR LNURL-AUTH IDENTITY AND MAY LEAD TO LOSS OF FUNDS!'
+
+export const createLnurlAuthPubkeyAndSignatureDeprecated = async ({
   lnurl,
   withJWT = false,
 }) => {
@@ -97,5 +100,80 @@ export const createLnurlAuthPubkeyAndSignature = async ({
     }
   } catch (error) {
     return Promise.reject(error)
+  }
+}
+
+export const createLnurlAuthPubkeyAndSignature = async ({
+  lnurl,
+  withJWT = false,
+}) => {
+  try {
+    if (!lnurl) {
+      throw new Error('lnurlNotFound')
+    }
+
+    const { words } = bech32.decode(lnurl, 500)
+    const bytes = bech32.fromWords(words)
+    const string = Buffer.from(bytes).toString()
+
+    const url = new URL(string)
+    const { k1, hmac } = Object.fromEntries(url.searchParams)
+
+    if (!url.host || !k1) {
+      throw new Error('MissingInformations')
+    }
+
+    const { publicKey, privateKey } = await generateKeys(url.host)
+
+    const sign = secp256k1.ecdsaSign(
+      Buffer.from(k1, 'hex'),
+      Buffer.from(privateKey, 'hex')
+    )
+
+    const signature = secp256k1.signatureExport(sign.signature)
+    const hexStringSignature = arrayToHexString(signature)
+
+    return {
+      tag: 'login',
+      k1,
+      hmac,
+      sig: hexStringSignature,
+      key: publicKey,
+      jwt: withJWT,
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const generateKeys = async (host) => {
+  // Sign and sha256 a canonical message to generate a linking private key
+  const canonicHash = createHash('sha256')
+    .update(Buffer.from(LNURL_CANONICAL_PHRASE))
+    .digest('hex')
+
+  const { signature: canonicPhraseSignature } = await LND.signMessage({
+    message: canonicHash,
+  })
+  const hashingKey = createHash('sha256')
+    .update(Buffer.from(canonicPhraseSignature))
+    .digest('hex')
+  const linkingPrivateKey = createHmac('sha256', hashingKey)
+    .update(host)
+    .digest('hex')
+
+  // Check if linking private key generation was successful
+  if (!secp256k1.privateKeyVerify(Buffer.from(linkingPrivateKey, 'hex'))) {
+    throw 'privateKeyGenerationFailed'
+  }
+
+  // Generate linking public key so that we can verify the message signature afterwards
+  const linkingPublicKey = secp256k1.publicKeyCreate(
+    Buffer.from(linkingPrivateKey, 'hex')
+  )
+
+  return {
+    publicKey: Buffer.from(linkingPublicKey).toString('hex'),
+    privateKey: linkingPrivateKey,
   }
 }
