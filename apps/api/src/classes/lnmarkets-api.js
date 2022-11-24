@@ -135,6 +135,7 @@ class LNMarketsAPI extends LNMarketsRest {
         Buffer.from(migrationMessageHash, 'hex'),
         Buffer.from(privateKey, 'hex')
       )
+      const signatureDER = secp256k1.signatureExport(signature)
 
       await this.beforeRequestApi({
         method: 'POST',
@@ -142,7 +143,7 @@ class LNMarketsAPI extends LNMarketsRest {
         params: {
           k1,
           publicKey,
-          signature: Buffer.from(signature).toString('hex'),
+          signature: Buffer.from(signatureDER).toString('hex'),
         },
       })
     } catch (error) {
