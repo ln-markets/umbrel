@@ -149,7 +149,7 @@ export const createLnurlAuthPubkeyAndSignature = async ({
 export const generateKeys = async (host) => {
   // Sign and sha256 a canonical message to generate a linking private key
   const canonicHash = createHash('sha256')
-    .update(Buffer.from(LNURL_CANONICAL_PHRASE))
+    .update(Buffer.from(LNURL_CANONICAL_PHRASE), 'utf8')
     .digest('hex')
 
   const { signature: canonicPhraseSignature } = await LND.signMessage({
