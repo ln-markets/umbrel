@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row justify-between items-center p-4 w-full">
     <div class="flex flex-col text-xs">
-      <div>LN Markets App v1.2.5</div>
+      <div>LN Markets App v1.3.0</div>
     </div>
     <div class="flex flex-row justify-between items-center w-48">
       <a

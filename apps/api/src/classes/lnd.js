@@ -10,6 +10,7 @@ import {
   decodePaymentRequest,
   pay,
   createInvoice,
+  signMessage,
 } from 'ln-service'
 
 const isPortOpen = async (opt = {}) => {
@@ -104,6 +105,10 @@ class LND {
 
   createInvoice(params) {
     return createInvoice({ ...params, lnd: this.lnd })
+  }
+
+  signMessage(params) {
+    return signMessage({ ...params, lnd: this.lnd })
   }
 }
 

@@ -1,6 +1,7 @@
 import http from 'node:http'
 
 import LND from '#src/classes/lnd.js'
+import LNMarketsAPI from '#src/classes/lnmarkets-api.js'
 import log from '#src/logger/index.js'
 
 import createExpressApp from './express.js'
@@ -32,6 +33,8 @@ const main = async () => {
     const host = process.env.APP_HOST || '0.0.0.0'
 
     server.listen(port, host)
+
+    await LNMarketsAPI.migrateAccount()
   } catch (error) {
     log.crit(error)
     // eslint-disable-next-line no-process-exit

@@ -10,11 +10,11 @@ x-logging: &default-logging
 networks:
   lnmarkets_backend:
     external: true
-  lnmarkets_reverse_proxy:
+  lnmarkets_reverse-proxy:
     external: true
 
 volumes:
-  lnmarkets_lnd_user:
+  lnmarkets_lnd-user:
     external: true
 
 services:
@@ -28,16 +28,16 @@ services:
       - 8001:4242
     environment:
       - NODE_ENV=development
-      - LND_IP=lnmarkets_lnd_user
+      - LND_IP=lnd-user
       - LNMARKETS_API_HOSTNAME=api.kibotrel.lnmarkets.dev
       - BITCOIN_NETWORK=regtest
       - APP_PASSWORD=lnmarkets
     volumes:
       - ${PWD}/../../apps/api/src:/usr/src/apps/api/src:cached
-      - lnmarkets_lnd_user:/lnd/:ro
+      - lnmarkets_lnd-user:/lnd/:ro
     networks:
       - lnmarkets_backend
-      - lnmarkets_reverse_proxy
+      - lnmarkets_reverse-proxy
     logging: *default-logging
 
   front:
@@ -76,8 +76,8 @@ services:
       - BITCOIN_NETWORK=regtest
       - APP_PASSWORD=lnmarkets
     volumes:
-      - lnmarkets_lnd_user:/lnd/:ro
+      - lnmarkets_lnd-user:/lnd/:ro
     networks:
       - lnmarkets_backend
-      - lnmarkets_reverse_proxy
+      - lnmarkets_reverse-proxy
     logging: *default-logging

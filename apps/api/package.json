@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "API for LN Markets app on Umbrel",
   "main": "index.js",
   "author": "Kilian Botrel",
@@ -31,12 +31,12 @@
     "express-session": "1.17.3",
     "express-winston": "4.2.0",
     "helmet": "6.0.0",
-    "ln-service": "54.2.3",
-    "node-fetch": "3.2.10",
+    "ln-service": "54.3.1",
+    "node-fetch": "3.3.0",
     "secp256k1": "4.0.3",
     "tiny-secp256k1": "2.2.1",
     "winston": "3.8.2",
-    "ws": "8.6.0"
+    "ws": "8.11.0"
   },
   "nodemonConfig": {
     "exec": "node src/index.js",
