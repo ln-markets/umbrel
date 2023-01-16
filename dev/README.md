@@ -83,17 +83,23 @@ To check if new version do not mess up with Umbrel follow these steps:
 1. Create a fork of [Umbrel apps repository](https://github.com/getumbrel/umbrel-apps).
 2. Get [latest master LN Markets app image](https://github.com/ln-markets/umbrel/pkgs/container/umbrel) shasum.
 3. In your forked repository edit `lnmarkets/docker-compose.yml` and change the image by something like:
-  ```yml
-    ...
-    lnmarkets:
-      image: ghcr.io/ln-markets/umbrel:master@sha256:[CHECKSUM]
-    ...
-  ```
+
+```yml
+  ...
+  lnmarkets:
+    image: ghcr.io/ln-markets/umbrel:master@sha256:[CHECKSUM]
+  ...
+```
+
 4. Log into Umbrel using `ssh umbrel@umbrel.local`
 5. Run the following commands:
-  ```shell
-    $> ./scripts/app stop lnmarkets
-    $> ./scripts/repo set "URL OF YOUR FORKED REPOSITORY"
-    $> ./scripts/repo checkout "URL OF YOUR FORKED REPOSITORY"
-  ```
-6. Finally go to [Umbrel app-store](http://umbrel.local/app-store/), click on the Update button and select LN Markets, you should be good to go!
+
+```shell
+  $> ./scripts/app stop lnmarkets
+  $> ./scripts/repo checkout "https://url-of-the-repository.git"
+  $> ./scripts/app update lnmarkets
+```
+
+> ℹ️ If you made your update on a branch, the checkout command parameter will be `https://url-of-the-repository.git#branch-name`.
+
+6. You should have the latest version of LN Markets running on your Umbrel, ready to be tested!
