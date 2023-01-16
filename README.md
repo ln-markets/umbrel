@@ -5,7 +5,7 @@
     <img src="https://www.codefactor.io/repository/github/ln-markets/umbrel/badge" alt="CodeFactor" />
   </a>
   <a href="https://github.com/ln-markets/umbrel/releases" alt="Build">
-    <img src="https://img.shields.io/github/workflow/status/ln-markets/umbrel/build" />
+    <img src="https://img.shields.io/github/actions/workflow/status/ln-markets/umbrel/build.yml?branch=master">
   </a>
   <a href="https://github.com/ln-markets/umbrel/releases" alt="Release">
     <img src="https://img.shields.io/github/v/release/ln-markets/umbrel" />
