@@ -1,8 +1,8 @@
-FROM node:16.15.0-alpine3.14 AS builder
+FROM node:18.15.0-alpine3.16 AS builder
 
 WORKDIR /usr/lnmarkets
 
-RUN npm install -g pnpm@7
+RUN npm install -g pnpm@8
 
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 
@@ -16,7 +16,7 @@ COPY apps/front /usr/lnmarkets/apps/front
 
 RUN pnpm -C apps/front build
 
-FROM node:16.15.0-alpine3.14
+FROM node:18.15.0-alpine3.16
 
 ENV NODE_ENV="production"
 

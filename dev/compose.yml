@@ -1,4 +1,4 @@
-version: '3.7'
+name: lnmarkets-umbrel
 
 x-logging: &default-logging
   driver: 'json-file'
@@ -6,7 +6,6 @@ x-logging: &default-logging
     max-size: '5m'
     max-file: '10'
     tag: '{{.Name}}'
-
 networks:
   lnmarkets_backend:
     external: true
@@ -19,42 +18,40 @@ volumes:
 
 services:
   api:
-    container_name: lnmarkets_umbrel_local_api
     restart: 'on-failure'
     build:
-      context: ../..
+      context: ..
       dockerfile: ./apps/api/docker/Dockerfile.dev
     ports:
       - 8001:4242
     environment:
       - NODE_ENV=development
       - LND_IP=lnd-user
-      - LNMARKETS_API_HOSTNAME=api.kibotrel.lnmarkets.dev
+      - LNMARKETS_API_HOSTNAME=api.afa.lnmarkets.dev
       - BITCOIN_NETWORK=regtest
       - APP_PASSWORD=lnmarkets
     volumes:
-      - ${PWD}/../../apps/api/src:/usr/src/apps/api/src:cached
-      - lnmarkets_lnd-user:/lnd/:ro
+      - ../apps/api/src:/usr/src/apps/api/src
+      - lnmarkets_lnd-user:/lnd:ro
     networks:
       - lnmarkets_backend
       - lnmarkets_reverse-proxy
     logging: *default-logging
 
   front:
-    container_name: lnmarkets_umbrel_local_front
     restart: 'on-failure'
     build:
-      context: ../..
+      context: ..
       dockerfile: ./apps/front/docker/Dockerfile.dev
     ports:
       - 3000:3000
     volumes:
-      - ${PWD}/../../apps/front/src:/usr/src/apps/front/src
-      - ${PWD}/../../apps/front/public:/usr/src/apps/front/public
-      - ${PWD}/../../apps/front/postcss.config.js:/usr/src/apps/front/postcss.config.js
-      - ${PWD}/../../apps/front/tailwind.config.js:/usr/src/apps/front/tailwind.config.js
-      - ${PWD}/../../apps/front/vite.config.js:/usr/src/apps/front/vite.config.js
-      - ${PWD}/../../apps/front/index.html:/usr/src/apps/front/index.html
+      - ../apps/front/src:/usr/src/apps/front/src
+      - ../apps/front/public:/usr/src/apps/front/public
+      - ../apps/front/postcss.config.js:/usr/src/apps/front/postcss.config.js
+      - ../apps/front/tailwind.config.js:/usr/src/apps/front/tailwind.config.js
+      - ../apps/front/vite.config.js:/usr/src/apps/front/vite.config.js
+      - ../apps/front/index.html:/usr/src/apps/front/index.html
     environment:
       - NODE_ENV=development
     logging: *default-logging
@@ -62,10 +59,9 @@ services:
   # This service is used to test the production container
   # We run as root to avoid permissions issues in the lnd volume
   app:
-    container_name: lnmarkets_umbrel_local
     restart: 'on-failure'
     build:
-      context: ../..
+      context: ..
       dockerfile: ./Dockerfile
     user: root
     ports:
@@ -76,7 +72,7 @@ services:
       - BITCOIN_NETWORK=regtest
       - APP_PASSWORD=lnmarkets
     volumes:
-      - lnmarkets_lnd-user:/lnd/:ro
+      - lnmarkets_lnd-user:/lnd:ro
     networks:
       - lnmarkets_backend
       - lnmarkets_reverse-proxy

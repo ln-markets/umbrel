@@ -1,5 +1,5 @@
 {
-  "name": "ln-markets-umbrel",
+  "name": "@ln-markets/umbrel",
   "version": "1.3.0",
   "description": "LN Markets Umbrel App",
   "repository": "git@github.com:lnmarkets/umbrel.git",
@@ -12,15 +12,8 @@
   "scripts": {
     "prepare": "husky install",
     "format": "prettier --write 'apps/**/*.{js,vue}'",
-    "local:start": "cd dev/local && ./scripts/start.sh",
-    "local:stop": "cd dev/local && ./scripts/stop.sh",
-    "testnet:init": "cd dev/testnet && ./scripts/init.sh",
-    "testnet:start": "cd dev/testnet && ./scripts/start.sh",
-    "testnet:stop": "cd dev/testnet && ./scripts/stop.sh",
-    "testnet:restart-api": "cd dev/testnet && docker-compose restart api",
-    "lnd:balance": "docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' walletbalance",
-    "lnd:unlock": "docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' unlock",
-    "lnd:create-channel": "docker exec --user lnd -it lnmarkets_umbrel_testnet_lnd lncli --network='testnet' openchannel '03bae2db4b57738c1ec1ffa1c5e5a4423968cc592b3b39cddf7d495e72919d6431'"
+    "start": "cd dev && docker compose up --build -d",
+    "stop": "cd dev && docker compose down"
   },
   "devDependencies": {
     "@commitlint/cli": "17.4.2",

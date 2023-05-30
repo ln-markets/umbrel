@@ -29,8 +29,8 @@ export default async (server) => {
     await lnm.connect()
     await lnm.subscribe({
       params: [
-        'futures/market/index',
-        'futures/market/bid-offer',
+        'futures/btc_usd/index',
+        'futures/btc_usd/lastPrice',
         'options/market/volatility',
       ],
     })
