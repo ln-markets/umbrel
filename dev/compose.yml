@@ -9,8 +9,6 @@ x-logging: &default-logging
 networks:
   lnmarkets_backend:
     external: true
-  lnmarkets_reverse-proxy:
-    external: true
 
 volumes:
   lnmarkets_lnd-user:
@@ -37,7 +35,6 @@ services:
       - lnmarkets_lnd-user:/lnd:ro
     networks:
       - lnmarkets_backend
-      - lnmarkets_reverse-proxy
     logging: *default-logging
 
   front:
@@ -78,5 +75,4 @@ services:
       - lnmarkets_lnd-user:/lnd:ro
     networks:
       - lnmarkets_backend
-      - lnmarkets_reverse-proxy
     logging: *default-logging
