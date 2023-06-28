@@ -21,17 +21,19 @@ services:
     restart: 'on-failure'
     build:
       context: ..
-      dockerfile: ./apps/api/docker/Dockerfile.dev
+      dockerfile: dev/Dockerfile
+      args:
+        PACKAGE: apps/api
     ports:
       - 8001:4242
     environment:
       - NODE_ENV=development
       - LND_IP=lnd-user
-      - LNMARKETS_API_HOSTNAME=api.afa.lnmarkets.dev
+      - LNM_HOSTNAME=afa.lnmarkets.dev
       - BITCOIN_NETWORK=regtest
       - APP_PASSWORD=lnmarkets
     volumes:
-      - ../apps/api/src:/usr/src/apps/api/src
+      - ../apps/api/src:/home/lnmarkets/apps/api/src
       - lnmarkets_lnd-user:/lnd:ro
     networks:
       - lnmarkets_backend
@@ -42,16 +44,18 @@ services:
     restart: 'on-failure'
     build:
       context: ..
-      dockerfile: ./apps/front/docker/Dockerfile.dev
+      dockerfile: dev/Dockerfile
+      args:
+        PACKAGE: apps/front
     ports:
       - 3000:3000
     volumes:
-      - ../apps/front/src:/usr/src/apps/front/src
-      - ../apps/front/public:/usr/src/apps/front/public
-      - ../apps/front/postcss.config.js:/usr/src/apps/front/postcss.config.js
-      - ../apps/front/tailwind.config.js:/usr/src/apps/front/tailwind.config.js
-      - ../apps/front/vite.config.js:/usr/src/apps/front/vite.config.js
-      - ../apps/front/index.html:/usr/src/apps/front/index.html
+      - ../apps/front/src:/home/lnmarkets/apps/front/src
+      - ../apps/front/public:/home/lnmarkets/apps/front/public
+      - ../apps/front/postcss.config.js:/home/lnmarkets/apps/front/postcss.config.js
+      - ../apps/front/tailwind.config.js:/home/lnmarkets/apps/front/tailwind.config.js
+      - ../apps/front/vite.config.js:/home/lnmarkets/apps/front/vite.config.js
+      - ../apps/front/index.html:/home/lnmarkets/apps/front/index.html
     environment:
       - NODE_ENV=development
     logging: *default-logging
@@ -67,10 +71,9 @@ services:
     ports:
       - 4242:4242
     environment:
-      - LND_IP=lnmarkets_lnd_user
-      - LNMARKETS_API_HOSTNAME=api.kibotrel.lnmarkets.dev
+      - LND_IP=lnd-user
+      - LNM_HOSTNAME=afa.lnmarkets.dev
       - BITCOIN_NETWORK=regtest
-      - APP_PASSWORD=lnmarkets
     volumes:
       - lnmarkets_lnd-user:/lnd:ro
     networks:

@@ -1,43 +1,38 @@
-FROM node:18.15.0-alpine3.16 AS builder
+FROM node:18.16.1-alpine3.16 AS builder
 
-WORKDIR /usr/lnmarkets
+WORKDIR /home/lnmarkets
 
 RUN npm install -g pnpm@8
 
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY pnpm-lock.yaml ./
 
-COPY apps/api/package.json /usr/lnmarkets/apps/api/package.json
-COPY apps/front/package.json /usr/lnmarkets/apps/front/package.json
+RUN pnpm fetch
 
-RUN pnpm config set store-dir .pnpm-store && \
-  pnpm install --frozen-lockfile --ignore-scripts
+COPY package.json pnpm-workspace.yaml  ./
+COPY apps /home/lnmarkets/apps
 
-COPY apps/front /usr/lnmarkets/apps/front
+RUN pnpm install --frozen-lockfile --recursive --offline --ignore-scripts
 
 RUN pnpm -C apps/front build
 
-FROM node:18.15.0-alpine3.16
+RUN pnpm --filter="@ln-markets/umbrel-api" --prod --no-optional deploy /tmp
+
+FROM node:18.16.1-alpine3.16
 
 ENV NODE_ENV="production"
 
-WORKDIR /usr/lnmarkets
+WORKDIR /home/lnmarkets
 
-RUN apk add --no-cache dumb-init
+RUN apk add dumb-init
 
-COPY --chown=node:node --from=builder /usr/lnmarkets/apps/front/dist /usr/lnmarkets/apps/api/public
-COPY --chown=node:node --from=builder /usr/lnmarkets/node_modules /usr/lnmarkets/node_modules
-COPY --chown=node:node --from=builder /usr/lnmarkets/apps/api/node_modules /usr/lnmarkets/apps/api/node_modules
-COPY --chown=node:node apps/api/src /usr/lnmarkets/apps/api/src
-COPY --chown=node:node apps/api/docker/healthcheck.js /usr/lnmarkets/apps/api/healthcheck.js
-COPY --chown=node:node apps/api/package.json /usr/lnmarkets/apps/api/package.json
+COPY --chown=node:node --from=builder /tmp /home/lnmarkets
+COPY --chown=node:node --from=builder /home/lnmarkets/apps/front/dist /home/lnmarkets/public
 
 USER node
 
 EXPOSE 4242
 
 HEALTHCHECK --interval=12s --timeout=12s --start-period=15s \  
-  CMD node /usr/lnmarkets/apps/api/healthcheck.js
-
-WORKDIR /usr/lnmarkets/apps/api
+  CMD nc -zv localhost 4242 || exit 1
 
 CMD ["dumb-init", "node", "src/index.js"]

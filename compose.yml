@@ -16,7 +16,7 @@ services:
       APP_HIDDEN_SERVICE: $APP_HIDDEN_SERVICE
       APP_DOMAIN: $APP_DOMAIN
       APP_PASSWORD: $APP_PASSWORD
-      API_PORT: $APP_LNMARKETS_PORT
+      APP_LNMARKETS_PORT: $APP_LNMARKETS_PORT
     networks:
       default:
         ipv4_address: $APP_LNMARKETS_IP

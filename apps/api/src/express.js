@@ -2,83 +2,97 @@ import path from 'node:path'
 import process from 'node:process'
 import { URL } from 'node:url'
 
-import cuid from 'cuid'
+import { createId } from '@paralleldrive/cuid2'
+import cors from 'cors'
 import express from 'express'
-import helmet from 'helmet'
+import {
+  dnsPrefetchControl,
+  expectCt,
+  frameguard,
+  hidePoweredBy,
+  ieNoOpen,
+  permittedCrossDomainPolicies,
+  referrerPolicy,
+  xssFilter,
+  noSniff,
+} from 'helmet'
 
-import context from '#src/helpers/context.js'
-import HttpError from '#src/helpers/errors.js'
-import cors from '#src/middleware/cors.js'
-import errors from '#src/middleware/errors.js'
-import logRequest from '#src/middleware/log-request.js'
-import session from '#src/middleware/session.js'
-import routes from '#src/routes/index.js'
+import { correctLnurlAuthMethod } from './services/correct.js'
+import { deprecatedLnurlAuth } from './services/deprecated.js'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
-const setRequestId = (req, res, next) => {
-  const requestId = cuid()
-  res.set('X-RequestId', requestId)
-  req.id = requestId
+const setRequestIdMiddleware = (req, res, next) => {
+  req.id = createId()
   next()
 }
 
-const asyncContext = (req, res, next) => {
-  try {
-    const store = new Map()
+const corMiddleware = cors({
+  exposedHeaders: [
+    'Set-Cookie',
+    'Cookie',
+    'X-RequestId',
+    'Access-Control-Allow-Origin',
+  ],
+  origin: (origin, callback) => {
+    callback(null, true)
+  },
+})
 
-    context.run(store, () => {
-      store.set('reqid', req.id)
-      store.set('ip', req.ip)
+const logMiddleware = (req, res, next) => {
+  const { path, method, ip, id } = req
 
-      next()
-    })
-  } catch (error) {
-    next(error)
-  }
+  console.log(
+    `time=${new Date().toISOString()} id=${id} ip=${ip} method=${method} path=${path}`
+  )
+
+  next()
 }
 
-export default () => {
+// eslint-disable-next-line no-unused-vars
+const logErrorMiddleware = (error, req, res, next) => {
+  console.error(error)
+  res.status(500).send(error.message)
+}
+
+export const createExpressApp = () => {
   const app = express()
 
-  app.use(helmet.dnsPrefetchControl())
-  app.use(helmet.expectCt())
-  app.use(helmet.frameguard())
-  app.use(helmet.hidePoweredBy())
-  app.use(helmet.ieNoOpen())
-  app.use(helmet.noSniff())
-  app.use(helmet.permittedCrossDomainPolicies())
-  app.use(helmet.referrerPolicy())
-  app.use(helmet.xssFilter())
+  app.use(dnsPrefetchControl())
+  app.use(expectCt())
+  app.use(frameguard())
+  app.use(hidePoweredBy())
+  app.use(ieNoOpen())
+  app.use(noSniff())
+  app.use(permittedCrossDomainPolicies())
+  app.use(referrerPolicy())
+  app.use(xssFilter())
 
   app.use(express.json())
   app.use(express.text())
   app.use(express.urlencoded({ extended: false }))
 
-  app.use(cors)
+  app.use(logMiddleware)
+  app.use(setRequestIdMiddleware)
+  app.use(corMiddleware)
 
-  app.use(setRequestId)
-  app.use(asyncContext)
-
-  app.use(session)
-
-  app.get('/status', (req, res) => {
-    res.status(200).end()
+  app.get('/correct', async (req, res, next) => {
+    try {
+      const result = await correctLnurlAuthMethod()
+      res.json(result)
+    } catch (error) {
+      next(error)
+    }
   })
 
-  app.get('/401', (req, res, next) => {
-    next(
-      new HttpError(
-        401,
-        'unauthorized',
-        'You do not have permission to reach this ressource.'
-      )
-    )
+  app.get('/deprecated', async (req, res, next) => {
+    try {
+      const result = await deprecatedLnurlAuth()
+      res.json(result)
+    } catch (error) {
+      next(error)
+    }
   })
-
-  app.use(logRequest(['password']))
-
-  app.use('/api', routes)
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../public')))
@@ -88,7 +102,7 @@ export default () => {
     })
   }
 
-  app.use(errors)
+  app.use(logErrorMiddleware)
 
   return app
 }

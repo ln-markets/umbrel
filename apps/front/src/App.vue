@@ -1,46 +1,55 @@
 <template>
-  <div class="app-container" :class="!showHeaderAndFooter ? 'h-full' : ''">
-    <nav-header v-if="showHeaderAndFooter" />
-    <router-view />
-    <nav-footer v-if="showHeaderAndFooter" />
+  <div class="m-0 flex h-full flex-col overflow-auto bg-gray-800 text-gray-200">
+    <NavHeader />
+
+    
+
+    <div class="flex grow flex-col items-center justify-center space-y-10">
+  
+          <div class="rounded-md bg-slate-900 p-4">
+          <div class="flex">
+            <div class="shrink-0">
+              <InformationCircleIcon
+                class="h-5 w-5 text-blue-400"
+                aria-hidden="true"
+              />
+            </div>
+            <div
+              class="ml-3 flex flex-1 flex-col space-y-1 text-sm text-gray-200 md:flex md:justify-between"
+            >
+              <p>Full revamp of LN Markets App in progress!</p>
+              <p>Meanwhile, please access your account clicking below</p>
+            </div>
+          </div>
+        </div>
+      <UmbrelButton :icon="ArrowRightOnRectangleIcon" :click="correct">
+        Login with Umbrel
+      </UmbrelButton>
+    </div>
+
+    
+    
+    <NavFooter />
   </div>
-  <lnm-umbrel-notifications />
-  <modals-container />
 </template>
 
-<script>
-import { useRouter } from 'vue-router'
+<script setup>
+import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline'
 
-import NavFooter from '@/layout/Footer.vue'
-import NavHeader from '@/layout/Header.vue'
-import { ModalsContainer } from 'vue-final-modal'
-import { computed } from 'vue'
+import { InformationCircleIcon } from '@heroicons/vue/20/solid'
+import { fetchWrapper } from './utils.js'
 
-export default {
-  components: { NavFooter, NavHeader, ModalsContainer },
-  setup() {
-    const router = useRouter()
+import NavFooter from './Footer.vue'
+import NavHeader from './Header.vue'
+import UmbrelButton from './Button.vue'
 
-    const showHeaderAndFooter = computed(() => {
-      return router.currentRoute.value.path === '/app'
-    })
 
-    return {
-      router,
-      showHeaderAndFooter,
-    }
-  },
-}
-</script>
-
-<style scoped>
-.app-container {
-  @apply flex flex-col p-0 m-0 overflow-auto bg-gray-100 text-gray-800;
-}
-
-@media screen and (min-height: 740px), screen and (min-width: 1280px) {
-  .app-container {
-    height: 100%;
+const correct = async () => {
+  try {
+    const { hostname, token } = await fetchWrapper({ path: '/correct' })
+    window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
+  } catch (error) {
+    console.error(error)
   }
 }
-</style>
+</script>

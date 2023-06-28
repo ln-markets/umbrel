@@ -1,45 +1,23 @@
-import http from 'node:http'
+import { pathToFileURL } from 'node:url'
 
-import LND from '#src/classes/lnd.js'
-import LNMarketsAPI from '#src/classes/lnmarkets-api.js'
-import log from '#src/logger/index.js'
+import { config } from './config.js'
+import { createExpressApp } from './express.js'
+import { createServer } from './server.js'
+import { createLndGrpc } from './services/lnd.js'
+import { getHostname } from './services/utils.js'
 
-import createExpressApp from './express.js'
-import WebsocketServer from './websockets.js'
+export const start = async () => {
+  const hostname = getHostname(config.network)
+  console.log(`Using domain ${hostname}`)
 
-process.on('unchaughtException', (error) => {
-  log.error(error)
-})
+  const lnd = createLndGrpc()
+  const info = await lnd.getWalletInfo()
+  console.log(`Connected to ${info.alias} (${info.version})`)
 
-const main = async () => {
-  try {
-    await LND.connect()
-    const app = createExpressApp()
-    const server = http.createServer(app)
-
-    WebsocketServer(server)
-
-    server.on('error', (error) => {
-      log.error(error)
-    })
-
-    server.on('listening', () => {
-      const { address, port } = server.address()
-
-      log.info(`Server listening on ${address}:${port}`)
-    })
-
-    const port = process.env.API_PORT || 4242
-    const host = process.env.APP_HOST || '0.0.0.0'
-
-    server.listen(port, host)
-
-    await LNMarketsAPI.migrateAccount()
-  } catch (error) {
-    log.crit(error)
-    // eslint-disable-next-line no-process-exit
-    process.exit(-1)
-  }
+  const app = createExpressApp()
+  await createServer(app)
 }
 
-main()
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await start()
+}
