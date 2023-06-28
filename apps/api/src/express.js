@@ -7,7 +7,6 @@ import cors from 'cors'
 import express from 'express'
 import {
   dnsPrefetchControl,
-  expectCt,
   frameguard,
   hidePoweredBy,
   ieNoOpen,
@@ -59,7 +58,6 @@ export const createExpressApp = () => {
   const app = express()
 
   app.use(dnsPrefetchControl())
-  app.use(expectCt())
   app.use(frameguard())
   app.use(hidePoweredBy())
   app.use(ieNoOpen())
