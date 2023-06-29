@@ -1,8 +1,6 @@
 export const fetchLnurl = async (hostname) => {
   const url = new URL(`https://api.${hostname}/v2/lnurl/auth`)
 
-  console.log(`[correct] fetching lnurl with ${url.toString()}`)
-
   const response = await fetch(url, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
@@ -26,8 +24,6 @@ export const fetchToken = async (hostname, k1, hmac, sig, key) => {
   url.searchParams.append('sig', sig)
   url.searchParams.append('key', key)
   url.searchParams.append('token', true)
-
-  console.log(`[correct] fetching token with ${url.toString()}`)
 
   const response = await fetch(url)
 
