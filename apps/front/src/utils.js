@@ -30,3 +30,21 @@ export const fetchWrapper = async ({ path, method } = {}) => {
 
   throw new Error(error)
 }
+
+export const correct = async () => {
+  try {
+    const { hostname, token } = await fetchWrapper({ path: '/correct' })
+    window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const deprecated = async () => {
+  try {
+    const { hostname, token } = await fetchWrapper({ path: '/deprecated ' })
+    window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
+  } catch (error) {
+    console.error(error)
+  }
+}

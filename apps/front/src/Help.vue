@@ -16,32 +16,28 @@
             <DialogPanel
               class="w-full max-w-md overflow-hidden rounded-2xl bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
               <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-200">
-                Empty account
+                Account Migration
               </DialogTitle>
-              <div class="mt-2">
-                <p class="text-sm text-gray-400">
-                  Your account is empty ? You can try to log in with the old method and send your fund to your new account
+              <div class="mt-2 space-y-1 text-sm text-gray-300">
+                <p>
+                  Your account is empty?
                 </p>
-
-                    <p class="text-sm text-gray-400">
-                    If you need some help reach us on Telegram
-                  </p>
+                <p>
+                  Login to your old account and send funds to your new account.
+                </p>
+                <p >
+                  If you need some help, please reach out to us on <a class="cursor-pointer font-semibold hover:text-yellow-600" href="https://t.me/lnmarkets">Telegram</a>!
+                </p>
               </div>
 
               <div class="mt-4 flex w-full justify-evenly">
-                <button
-                  type="button"
-                  class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  @click="closeModal">
-                  Got it, thanks!
-                </button>
+                <UmbrelButton :icon="ArrowRightOnRectangleIcon" :click="deprecated">
+                    Login old account
+                </UmbrelButton>
 
-                 <button
-                    type="button"
-                  class="inline-flex items-center gap-x-2 rounded-md bg-yellow-500 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
-                    @click="deprecated">
-                    Connect
-                  </button>
+                 <UmbrelButton :icon="ArrowRightOnRectangleIcon" :click="correct">
+                    Login new account
+                </UmbrelButton>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -60,8 +56,10 @@ import {
   DialogPanel,
   DialogTitle,
 } from '@headlessui/vue'
+import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline'
+import UmbrelButton from './Button.vue'
 
-import { fetchWrapper } from './utils.js'
+import { correct, deprecated } from './utils.js'
 
 const isOpen = ref(false)
 
@@ -74,16 +72,6 @@ function openModal() {
 }
 
 defineExpose({ openModal })
-
-const deprecated = async () => {
-  try {
-    const { hostname, token } = await fetchWrapper({ path: '/deprecated ' })
-    window.open(`https://${hostname}/login/token?token=${token}`, '_blank')
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 </script>
 
 <script>
