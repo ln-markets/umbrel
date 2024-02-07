@@ -15,7 +15,7 @@ RUN pnpm install --frozen-lockfile --recursive --offline --ignore-scripts
 
 RUN pnpm -C apps/front build
 
-RUN pnpm --filter="@ln-markets/umbrel-api" --prod --no-optional deploy /tmp
+RUN pnpm --filter="@ln-markets/umbrel-api" --prod --no-optional deploy /build
 
 FROM node:18.16.1-alpine
 
@@ -25,7 +25,7 @@ WORKDIR /home/lnmarkets
 
 RUN apk add dumb-init
 
-COPY --chown=node:node --from=builder /tmp /home/lnmarkets
+COPY --chown=node:node --from=builder /build /home/lnmarkets
 COPY --chown=node:node --from=builder /home/lnmarkets/apps/front/dist /home/lnmarkets/public
 
 USER node
