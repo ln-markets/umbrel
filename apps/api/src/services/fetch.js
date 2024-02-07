@@ -1,10 +1,7 @@
 export const fetchLnurl = async (hostname) => {
   const url = new URL(`https://api.${hostname}/v2/lnurl/auth`)
 
-  const response = await fetch(url, {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-  })
+  const response = await fetch(url, { method: 'post' })
 
   if (!response.ok) {
     const error = await response.text()
