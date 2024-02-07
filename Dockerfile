@@ -1,4 +1,4 @@
-FROM node:18.16.1-alpine AS builder
+FROM node:20.9.0-alpine AS builder
 
 WORKDIR /home/lnmarkets
 
@@ -17,7 +17,7 @@ RUN pnpm -C apps/front build
 
 RUN pnpm --filter="@ln-markets/umbrel-api" --prod --no-optional deploy /build
 
-FROM node:18.16.1-alpine
+FROM node:20.9.0-alpine
 
 ENV NODE_ENV="production"
 

@@ -11,16 +11,16 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@headlessui/vue": "1.7.14",
-    "@heroicons/vue": "2.0.18",
-    "vue": "3.3.4"
+    "@headlessui/vue": "1.7.18",
+    "@heroicons/vue": "2.1.1",
+    "vue": "3.4.15"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "4.2.3",
-    "@vue/compiler-sfc": "3.3.4",
-    "autoprefixer": "10.4.14",
-    "postcss": "8.4.24",
-    "tailwindcss": "3.3.2",
-    "vite": "4.3.9"
+    "@vitejs/plugin-vue": "5.0.3",
+    "@vue/compiler-sfc": "3.4.15",
+    "autoprefixer": "10.4.17",
+    "postcss": "8.4.34",
+    "tailwindcss": "3.4.1",
+    "vite": "5.0.12"
   }
 }

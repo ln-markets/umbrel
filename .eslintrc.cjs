@@ -6,8 +6,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['apps/front/**/*.{js,vue}'],
-
+      files: ['apps/front/src/**/*.{js,vue}'],
       parser: 'vue-eslint-parser',
       extends: [
         'plugin:tailwindcss/recommended',

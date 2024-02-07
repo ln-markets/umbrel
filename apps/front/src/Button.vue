@@ -9,7 +9,7 @@
     <component
       :is="icon"
       v-if="icon"
-      class="-mr-0.5 h-5 w-5"
+      class="-mr-0.5 size-5"
       aria-hidden="true"
     />
   </button>

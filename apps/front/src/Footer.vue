@@ -6,7 +6,7 @@
     <div class="flex w-48 flex-row items-center justify-between">
       <a
         aria-label="Discord"
-        class="social-icon h-7 w-7"
+        class="social-icon size-7"
         href="https://discord.gg/5HwDJFx2Jz"
         rel="noopener"
         target="_blank"
@@ -25,7 +25,7 @@
       </a>
       <a
         aria-label="Telegram"
-        class="social-icon h-6 w-6"
+        class="social-icon size-6"
         href="https://www.t.me/lnmarkets"
         rel="noopener"
         target="_blank"
@@ -44,7 +44,7 @@
       </a>
       <a
         aria-label="Github"
-        class="social-icon h-7 w-7"
+        class="social-icon size-7"
         href="https://github.com/lnmarkets/umbrel"
         rel="noopener"
         target="_blank"
@@ -65,7 +65,7 @@
       </a>
       <a
         aria-label="Twitter"
-        class="social-icon h-7 w-7"
+        class="social-icon size-7"
         href="https://twitter.com/LNMarkets"
         rel="noopener"
         target="_blank"
@@ -84,7 +84,7 @@
       </a>
       <a
         aria-label="Substack"
-        class="social-icon h-6 w-6"
+        class="social-icon size-6"
         href="https://lnmarkets.substack.com/"
         rel="noopener"
         target="_blank"
@@ -114,25 +114,24 @@
     </div>
     <UmbrelButton :click="openHelp">Help</UmbrelButton>
   </div>
-  <ModalHelp ref="modalHelpRef"/>
+  <ModalHelp ref="modalHelpRef" />
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 import ModalHelp from './Help.vue'
 import UmbrelButton from './Button.vue'
 
-const modalHelpRef = ref(null);
+const modalHelpRef = ref(null)
 
 const openHelp = () => {
-  modalHelpRef.value.openModal();
+  modalHelpRef.value.openModal()
 }
-
 </script>
 
 <script>
-export default { name: 'UmbrelFooter'}
+export default { name: 'UmbrelFooter' }
 </script>
 
 <style scoped>
