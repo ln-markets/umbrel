@@ -1,6 +1,6 @@
 {
   "name": "@ln-markets/umbrel",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "LN Markets Umbrel App",
   "repository": "git@github.com:lnmarkets/umbrel.git",
   "author": "Victor Afanassieff <kilian.botrel@ito.am>",

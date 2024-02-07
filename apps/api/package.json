@@ -1,6 +1,6 @@
 {
   "name": "@ln-markets/umbrel-api",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "API for LN Markets app on Umbrel",
   "main": "index.js",
   "license": "MIT",
